@@ -1,0 +1,7 @@
+{
+  "name": "icorte",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
