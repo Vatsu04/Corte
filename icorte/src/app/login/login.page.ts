@@ -14,6 +14,10 @@ export class LoginPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    cpf: ['', [Validators.required, Validators.email]],
+    endereco: ['', [Validators.required, Validators.email]],
+    foto: ['', [Validators.required, Validators.email]],
+    nome: ['', [Validators.required, Validators.email]],
   });
 
   constructor(
@@ -36,6 +40,10 @@ export class LoginPage implements OnInit {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      cpf: ['', [Validators.required, Validators.email]],
+    endereco: ['', [Validators.required, Validators.email]],
+    foto: ['', [Validators.required, Validators.email]],
+    nome: ['', [Validators.required, Validators.email]],
     });
   }
 
