@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="credentials" (ngSubmit)="login()">
+  <form [formGroup]="credentials" ngSubmit="login()">
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
@@ -35,7 +35,7 @@
 
     </ion-item>
       <ion-button expand="full" [disabled]="!credentials.valid" type="submit">Login</ion-button>
-      <ion-button expand="full" (click)="register()" type="button">Create account</ion-button>
-
+      <ion-button expand="full" routerLink="/login-barbeiro">Login Barbeiro</ion-button>
+      <ion-button expand="full" routerLink="/cadastro">Cadastro</ion-button>
   </form>
 </ion-content>

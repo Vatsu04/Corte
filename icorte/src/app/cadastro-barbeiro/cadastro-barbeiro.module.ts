@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CadastroPageRoutingModule } from './cadastro-routing.module';
+import { CadastroBarbeiroPageRoutingModule } from './cadastro-barbeiro-routing.module';
 
-import { CadastroPage } from './cadastro.page';
+import { CadastroBarbeiroPage } from './cadastro-barbeiro.page';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     IonicModule,
-    CadastroPageRoutingModule,
+    CadastroBarbeiroPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [CadastroPage],
+  declarations: [CadastroBarbeiroPage]
 })
-export class CadastroPageModule {}
+export class CadastroBarbeiroPageModule {}

@@ -6,18 +6,20 @@ import { AuthService } from '../services/auth.service';
 
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.page.html',
-  styleUrls: ['./cadastro.page.scss'],
+  selector: 'app-cadastro-barbeiro',
+  templateUrl: './cadastro-barbeiro.page.html',
+  styleUrls: ['./cadastro-barbeiro.page.scss'],
 })
-export class CadastroPage implements OnInit {
+export class CadastroBarbeiroPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
+    data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
+    especialidades: ['', [Validators.required, Validators.minLength(12)]],
+    foto: ['', [Validators.required, Validators.minLength(6)]],
+    local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
+    nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     cpf: ['', [Validators.required, Validators.email]],
-    endereco: ['', [Validators.required, Validators.email]],
-    foto: ['', [Validators.required, Validators.email]],
-    nome: ['', [Validators.required, Validators.email]],
   });
 
   constructor(
@@ -35,33 +37,32 @@ export class CadastroPage implements OnInit {
   get password() {
     return this.credentials.get('password');
   }
-  
+
   get cpf() {
     return this.credentials.get('cpf');
   }
 
-  get endereco() {
-    return this.credentials.get('endereco');
+  get dataNascimento() {
+    return this.credentials.get('data_nascimento');
+  }
+
+  get especialidades() {
+    return this.credentials.get('especialidades');
   }
 
   get foto() {
     return this.credentials.get('foto');
   }
 
+  get localTrabalho() {
+    return this.credentials.get('local_trabalho');
+  }
+
   get nome() {
     return this.credentials.get('nome');
   }
 
-  ngOnInit() {
-    this.credentials = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      cpf: ['', [Validators.required, Validators.email]],
-    endereco: ['', [Validators.required, Validators.email]],
-    foto: ['', [Validators.required, Validators.email]],
-    nome: ['', [Validators.required, Validators.email]],
-    });
-  }
+
   async register() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -75,29 +76,24 @@ export class CadastroPage implements OnInit {
       this.showAlert('Registration failed', 'Please try again!');
     }
   }
- 
-
-  async login() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-
-    const user = await this.authService.login(this.credentials.value);
-    await loading.dismiss();
-
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-    } else {
-      this.showAlert('Login failed', 'Please try again!');
-    }
+  ngOnInit() {
+    this.credentials = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+     
+      data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
+    especialidades: ['', [Validators.required, Validators.minLength(12)]],
+    foto: ['', [Validators.required, Validators.minLength(6)]],
+    local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
+    nome: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    cpf: ['', [Validators.required, Validators.email]],
+    });
   }
-
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
       message,
       buttons: ['OK'],
     });
-
-    await alert.present();
-  }
+}
 }

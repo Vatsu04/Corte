@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Cadastrar usuário</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="credentials" (ngSubmit)="register()">
+  <form [formGroup]="credentials">
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
@@ -20,23 +20,37 @@
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cpf" placeholder="CPF" formControlName="cpf"></ion-input>
+      <ion-input type="text" placeholder="CPF" formControlName="cpf"></ion-input>
       <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">Senha invalido!</ion-note>
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
-      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Senha invalido!</ion-note>
+      <ion-input type="text" placeholder="Especialidades" formControlName="especialidades"></ion-input>
+      <ion-note slot="error" *ngIf="(especialidades?.dirty || especialidades?.touched) && especialidades?.errors">Senha invalido!</ion-note>
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
       <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
 
     </ion-item>
+    
+  
+  <ion-item fill="solid" class="ion-margin-bottom">
+    <ion-input type="photo" placeholder="foto" formControlName="foto"></ion-input>
+    <ion-note slot="error" *ngIf="(foto?.dirty || foto?.touched) && foto?.errors">Senha invalido!</ion-note>
+
+  </ion-item>
+
+
+<ion-item fill="solid" class="ion-margin-bottom">
+  <ion-input type="text" placeholder="Data de Nascimento" formControlName="dataNascimento"></ion-input>
+  <ion-note slot="error" *ngIf="(dataNascimento?.dirty || dataNascimento?.touched) && nome?.errors">Senha invalido!</ion-note>
+
+</ion-item>
       <ion-button expand="full"  type="button" (click)="register()">Cadastrar conta</ion-button>
-      <ion-button expand="full" routerLink="/login" type="button">Página Login</ion-button>
-     
+      <ion-button expand="full" href="../login-barbeiro/login-barbeiro.page.html" type="button">Fazer Login</ion-button>
+      
 
   </form>
 </ion-content>

@@ -35,6 +35,22 @@ export class LoginPage implements OnInit {
   get password() {
     return this.credentials.get('password');
   }
+  
+  get cpf() {
+    return this.credentials.get('cpf');
+  }
+
+  get endereco() {
+    return this.credentials.get('endereco');
+  }
+
+  get foto() {
+    return this.credentials.get('foto');
+  }
+
+  get nome() {
+    return this.credentials.get('nome');
+  }
 
   ngOnInit() {
     this.credentials = this.fb.group({
@@ -47,19 +63,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async register() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-
-    const user = await this.authService.register(this.credentials.value);
-    await loading.dismiss();
-
-    if (user) {
-      this.router.navigateByUrl('/tab1', { replaceUrl: true });
-    } else {
-      this.showAlert('Registration failed', 'Please try again!');
-    }
-  }
+ 
 
   async login() {
     const loading = await this.loadingController.create();
