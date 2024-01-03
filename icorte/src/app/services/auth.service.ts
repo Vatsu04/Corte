@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from '@angular/fire/auth';
-import { Firestore, doc, docData } from '@angular/fire/firestore';
+import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import {Photo} from '@capacitor/camera';
-import {Storage} from '@angular/fire/storage';
+import {Storage, ref} from '@angular/fire/storage';
+import { getDownloadURL, uploadBytesResumable, uploadString } from 'firebase/storage';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,11 +16,7 @@ export class AuthService {
     ) {}
 
 
-    getUserProfile(){
-      const user = this.auth.currentUser;
-      const userDocRef = doc(this.firestore, `users/${user.uid}`);
-      return docData(userDocRef);
-    }
+    
     
   async register ({email, password}: { email: string, password: string }) {
     try {
@@ -50,4 +47,6 @@ export class AuthService {
   logout() {
     return signOut(this.auth);
   }
+
+ 
 }

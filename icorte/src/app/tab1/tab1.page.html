@@ -3,12 +3,26 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
+      <ion-buttons slot="start">
+      <ion-title size="large">Página Inicial</ion-title>
       <ion-button (click)="logout()">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
+    </ion-buttons>
+    <ion-title>Meu perfil</ion-title>
     </ion-toolbar>
   </ion-header>
-
+<ion-content class="ion-padding">
+  <div class="preview">
+    <ion-avatar (click)="changeImage()">
+      <img alt="avatar" *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl"/>
+      <ng-template #placeholder_avatar>
+        <div class="fallback">
+          <p>Select avatar</p>
+        </div>
+      </ng-template>
+    </ion-avatar>
+  </div>
+</ion-content>
   <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>

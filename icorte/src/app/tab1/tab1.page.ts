@@ -17,12 +17,18 @@ export class Tab1Page {
     private router: Router,
     private loadingController: LoadingController,
     private alertController: AlertController
-  ) {}
+  ) {
+    this.avatarService.getUserProfile().subscribe((data) =>{
+      this.profile = data;
+    });
+  }
+
+    
 
   async logout(){
    await this.authService.logout()
    this.router.navigateByUrl('/', {replaceUrl: true});
-   
+
   }
 
   async changeImage(){}
