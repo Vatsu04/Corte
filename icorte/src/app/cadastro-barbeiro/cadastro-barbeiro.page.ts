@@ -15,11 +15,11 @@ export class CadastroBarbeiroPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
     especialidades: ['', [Validators.required, Validators.minLength(12)]],
-    foto: ['', [Validators.required, Validators.minLength(6)]],
+   
     local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.email]],
+    cpf: ['', [Validators.required, Validators.minLength(11)]],
   });
 
   constructor(
@@ -82,11 +82,11 @@ export class CadastroBarbeiroPage implements OnInit {
      
       data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
     especialidades: ['', [Validators.required, Validators.minLength(12)]],
-    foto: ['', [Validators.required, Validators.minLength(6)]],
+    
     local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.email]],
+    cpf: ['', [Validators.required, Validators.minLength(11)]],
     });
   }
   async showAlert(header: string, message: string) {

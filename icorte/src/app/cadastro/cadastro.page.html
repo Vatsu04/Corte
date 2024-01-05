@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="credentials" (ngSubmit)="register()">
+  <form [formGroup]="credentials">
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
@@ -34,8 +34,8 @@
       <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
 
     </ion-item>
-      <ion-button expand="full"  type="button" (click)="register()">Cadastrar conta</ion-button>
-      <ion-button expand="full" routerLink="/login" type="button">Página Login</ion-button>
+      <ion-button expand="full"   [disabled]="!credentials.valid" type="button" (click)="register()">Cadastrar conta</ion-button>
+      <ion-button expand="full" routerLink="/" >Página Login</ion-button>
      
 
   </form>

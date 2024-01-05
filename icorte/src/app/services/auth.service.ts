@@ -26,7 +26,7 @@ export class AuthService {
         credentials.password
       );
 
-      const userDocRef = this.firestore.doc(`users/${userCredential.user?.uid}`);
+      const userDocRef = this.firestore.doc(`barbers/${userCredential.user?.uid}`);
       await userDocRef.set({
         emaiL: credentials.email,
         cpf: credentials.cpf,
@@ -57,7 +57,7 @@ export class AuthService {
         email: credentials.email,
         cpf: credentials.cpf,
         endereco: credentials.endereco,
-        foto: credentials.foto,
+        
         nome: credentials.nome
         // Add more fields as needed
       });

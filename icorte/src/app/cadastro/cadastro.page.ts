@@ -14,10 +14,10 @@ export class CadastroPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.email]],
-    endereco: ['', [Validators.required, Validators.email]],
-    foto: ['', [Validators.required, Validators.email]],
-    nome: ['', [Validators.required, Validators.email]],
+    cpf: ['', [Validators.required, Validators.minLength(11)]],
+    endereco: ['', [Validators.required, Validators.minLength(10)]],
+
+    nome: ['', [Validators.required, Validators.minLength(10)]],
   });
 
   constructor(
@@ -56,10 +56,10 @@ export class CadastroPage implements OnInit {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      cpf: ['', [Validators.required, Validators.email]],
-    endereco: ['', [Validators.required, Validators.email]],
-    foto: ['', [Validators.required, Validators.email]],
-    nome: ['', [Validators.required, Validators.email]],
+      cpf: ['', [Validators.required, Validators.minLength(11)]],
+    endereco: ['', [Validators.required, Validators.minLength(10)]],
+
+    nome: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
   async register() {
@@ -77,19 +77,7 @@ export class CadastroPage implements OnInit {
   }
  
 
-  async login() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-
-    const user = await this.authService.login(this.credentials.value);
-    await loading.dismiss();
-
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-    } else {
-      this.showAlert('Login failed', 'Please try again!');
-    }
-  }
+ 
 
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({

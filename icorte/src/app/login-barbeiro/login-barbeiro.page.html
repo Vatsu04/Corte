@@ -1,13 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>loginBarbeiro</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">loginBarbeiro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="credentials" (ngSubmit)="login()">
+
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+   
+    
+    <ion-button expand="full" [disabled]="!credentials.valid" type="submit">Login</ion-button>
+    <ion-button expand="full" routerLink="/login">Login Cliente</ion-button>
+    <ion-button expand="full" routerLink="/cadastro">Cadastro</ion-button>
+    <ion-button expand="full" routerLink="/cadastro-barbeiro">Cadastro Barbeiro</ion-button>
+  </form>
 </ion-content>

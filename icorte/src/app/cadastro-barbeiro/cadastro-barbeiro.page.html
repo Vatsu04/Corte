@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Cadastro Barbeiro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="credentials">
+  <form [formGroup]="credentials" >
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
@@ -36,11 +36,7 @@
     </ion-item>
     
   
-  <ion-item fill="solid" class="ion-margin-bottom">
-    <ion-input type="photo" placeholder="foto" formControlName="foto"></ion-input>
-    <ion-note slot="error" *ngIf="(foto?.dirty || foto?.touched) && foto?.errors">Senha invalido!</ion-note>
 
-  </ion-item>
 
 
 <ion-item fill="solid" class="ion-margin-bottom">
@@ -48,9 +44,10 @@
   <ion-note slot="error" *ngIf="(dataNascimento?.dirty || dataNascimento?.touched) && nome?.errors">Senha invalido!</ion-note>
 
 </ion-item>
-      <ion-button expand="full"  type="button" (click)="register()">Cadastrar conta</ion-button>
-      <ion-button expand="full" href="../login-barbeiro/login-barbeiro.page.html" type="button">Fazer Login</ion-button>
-      
+      <ion-button expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar conta</ion-button>
+      <ion-button expand="full" routerLink="/login-barbeiro">Fazer Login</ion-button>
+      <ion-button expand="full" routerLink="/cadastro">Cadastro Usuário</ion-button>
+      <ion-button expand="full" routerLink="/login">Login Usuário</ion-button>
 
   </form>
 </ion-content>

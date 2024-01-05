@@ -23,10 +23,12 @@ export class Tab1Page {
   ) {
     this.avatarService.getUserProfile().subscribe((data) =>{
       this.profile = data;
+
+      
     });
   }
 
-    
+  
 
   async logout(){
    await this.authService.logout()
