@@ -42,7 +42,7 @@ export class CadastroBarbeiroPage implements OnInit {
     return this.credentials.get('cpf');
   }
 
-  get dataNascimento() {
+  get data_nascimento() {
     return this.credentials.get('data_nascimento');
   }
 
@@ -54,7 +54,7 @@ export class CadastroBarbeiroPage implements OnInit {
     return this.credentials.get('foto');
   }
 
-  get localTrabalho() {
+  get local_trabalho() {
     return this.credentials.get('local_trabalho');
   }
 
@@ -78,11 +78,9 @@ export class CadastroBarbeiroPage implements OnInit {
   }
   ngOnInit() {
     this.credentials = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-     
-      data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
+    email: ['', [Validators.required, Validators.email]],
+    data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
     especialidades: ['', [Validators.required, Validators.minLength(12)]],
-    
     local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],

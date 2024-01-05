@@ -21,33 +21,35 @@
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="text" placeholder="CPF" formControlName="cpf"></ion-input>
-      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">Senha invalido!</ion-note>
+      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">Cpf invalido!</ion-note>
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="text" placeholder="Especialidades" formControlName="especialidades"></ion-input>
-      <ion-note slot="error" *ngIf="(especialidades?.dirty || especialidades?.touched) && especialidades?.errors">Senha invalido!</ion-note>
+      <ion-note slot="error" *ngIf="(especialidades?.dirty || especialidades?.touched) && especialidades?.errors">Especialidades invalidas!</ion-note>
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
-      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
 
     </ion-item>
-    
-  
 
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Local de Trabalho / Endereço" formControlName="local_trabalho"></ion-input>
+      <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
 
+    </ion-item>
 
-<ion-item fill="solid" class="ion-margin-bottom">
-  <ion-input type="text" placeholder="Data de Nascimento" formControlName="dataNascimento"></ion-input>
-  <ion-note slot="error" *ngIf="(dataNascimento?.dirty || dataNascimento?.touched) && nome?.errors">Senha invalido!</ion-note>
+  <ion-item fill="solid" class="ion-margin-bottom">
+   <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento"></ion-input>
+   <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && nome?.errors">Data de Nascimento invalido!</ion-note>
 
 </ion-item>
       <ion-button expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar conta</ion-button>
       <ion-button expand="full" routerLink="/login-barbeiro">Fazer Login</ion-button>
       <ion-button expand="full" routerLink="/cadastro">Cadastro Usuário</ion-button>
-      <ion-button expand="full" routerLink="/login">Login Usuário</ion-button>
+      <ion-button expand="full" routerLink="/">Login Usuário</ion-button>
 
   </form>
 </ion-content>
