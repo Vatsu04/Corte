@@ -1,40 +1,79 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth'; // Import from 'compat' namespace
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Storage } from '@angular/fire/storage';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from '@angular/fire/auth';
-import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
-import {Photo} from '@capacitor/camera';
-import {Storage, ref} from '@angular/fire/storage';
-import { getDownloadURL, uploadBytesResumable, uploadString } from 'firebase/storage';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   constructor(
-    private auth: Auth,
-    private firestore: Firestore,
+    private auth2: Auth,
+    private auth: AngularFireAuth,
+    private firestore: AngularFirestore,
     private storage: Storage
-    ) {}
+  ) {}
 
 
-    
-    
-  async register ({email, password}: { email: string, password: string }) {
+
+
+  async registerBarber(credentials: any) {
     try {
-      const user = await createUserWithEmailAndPassword(
-        this.auth,
-        email,
-        password
+      const userCredential = await this.auth.createUserWithEmailAndPassword(
+        credentials.email,
+        credentials.password
       );
-      return user;
-    } catch(e) {
+
+      const userDocRef = this.firestore.doc(`users/${userCredential.user?.uid}`);
+      await userDocRef.set({
+        emaiL: credentials.email,
+        cpf: credentials.cpf,
+        especialidades: credentials.especialidades,
+      
+        nome: credentials.nome,
+        local_trabalho: credentials.local_trabalho,
+        data_nascimento: credentials.data_nascimento
+        
+      });
+
+      return userCredential.user;
+    } catch (error) {
+      console.error('Error registering user with profile:', error);
       return null;
     }
   }
 
+  async registerWithProfile(credentials: any) {
+    try {
+      const userCredential = await this.auth.createUserWithEmailAndPassword(
+        credentials.email,
+        credentials.password
+      );
+
+      const userDocRef = this.firestore.doc(`users/${userCredential.user?.uid}`);
+      await userDocRef.set({
+        email: credentials.email,
+        cpf: credentials.cpf,
+        endereco: credentials.endereco,
+        foto: credentials.foto,
+        nome: credentials.nome
+        // Add more fields as needed
+      });
+
+      return userCredential.user;
+    } catch (error) {
+      console.error('Error registering user with profile:', error);
+      return null;
+    }
+  }
+
+
   async login ({email, password}: { email: string, password: string }) {
     try {
       const user = await signInWithEmailAndPassword(
-        this.auth,
+        this.auth2,
         email,
         password
       );
@@ -45,7 +84,7 @@ export class AuthService {
   }
 
   logout() {
-    return signOut(this.auth);
+    return signOut(this.auth2);
   }
 
  

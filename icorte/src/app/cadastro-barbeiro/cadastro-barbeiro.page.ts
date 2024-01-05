@@ -67,7 +67,7 @@ export class CadastroBarbeiroPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const user = await this.authService.register(this.credentials.value);
+    const user = await this.authService.registerBarber(this.credentials.value);
     await loading.dismiss();
 
     if (user) {

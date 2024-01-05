@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="credentials" ngSubmit="login()">
+  <form [formGroup]="credentials" (ngSubmit)="login()">
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
@@ -19,23 +19,10 @@
       <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
 
     </ion-item>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cpf" placeholder="CPF" formControlName="cpf"></ion-input>
-      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">Senha invalido!</ion-note>
-
-    </ion-item>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
-      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Senha invalido!</ion-note>
-
-    </ion-item>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
-      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
-
-    </ion-item>
-      <ion-button expand="full" [disabled]="!credentials.valid" type="submit">Login</ion-button>
-      <ion-button expand="full" routerLink="/login-barbeiro">Login Barbeiro</ion-button>
-      <ion-button expand="full" routerLink="/cadastro">Cadastro</ion-button>
+   
+    
+    <ion-button expand="full" [disabled]="!credentials.valid" type="submit">Login</ion-button>
+    <ion-button expand="full" routerLink="/login-barbeiro">Login Barbeiro</ion-button>
+    <ion-button expand="full" routerLink="/cadastro">Cadastro</ion-button>
   </form>
 </ion-content>

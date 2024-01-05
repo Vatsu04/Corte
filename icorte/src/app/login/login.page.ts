@@ -14,10 +14,7 @@ export class LoginPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.email]],
-    endereco: ['', [Validators.required, Validators.email]],
-    foto: ['', [Validators.required, Validators.email]],
-    nome: ['', [Validators.required, Validators.email]],
+   
   });
 
   constructor(
@@ -56,10 +53,7 @@ export class LoginPage implements OnInit {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      cpf: ['', [Validators.required, Validators.email]],
-    endereco: ['', [Validators.required, Validators.email]],
-    foto: ['', [Validators.required, Validators.email]],
-    nome: ['', [Validators.required, Validators.email]],
+     
     });
   }
 
@@ -73,7 +67,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/tab1', { replaceUrl: true });
     } else {
       this.showAlert('Login failed', 'Please try again!');
     }

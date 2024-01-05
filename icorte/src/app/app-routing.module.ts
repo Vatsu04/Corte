@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import  {redirectUnauthorizedTo,
-redirectLoggedInTo,
+import  {redirectUnauthorizedTo, redirectLoggedInTo, canActivate} from '@angular/fire/auth-guard';
 
-canActivate} from '@angular/fire/auth-guard';
+const redirectUnauthorizedToLogin = () => [redirectUnauthorizedTo(['login'])];
+const redirectLoggedInHome = () => [redirectLoggedInTo(['tab1'])];
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInHome = () => redirectLoggedInTo(['home']);
+
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule),
-    ...canActivate(redirectLoggedInHome)
+    canActivate: [redirectLoggedInHome]
   },
   {
     path: 'tab1',
-    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule),
+    canActivate: [redirectUnauthorizedToLogin]
   },
   {
     path: 'cadastro',
     loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
-  },  {
+  },
+  {
     path: 'login-barbeiro',
     loadChildren: () => import('./login-barbeiro/login-barbeiro.module').then( m => m.LoginBarbeiroPageModule)
   },

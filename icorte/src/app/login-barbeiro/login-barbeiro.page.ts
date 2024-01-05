@@ -10,16 +10,14 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login-barbeiro.page.html',
   styleUrls: ['./login-barbeiro.page.scss'],
 })
-
 export class LoginBarbeiroPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
-    especialidades: ['', [Validators.required, Validators.minLength(12)]],
-    foto: ['', [Validators.required, Validators.minLength(6)]],
-    local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
-    nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    cpf: ['', [Validators.required, Validators.email]],
+    especialidades: ['', [Validators.required, Validators.email]],
+    data_nascimento: ['', [Validators.required, Validators.email]],
+    nome: ['', [Validators.required, Validators.email]],
   });
 
   constructor(
@@ -37,37 +35,57 @@ export class LoginBarbeiroPage implements OnInit {
   get password() {
     return this.credentials.get('password');
   }
-
-  async register() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-
-    const user = await this.authService.register(this.credentials.value);
-    await loading.dismiss();
-
-    if (user) {
-      this.router.navigateByUrl('/tab1', { replaceUrl: true });
-    } else {
-      this.showAlert('Registration failed', 'Please try again!');
-    }
+  
+  get cpf() {
+    return this.credentials.get('cpf');
   }
+
+  get especialidades() {
+    return this.credentials.get('especialidades');
+  }
+
+  get data_nascimento() {
+    return this.credentials.get('data_nascimento');
+  }
+
+  get nome() {
+    return this.credentials.get('nome');
+  }
+
   ngOnInit() {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-     
-      data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
-    especialidades: ['', [Validators.required, Validators.minLength(12)]],
-    foto: ['', [Validators.required, Validators.minLength(6)]],
-    local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
-    nome: ['', [Validators.required, Validators.minLength(6)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      cpf: ['', [Validators.required, Validators.email]],
+      especialidades: ['', [Validators.required, Validators.email]],
+      data_nascimento: ['', [Validators.required, Validators.email]],
+      nome: ['', [Validators.required, Validators.email]],
     });
   }
+
+ 
+
+  async login() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    const user = await this.authService.login(this.credentials.value);
+    await loading.dismiss();
+
+    if (user) {
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+    } else {
+      this.showAlert('Login failed', 'Please try again!');
+    }
+  }
+
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
       message,
       buttons: ['OK'],
     });
-}
+
+    await alert.present();
+  }
 }
