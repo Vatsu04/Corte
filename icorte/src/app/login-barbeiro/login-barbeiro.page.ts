@@ -73,9 +73,9 @@ export class LoginBarbeiroPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/tab3', { replaceUrl: true });
     } else {
-      this.showAlert('Login failed', 'Please try again!');
+      this.showAlert('Login falho', 'Por favor tente novamente!');
     }
   }
 

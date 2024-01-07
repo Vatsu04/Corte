@@ -71,7 +71,7 @@ export class CadastroBarbeiroPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('/tab1', { replaceUrl: true });
+      this.router.navigateByUrl('/tab3', { replaceUrl: true });
     } else {
       this.showAlert('Registration failed', 'Please try again!');
     }

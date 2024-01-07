@@ -15,7 +15,12 @@
           </div>
         </ng-template>
       </ion-avatar>
+     
     </div>
+    <div id="info">
+    <ion-text>{{ usuarios[0].nome }}  </ion-text> <br>
+    <ion-text id="email">{{ usuarios[0].email }}</ion-text>
+  </div>
 <div id="botoes">
       <ion-button class="botao" (click)="logout()">
         Log Out
