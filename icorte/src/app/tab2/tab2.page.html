@@ -1,7 +1,7 @@
 <ion-content>
   <ion-header>
     <ion-toolbar>
-      <ion-title class="ion-text-center">Anabolic Cakes</ion-title>
+      <ion-title class="ion-text-center">Catálogo Icorte</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -10,9 +10,10 @@
    
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let barbeiro of barbeiros">
         <ion-card>
-          <ion-img [src]="{{barbeiros.foto}}" class="image-limit"></ion-img>
+          <ion-img [src]="barbeiro.foto" class="image-limit"></ion-img>
+
           <ion-card-header>
-            <ion-card-title class="nome">{{ bolo.nome }}</ion-card-title>
+            <ion-card-title class="nome">{{ barbeiro.nome }}</ion-card-title>
           </ion-card-header>
           
          
@@ -22,12 +23,12 @@
        
         
         <ion-card-content>
-          <p>Nome: {{ barbeiros.nome }}</p>
-          <p>Email: {{ barbeiros.email }}</p>
-          <p>Especialidades: {{ barbeiros.especialidades }}</p>
-          <p>Local de Trabalho: {{ barbeiros.local_trabalho }}</p>
-          <p class="ion-text-end ion-margin-top">Preço: {{ bolo.preco  }}</p>
-          <ion-button (click)="adicionarAoCarrinho(bolo)" expand="full">Adicionar ao Carrinho</ion-button>
+          <p>Nome: {{ barbeiro.nome }}</p>
+          <p>Email: {{ barbeiro.email }}</p>
+          <p>Especialidades: {{ barbeiro.especialidades }}</p>
+          <p>Local de Trabalho: {{ barbeiro.local_trabalho }}</p>
+         
+        
         </ion-card-content>
       </ion-card>
     </ion-col>

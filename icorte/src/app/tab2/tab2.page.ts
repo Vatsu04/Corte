@@ -7,20 +7,24 @@ import { Firestore, collection, getDocs } from 'firebase/firestore';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  barbeiros:any[] = [{nome:'', data_nascimento:'', email:'', especialidades:'', local_trabalho:'', cpf:'', foto:'', uid:''}]
+  barbeiros: any[] = [
+    { nome: '', data_nascimento: '', email: '', especialidades: '', local_trabalho: '', cpf: '', foto: '', uid: '' }
+  ];
   constructor(
     private firestore: Firestore
   ) {}
 
-  ngOnit(){
-    let i = 0
+  ngOnInit() {
+    let i = 0;
     this.listarBanco();
-    console.log(this.barbeiros.length)
-    for(i;i< this.barbeiros.length;i++)
-    if (this.barbeiros[i].foto == undefined || null || ""){
-        this.barbeiros[i].foto = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+    console.log(this.barbeiros.length);
+    for (i; i < this.barbeiros.length; i++) {
+      if (this.barbeiros[i].foto == undefined || null || "") {
+        this.barbeiros[i].foto = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png";
+      }
     }
   }
+  
 
   async listarBanco() {
     const querySnapshot = await getDocs(collection(this.firestore, "Barbeiros"));
@@ -31,4 +35,7 @@ export class Tab2Page {
       
     });
   }
+
+  //Fazer uma função de filtragem
+  
 }

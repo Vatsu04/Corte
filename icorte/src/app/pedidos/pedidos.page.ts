@@ -11,5 +11,8 @@ export class PedidosPage implements OnInit {
 
   ngOnInit() {
   }
+//Funções a fazer
+// Cadastrar os pedidos no banco de dados
+// Nos pedidos serão cadastrados o nome, email, endereço, cpf e foto do usuário que chamou o barbeiro e o tipo de atendimento
 
 }
