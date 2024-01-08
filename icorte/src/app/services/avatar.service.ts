@@ -89,15 +89,15 @@ export class AvatarService {
       const imageUrl = await getDownloadURL(storageRef);
   
       // Retrieve the existing user data
-      const userDocRef = doc(this.firestore, 'barbers', barber.uid);
-      const userDoc = await getDoc(userDocRef);
+      const barberDocRef = doc(this.firestore, 'barbers', barber.uid);
+      const barberDoc = await getDoc(barberDocRef);
   
-      if (userDoc.exists()) {
+      if (barberDoc.exists()) {
         // Get the existing user fields
-        const { nome, cpf, email, local_trabalho, especialidades } = userDoc.data();
+        const { nome, cpf, email, local_trabalho, especialidades } = barberDoc.data();
   
         // Update only the imageUrl field and maintain other fields
-        await updateDoc(userDocRef, { imageUrl, nome, cpf, email, local_trabalho, especialidades });
+        await updateDoc(barberDocRef, { imageUrl, nome, cpf, email, local_trabalho, especialidades });
   
         return true;
       } else {

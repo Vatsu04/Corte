@@ -18,7 +18,7 @@ export class Tab2Page {
     console.log(this.barbeiros.length)
     for(i;i< this.barbeiros.length;i++)
     if (this.barbeiros[i].foto == undefined || null || ""){
-        this.barbeiros[i].foto =
+        this.barbeiros[i].foto = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
     }
   }
 
