@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import {doc, docData, Firestore, setDoc} from '@angular/fire/firestore';
+import {doc, docData, Firestore, getDoc, setDoc, updateDoc} from '@angular/fire/firestore';
 import { getDownloadURL, ref, Storage, uploadString } from '@angular/fire/storage';
 import {Photo} from '@capacitor/camera';
 
@@ -17,31 +17,102 @@ export class AvatarService {
 
   getUserProfile(){
     const user = this.auth.currentUser;
-    const userDocRef = doc(this.firestore, `images/${user?.uid}`);
+    const userDocRef = doc(this.firestore, `users/${user?.uid}`);
     return docData(userDocRef);
   }
 
-  async uploadImage(cameraFile: Photo){
+  async uploadImage(cameraFile: Photo) {
     const user = this.auth.currentUser;
-    const path = `uploads/${user?.uid}/profile.png`;
+  
+    if (!user) {
+      console.error('User not logged in');
+      return null;
+    }
+  
+    const path = `uploads/${user.uid}/profile.png`;
     const storageRef = ref(this.storage, path);
-
-
-    try{
+  
+    try {
+      // Upload the image to storage
       await uploadString(storageRef, cameraFile.base64String ?? '', 'base64');
-
+  
+      // Get the download URL of the uploaded image
       const imageUrl = await getDownloadURL(storageRef);
-      
-      const userDocRef = doc(this.firestore, `images/${user?.uid}`);
-      await setDoc(userDocRef, {
-        imageUrl,
-        
-      });
-      return true;
-    }catch(e){
+  
+      // Retrieve the existing user data
+      const userDocRef = doc(this.firestore, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+  
+      if (userDoc.exists()) {
+        // Get the existing user fields
+        const { nome, cpf, email, endereco } = userDoc.data();
+  
+        // Update only the imageUrl field and maintain other fields
+        await updateDoc(userDocRef, { imageUrl, nome, cpf, email, endereco });
+  
+        return true;
+      } else {
+        console.error('User document not found');
+        return null;
+      }
+    } catch (e) {
+      console.error('Error uploading image:', e);
       return null;
     }
   }
+  
+
+
+
+  getBarberProfile(){
+    const barber = this.auth.currentUser;
+    const barberDocRef = doc(this.firestore, `barbers/${barber?.uid}`);
+    return docData(barberDocRef);
+  }
+
+  async uploadBarberImage(cameraFile: Photo) {
+    const barber = this.auth.currentUser;
+  
+    if (!barber) {
+      console.error('User not logged in');
+      return null;
+    }
+  
+    const path = `uploads/${barber.uid}/profile.png`;
+    const storageRef = ref(this.storage, path);
+  
+    try {
+      // Upload the image to storage
+      await uploadString(storageRef, cameraFile.base64String ?? '', 'base64');
+  
+      // Get the download URL of the uploaded image
+      const imageUrl = await getDownloadURL(storageRef);
+  
+      // Retrieve the existing user data
+      const userDocRef = doc(this.firestore, 'barbers', barber.uid);
+      const userDoc = await getDoc(userDocRef);
+  
+      if (userDoc.exists()) {
+        // Get the existing user fields
+        const { nome, cpf, email, local_trabalho, especialidades } = userDoc.data();
+  
+        // Update only the imageUrl field and maintain other fields
+        await updateDoc(userDocRef, { imageUrl, nome, cpf, email, local_trabalho, especialidades });
+  
+        return true;
+      } else {
+        console.error('User document not found');
+        return null;
+      }
+    } catch (e) {
+      console.error('Error uploading image:', e);
+      return null;
+    }
+  }
+  
 
   
 }
+
+  
+
