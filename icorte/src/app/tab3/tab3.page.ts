@@ -72,7 +72,7 @@ export class Tab3Page {
         const loading = await this.loadingController.create();
         await loading.present();
 
-        const result = await this.avatarService.uploadImage(image);
+        const result = await this.avatarService.uploadBarberImage(image);
         loading.dismiss();
 
         if (!result) {

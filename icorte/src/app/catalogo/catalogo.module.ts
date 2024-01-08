@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { IonicModule } from '@ionic/angular';
 
 import { CatalogoPageRoutingModule } from './catalogo-routing.module';
@@ -12,6 +12,7 @@ import { CatalogoPage } from './catalogo.page';
   imports: [
     CommonModule,
     FormsModule,
+    AngularFirestoreModule,
     IonicModule,
     CatalogoPageRoutingModule
   ],

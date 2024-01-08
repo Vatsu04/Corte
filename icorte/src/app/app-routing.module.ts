@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'tab1',
     loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule),
-    canActivate: [redirectUnauthorizedToLogin]
+    
   },
   {
     path: 'cadastro',
@@ -41,7 +41,7 @@ const routes: Routes = [
   {
     path: 'catalogo',
     loadChildren: () => import('./catalogo/catalogo.module').then( m => m.CatalogoPageModule)
-  } 
+  }      
 
 
 

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { Firestore, collection, getDocs } from 'firebase/firestore';
+import { Component, Injectable } from '@angular/core';
+import { collection, Firestore, getDocs } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Component({
   selector: 'app-catalogo',
@@ -11,7 +13,8 @@ export class CatalogoPage {
     { nome: '', data_nascimento: '', email: '', especialidades: '', local_trabalho: '', cpf: '', foto: '', uid: '' }
   ];
   constructor(
-    private firestore: Firestore
+    private firestore: Firestore,
+    private aFirestore: AngularFirestore
   ) {}
 
   ngOnInit() {
@@ -27,10 +30,10 @@ export class CatalogoPage {
   
 
   async listarBanco() {
-    const querySnapshot = await getDocs(collection(this.firestore, "Barbeiros"));
+    const querySnapshot = await getDocs(collection(this.firestore, "barbers"));
     querySnapshot.forEach((doc) => {
       
-      this.barbeiros = [...this.barbeiros, { nome: doc.data()['nome'], descricao: doc.data()['descricao'], preco: doc.data()['preco'], qtd: doc.data()['qtd'], image: doc.data()['image'] }]
+      this.barbeiros = [...this.barbeiros, { nome: doc.data()['nome'], email: doc.data()['email'], especialidades: doc.data()['especialidades'], local_trabalho: doc.data()['local_trabalho'], cpf: doc.data()['cpf'], foto: doc.data()['imageUrl'] }]
 
       
     });
