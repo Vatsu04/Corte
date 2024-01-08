@@ -29,7 +29,11 @@ const routes: Routes = [
   {
     path: 'cadastro-barbeiro',
     loadChildren: () => import('./cadastro-barbeiro/cadastro-barbeiro.module').then( m => m.CadastroBarbeiroPageModule)
+  },  {
+    path: 'pedidos',
+    loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
   }
+
 
 
 ];

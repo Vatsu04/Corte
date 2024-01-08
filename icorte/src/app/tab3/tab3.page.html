@@ -1,17 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      
     </ion-toolbar>
+    <ion-title size="large">Página Inicial Barbeiro</ion-title>
   </ion-header>
+  <ion-content class="ion-padding">
+    <div class="preview">
+      <ion-avatar (click)="changeImage()">
+        <img alt="avatar" *ngIf="profile?.['imageUrl']; else placeholder_avatar;" [src]="profile?.['imageUrl'] ?? ''"/>
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <p>Select avatar</p>
+          </div>
+        </ng-template>
+      </ion-avatar>
+     
+    </div>
+    <div id="info">
+    <ion-text>{{ barbeiros[0].nome }}  </ion-text> <br>
+    <ion-text id="email">{{ barbeiros[0].email }}</ion-text>
+    <ion-text id="email">{{ barbeiros[0].especialidades }}</ion-text>
+  </div>
+<div id="botoes">
+      <ion-button class="botao" (click)="logout()">
+        Log Out
+      </ion-button>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+      <br>
+    
+      <ion-button class="botao" routerLink="/tab2" routerDirection="forward">
+        Catálogo de Barbeiros
+      </ion-button>
+    </div>
+  </ion-content>
 </ion-content>
