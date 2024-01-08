@@ -34,7 +34,9 @@ export class Tab3Page {
 
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
-        this.barbeiros = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'], especialidades: userDoc.data()['especialidades']  }];
+        this.barbeiros = [{ nome: userDoc.data()['nome'],
+         email: userDoc.data()['emaiL'], //Email com 2 Ls
+         especialidades: userDoc.data()['especialidades']  }];
         console.log(this.barbeiros[0]?.nome);
     console.log(this.barbeiros[0]?.email);
       } else {

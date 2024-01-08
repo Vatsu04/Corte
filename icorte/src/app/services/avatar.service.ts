@@ -94,10 +94,10 @@ export class AvatarService {
   
       if (barberDoc.exists()) {
         // Get the existing user fields
-        const { nome, cpf, email, local_trabalho, especialidades } = barberDoc.data();
+        const { nome, cpf, emaiL, local_trabalho, especialidades } = barberDoc.data();
   
         // Update only the imageUrl field and maintain other fields
-        await updateDoc(barberDocRef, { imageUrl, nome, cpf, email, local_trabalho, especialidades });
+        await updateDoc(barberDocRef, { imageUrl, nome, cpf, emaiL, local_trabalho, especialidades });
   
         return true;
       } else {

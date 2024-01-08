@@ -14,10 +14,7 @@ export class LoginBarbeiroPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.email]],
-    especialidades: ['', [Validators.required, Validators.email]],
-    data_nascimento: ['', [Validators.required, Validators.email]],
-    nome: ['', [Validators.required, Validators.email]],
+   
   });
 
   constructor(
@@ -56,10 +53,7 @@ export class LoginBarbeiroPage implements OnInit {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      cpf: ['', [Validators.required, Validators.email]],
-      especialidades: ['', [Validators.required, Validators.email]],
-      data_nascimento: ['', [Validators.required, Validators.email]],
-      nome: ['', [Validators.required, Validators.email]],
+     
     });
   }
 

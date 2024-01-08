@@ -1,7 +1,8 @@
 import { Component, Injectable } from '@angular/core';
 import { collection, Firestore, getDocs } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -14,31 +15,49 @@ export class CatalogoPage {
   ];
   constructor(
     private firestore: Firestore,
-    private aFirestore: AngularFirestore
+    private aFirestore: AngularFirestore,
+    private router:Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     let i = 0;
     this.listarBanco();
     console.log(this.barbeiros.length);
+    
+  }
+  
+  async returnToMenu(){
+    console.log('Returning to menu...');
+    this.router.navigate(['/tab1']);
+  }
+
+  
+
+  async listarBanco() {
+    let i =0;
+    const querySnapshot = await getDocs(collection(this.firestore, "barbers"));
+    querySnapshot.forEach((doc) => {
+      
+      this.barbeiros = [...this.barbeiros, { nome: doc.data()['nome'], 
+      email: doc.data()['emaiL'] /*cometi um erro no firebase n tem como mudar kkkk, escreve assim*/,
+      especialidades: doc.data()['especialidades'], 
+      local_trabalho: doc.data()['local_trabalho'],
+      cpf: doc.data()['cpf'],
+      foto: doc.data()['imageUrl'] }]
+
+      
+    });
     for (i; i < this.barbeiros.length; i++) {
       if (this.barbeiros[i].foto == undefined || null || "") {
         this.barbeiros[i].foto = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png";
       }
     }
   }
-  
-
-  async listarBanco() {
-    const querySnapshot = await getDocs(collection(this.firestore, "barbers"));
-    querySnapshot.forEach((doc) => {
-      
-      this.barbeiros = [...this.barbeiros, { nome: doc.data()['nome'], email: doc.data()['email'], especialidades: doc.data()['especialidades'], local_trabalho: doc.data()['local_trabalho'], cpf: doc.data()['cpf'], foto: doc.data()['imageUrl'] }]
-
-      
-    });
+  async logout() {
+    await this.authService.logout();
+    this.router.navigateByUrl('/', { replaceUrl: true });
   }
-
   //Fazer uma função de filtragem
   
 }
