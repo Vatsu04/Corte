@@ -7,9 +7,6 @@
       
     </ion-toolbar>
   </ion-header>
-  <!-- Your content goes here -->
-
-
 
   <ion-grid>
     <ion-row>
@@ -27,6 +24,8 @@
             <p>Email: {{ barbeiro.email }}</p>
             <p>Especialidades: {{ barbeiro.especialidades }}</p>
             <p>Local de Trabalho: {{ barbeiro.local_trabalho }}</p>
+            <ion-button id="chamar" (click)="chamarBarbeiro(barbeiro.email, barbeiro.nome)">Chamar</ion-button>
+          
           </ion-card-content>
         </ion-card>
       </ion-col>
