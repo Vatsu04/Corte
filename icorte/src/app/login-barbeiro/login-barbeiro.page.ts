@@ -25,29 +25,7 @@ export class LoginBarbeiroPage implements OnInit {
     private router: Router
   ) {}
 
-  get email() {
-    return this.credentials.get('email');
-  }
 
-  get password() {
-    return this.credentials.get('password');
-  }
-  
-  get cpf() {
-    return this.credentials.get('cpf');
-  }
-
-  get especialidades() {
-    return this.credentials.get('especialidades');
-  }
-
-  get data_nascimento() {
-    return this.credentials.get('data_nascimento');
-  }
-
-  get nome() {
-    return this.credentials.get('nome');
-  }
 
   ngOnInit() {
     this.credentials = this.fb.group({
