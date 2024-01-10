@@ -81,21 +81,7 @@ export class CatalogoPage {
   }
   //Fazer uma função de filtragem
   async chamarBarbeiro(email:string, nome:string){
-    this.barber.email= email,
-    this.barber.nome = nome
-    this.informacoesUsuario()
-    const pedido ={
-      nome: this.usuarios.nome,
-      email: this.usuarios.email,
-      foto: this.usuarios.foto,
-      endereco: this.usuarios.endereco,
-      barberNome: this.barber.nome,
-      barberEndereco: this.barber.endereco,
-      atendido: 'não'
-    }
-
-    const document = doc(collection(this.firestore, "Pedidos"));
-    return setDoc(document, pedido);
+    this.router.navigateByUrl('/chamado', {replaceUrl: true});
   }
 
   async getLoggedInUserData(){
