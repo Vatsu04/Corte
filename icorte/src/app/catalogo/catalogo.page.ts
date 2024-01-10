@@ -90,7 +90,8 @@ export class CatalogoPage {
       foto: this.usuarios.foto,
       endereco: this.usuarios.endereco,
       barberNome: this.barber.nome,
-      barberEndereco: this.barber.endereco
+      barberEndereco: this.barber.endereco,
+      atendido: 'não'
     }
 
     const document = doc(collection(this.firestore, "Pedidos"));
