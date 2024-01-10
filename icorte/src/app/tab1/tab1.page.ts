@@ -44,7 +44,8 @@ export class Tab1Page {
         console.log(this.usuarios[0]?.nome);
     console.log(this.usuarios[0]?.email);
       } else {
-        console.error('User document not found');
+        console.error('Documento do usuário não encontrado, é possível que esse usuário seja um barbeiro e não um cliente');
+        this.router.navigateByUrl('/', {replaceUrl:true});
       }
     } else {
       console.error('User UID not available');

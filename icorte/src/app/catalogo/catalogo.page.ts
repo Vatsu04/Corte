@@ -33,10 +33,8 @@ export class CatalogoPage {
   }
 
 
-  async chamarBarbeiro(email:string, nome:string){
-    this.barber.email= email,
-    this.barber.nome = nome
-  }
+  
+  
 
   async informacoesUsuario() {
     const userUID = await this.authService.getCurrentUserUID();
@@ -82,7 +80,9 @@ export class CatalogoPage {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
   //Fazer uma função de filtragem
-  async pedido(){
+  async chamarBarbeiro(email:string, nome:string){
+    this.barber.email= email,
+    this.barber.nome = nome
     this.informacoesUsuario()
     const pedido ={
       nome: this.usuarios.nome,
