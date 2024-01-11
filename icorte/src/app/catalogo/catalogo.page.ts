@@ -12,7 +12,8 @@ import { AuthService } from '../services/auth.service';
 export class CatalogoPage {
   barbeiros: any[] = [];
   usuarios: any = [{email:'', nome:'', foto:'', endereco:''}];
-  barber:any = []
+  public static barber:any = []
+  
   constructor(
     private firestore: Firestore,
     private aFirestore: AngularFirestore,
@@ -81,9 +82,17 @@ export class CatalogoPage {
   }
   //Fazer uma função de filtragem
   async chamarBarbeiro(email:string, nome:string){
+    CatalogoPage.barber.nome = nome;
+    CatalogoPage.barber.email = email;
+
     this.router.navigateByUrl('/chamado', {replaceUrl: true});
+
   }
 
+
+  async dadosBarbeiro(){
+
+  }
   async getLoggedInUserData(){
 
   }
