@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { collection, Firestore, getDocs } from '@angular/fire/firestore';
+import { collection, doc, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -10,9 +10,9 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['catalogo.page.scss']
 })
 export class CatalogoPage {
-  barbeiros: any[] = [
-    { nome: '', data_nascimento: '', email: '', especialidades: '', local_trabalho: '', cpf: '', foto: '', uid: '' }
-  ];
+  barbeiros: any[] = [];
+  usuarios: any = [{email:'', nome:'', foto:'', endereco:''}];
+  barber:any = []
   constructor(
     private firestore: Firestore,
     private aFirestore: AngularFirestore,
@@ -21,7 +21,7 @@ export class CatalogoPage {
   ) {}
 
   ngOnInit() {
-    let i = 0;
+    
     this.listarBanco();
     console.log(this.barbeiros.length);
     
@@ -32,7 +32,30 @@ export class CatalogoPage {
     this.router.navigate(['/tab1']);
   }
 
-  
+
+  async chamarBarbeiro(email:string, nome:string){
+    this.barber.email= email,
+    this.barber.nome = nome
+  }
+
+  async informacoesUsuario() {
+    const userUID = await this.authService.getCurrentUserUID();
+
+    if (userUID) {
+      const userDoc = await getDoc(doc(this.firestore, "users", userUID));
+
+      if (userDoc.exists()) {
+        console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
+        this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'], endereco: userDoc.data()['endereco'], foto: userDoc.data()['imageUrl'] }];
+        console.log(this.usuarios[0]?.nome);
+    console.log(this.usuarios[0]?.email);
+      } else {
+        console.error('User document not found');
+      }
+    } else {
+      console.error('User UID not available');
+    }
+  }
 
   async listarBanco() {
     let i =0;
@@ -59,5 +82,22 @@ export class CatalogoPage {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
   //Fazer uma função de filtragem
-  
+  async pedido(){
+    this.informacoesUsuario()
+    const pedido ={
+      nome: this.usuarios.nome,
+      email: this.usuarios.email,
+      foto: this.usuarios.foto,
+      endereco: this.usuarios.endereco,
+      barberNome: this.barber.nome,
+      barberEndereco: this.barber.endereco
+    }
+
+    const document = doc(collection(this.firestore, "Pedidos"));
+    return setDoc(document, pedido);
+  }
+
+  async getLoggedInUserData(){
+
+  }
 }
