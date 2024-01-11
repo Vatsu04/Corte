@@ -12,10 +12,13 @@
     <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
 
   </ion-item>
-  <ion-button fill="outline" expand="block" id="open-modal"><ion-thumbnail><img
-    src="placeholder_avatar"></ion-thumbnail>Foto do produto</ion-button>
-
-<img alt="image" *ngIf="isImg" src={{imgSrc}} class="imgSrc">
+  <ion-avatar (click)="changeImage()">
+    <img alt="avatar" *ngIf="profile?.['imageUrl']; else placeholder_avatar;" [src]="profile?.['imageUrl'] ?? ''"/>
+    <ng-template #placeholder_avatar>
+      <div class="fallback">
+        <p>Mande uma foto exemplo do corte para o barbeiro</p>
+      </div>
+    </ng-template>
   </ion-avatar>
 
 

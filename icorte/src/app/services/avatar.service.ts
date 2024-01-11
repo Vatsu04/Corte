@@ -111,6 +111,39 @@ export class AvatarService {
   }
   
 
+  async uploadChamadoImage(cameraFile: Photo) {
+    const chamado = this.auth.currentUser;
+  
+    if (!chamado) {
+      console.error('User not logged in');
+      return null;
+    }
+  
+    const path = `uploads/${chamado.uid}/profile.png`;
+    const storageRef = ref(this.storage, path);
+  
+    try {
+      // Upload the image to storage
+      await uploadString(storageRef, cameraFile.base64String ?? '', 'base64');
+  
+      // Get the download URL of the uploaded image
+      const imageUrl = await getDownloadURL(storageRef);
+  
+      // Retrieve the existing user data
+      const chamadoDocRef = doc(this.firestore, 'chamados', chamado.uid);
+
+  
+      
+        await updateDoc(chamadoDocRef, { imageUrl });
+  
+        return true;
+      
+    } catch (e) {
+      console.error('Error uploading image:', e);
+      return null;
+    }
+  }
+
   
 }
 
