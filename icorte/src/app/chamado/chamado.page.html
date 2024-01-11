@@ -4,21 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<form [formGroup]="credentials" (ngSubmit)="login()">
+<ion-content [fullscreen]="true">
+<form [formGroup]="credentials" (ngSubmit)="chamarBabeiro()">
 
 
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-input type="text" placeholder="Descreva seu pedido..." formControlName="Pedido"></ion-input>
-    <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
+    <ion-note slot="error" *ngIf="(descricao?.dirty || descricao?.touched) && descricao?.errors">Email invalido!</ion-note>
 
   </ion-item>
   <ion-avatar (click)="changeImage()">
-    <img alt="avatar" *ngIf="profile?.['imageUrl']; else placeholder_avatar;" [src]="profile?.['imageUrl'] ?? ''"/>
+    <img alt="avatar" *ngIf="chamado?.['imageUrl']; else placeholder_avatar;" [src]="chamado?.['imageUrl'] ?? ''"/>
     <ng-template #placeholder_avatar>
       <div class="fallback">
         <p>Mande uma foto exemplo do corte para o barbeiro</p>
       </div>
+      <ion-button expand="full" [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
     </ng-template>
   </ion-avatar>
-
+  </form>
+</ion-content>
 

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AvatarService } from '../services/avatar.service';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import { collection, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { Firestore } from 'firebase/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -50,10 +50,20 @@ export class ChamadoPage implements OnInit {
         nomeCliente:  this.usuarios.nome,
         emailCliente: this.usuarios.email,
         nomeBarbeiro: this.barber.nome,
-        emailBarbeiro: this.barber.email
+        emailBarbeiro: this.barber.email,
+        descricao: this.descricao
       }
+      const document = doc(collection(this.firestore, 'chamados'));
+      return setDoc(document, chamado)
     }
+    
   }
+
+
+  get descricao() {
+    return this.credentials.get('descricao');
+  }
+
 
   async verificarImagem() {
     const userUID = await this.authService.getCurrentUserUID();
@@ -89,7 +99,7 @@ export class ChamadoPage implements OnInit {
         const loading = await this.loadingController.create();
         await loading.present();
 
-        const result = await this.avatarService.uploadImage(image);
+        const result = await this.avatarService.uploadChamadoImage(image);
         loading.dismiss();
 
         if (!result) {

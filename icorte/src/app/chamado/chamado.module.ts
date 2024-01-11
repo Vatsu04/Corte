@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ChamadoPageRoutingModule } from './chamado-routing.module';
 
 import { ChamadoPage } from './chamado.page';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChamadoPageRoutingModule
+    ChamadoPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [ChamadoPage]
 })
