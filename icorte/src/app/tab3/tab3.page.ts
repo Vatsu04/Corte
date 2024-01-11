@@ -40,7 +40,8 @@ export class Tab3Page {
         console.log(this.barbeiros[0]?.nome);
     console.log(this.barbeiros[0]?.email);
       } else {
-        console.error('User document not found');
+        console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
+        this.router.navigateByUrl('/login-barbeiro', { replaceUrl: true }); // Provavelmente vou mudar as duas páginas de login para uma página de login universal, mas ainda vou testar
       }
     } else {
       console.error('User UID not available');

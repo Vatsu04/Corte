@@ -33,10 +33,8 @@ export class CatalogoPage {
   }
 
 
-  async chamarBarbeiro(email:string, nome:string){
-    this.barber.email= email,
-    this.barber.nome = nome
-  }
+  
+  
 
   async informacoesUsuario() {
     const userUID = await this.authService.getCurrentUserUID();
@@ -82,19 +80,8 @@ export class CatalogoPage {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
   //Fazer uma função de filtragem
-  async pedido(){
-    this.informacoesUsuario()
-    const pedido ={
-      nome: this.usuarios.nome,
-      email: this.usuarios.email,
-      foto: this.usuarios.foto,
-      endereco: this.usuarios.endereco,
-      barberNome: this.barber.nome,
-      barberEndereco: this.barber.endereco
-    }
-
-    const document = doc(collection(this.firestore, "Pedidos"));
-    return setDoc(document, pedido);
+  async chamarBarbeiro(email:string, nome:string){
+    this.router.navigateByUrl('/chamado', {replaceUrl: true});
   }
 
   async getLoggedInUserData(){
