@@ -8,13 +8,19 @@ import { ChamadoPageRoutingModule } from './chamado-routing.module';
 
 import { ChamadoPage } from './chamado.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { CatalogoPageRoutingModule } from '../catalogo/catalogo-routing.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ChamadoPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    AngularFirestoreModule,
+
+    CatalogoPageRoutingModule
   ],
   declarations: [ChamadoPage]
 })

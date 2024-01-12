@@ -5,7 +5,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AvatarService } from '../services/avatar.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { collection, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
-import { Firestore } from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 @Component({
