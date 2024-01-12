@@ -129,21 +129,13 @@ export class AvatarService {
       // Get the download URL of the uploaded image
       const imageUrl = await getDownloadURL(storageRef);
   
-      // Retrieve the existing user data
-      const chamadoDocRef = doc(this.firestore, 'chamados', chamado.uid);
-
-  
-      
-        await updateDoc(chamadoDocRef, { imageUrl });
-  
-        return true;
-      
-    } catch (e) {
-      console.error('Error uploading image:', e);
-      return null;
+      // Return the imageUrl on successful upload
+      return imageUrl;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      throw new Error('Failed to upload image');
     }
   }
-
   
 }
 

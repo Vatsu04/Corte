@@ -33,32 +33,39 @@ export class ChamadoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.listarBanco;
     this.credentials = this.fb.group({
       descricao: ['', [Validators.required, Validators.minLength(10)]],
       local: ['', [Validators.required]],
      
     });
   }
-  async chamarBabeiro(){
-    this.listarBanco();
-    if(await this.verificarImagem() == true)  {
+  async chamarBabeiro() {
+  
+    
+    if (await this.verificarImagem()) {
       console.log("Imagem obrigatória!"); 
-    }
-    else{
-      const chamado ={
-        imageUrl: this.chamado.foto,
-        nomeCliente:  this.usuarios.nome,
+    } else {
+      const chamado = {
+        imageUrl: this.chamado.imageData, // Update this line
+        nomeCliente: this.usuarios.nome,
         emailCliente: this.usuarios.email,
         nomeBarbeiro: this.barber.nome,
         emailBarbeiro: this.barber.email,
         descricao: this.descricao,
         local: this.local
-      }
+      };
+  
       const document = doc(collection(this.firestore, 'chamados'));
-      return setDoc(document, chamado)
+      try {
+        await setDoc(document, chamado);
+        console.log('Chamado added successfully');
+      } catch (error) {
+        console.error('Error adding chamado:', error);
+      }
     }
-    
   }
+  
 
 
   get descricao() {
@@ -102,28 +109,19 @@ export class ChamadoPage implements OnInit {
         resultType: CameraResultType.Base64,
         source: CameraSource.Photos,
       });
-
+  
       if (image) {
         const loading = await this.loadingController.create();
         await loading.present();
-
-        const result = await this.avatarService.uploadChamadoImage(image);
+  
+        // Set imageData property with base64 data
+        this.chamado.imageData = `data:image/jpeg;base64,${image.base64String}`;
+        
         loading.dismiss();
-
-        if (!result) {
-          const alert = await this.alertController.create({
-            header: 'Upload failed',
-            message: 'There was a problem uploading your avatar.',
-            buttons: ['OK'],
-          });
-          await alert.present();
-        }
       } else {
-   
         console.log('Image capture canceled');
       }
     } catch (error) {
-   
       console.error('Error capturing image:', error);
       const alert = await this.alertController.create({
         header: 'Error',
@@ -133,6 +131,7 @@ export class ChamadoPage implements OnInit {
       await alert.present();
     }
   }
+  
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();
 
