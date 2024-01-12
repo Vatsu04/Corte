@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class ChamadoPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     descricao: ['', [Validators.required, Validators.minLength(10)]],
-    
+    local: ['', [Validators.required]],
    
   });
   barber:any = [{nome: CatalogoPage.barber.nome, email: CatalogoPage.barber.email}]
@@ -35,7 +35,7 @@ export class ChamadoPage implements OnInit {
   ngOnInit() {
     this.credentials = this.fb.group({
       descricao: ['', [Validators.required, Validators.minLength(10)]],
-      
+      local: ['', [Validators.required]],
      
     });
   }
@@ -51,7 +51,8 @@ export class ChamadoPage implements OnInit {
         emailCliente: this.usuarios.email,
         nomeBarbeiro: this.barber.nome,
         emailBarbeiro: this.barber.email,
-        descricao: this.descricao
+        descricao: this.descricao,
+        local: this.local
       }
       const document = doc(collection(this.firestore, 'chamados'));
       return setDoc(document, chamado)
@@ -64,6 +65,9 @@ export class ChamadoPage implements OnInit {
     return this.credentials.get('descricao');
   }
 
+  get local(){
+    return this.credentials.get('local');
+  }
 
   async verificarImagem() {
     const userUID = await this.authService.getCurrentUserUID();
@@ -85,7 +89,11 @@ export class ChamadoPage implements OnInit {
   } else{
     return false;
   }
+
+
   }
+
+
   async changeImage() {
     try {
       const image = await Camera.getPhoto({
