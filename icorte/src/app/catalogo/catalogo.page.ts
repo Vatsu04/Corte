@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { collection, doc, DocumentData, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -12,18 +12,24 @@ export class CatalogoPage {
   profile: null | DocumentData | undefined = null;
   barbeiros: any[] = [];
   usuarios: any = [{email:'', nome:'', foto:'', endereco:''}];
-  public static barber:any = [];
+  barber: any = { nome: '', email: '' };
   
   constructor(
     private firestore: Firestore,
   
     private router:Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    
+ngOnInit() {
+    this.barber = history.state.barber || { nome: '', email: '' };
+
     this.listarBanco();
+  
+
+
+ 
  
     
   }
@@ -65,13 +71,12 @@ export class CatalogoPage {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
-  async chamarBarbeiro(email:string, nome:string){
-    CatalogoPage.barber.nome = nome;
-    CatalogoPage.barber.email = email;
-
-    this.router.navigateByUrl('/chamado', {replaceUrl: true});
-
-  }
+ chamarBarbeiro(email: string, nome: string) {
+  this.router.navigateByUrl('/chamado', {
+    replaceUrl: true,
+    state: { barber: { nome, email } }
+  });
+}
 
 
 }

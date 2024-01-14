@@ -7,9 +7,9 @@ import { collection, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestor
 import { Storage, uploadBytes, ref, listAll, getDownloadURL } from '@angular/fire/storage';
 import { Firestore } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import {v4 as uuidv4} from 'uuid';
-
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-chamado',
@@ -22,7 +22,7 @@ export class ChamadoPage implements OnInit {
     local: ['', [Validators.required]],
    
   });
-  barber:any = [{nome: CatalogoPage.barber.nome, email: CatalogoPage.barber.email}];
+ 
   chamado:any =[];
   usuarios: any = [{email:'', nome:''}];
   foto: any;
@@ -30,7 +30,7 @@ export class ChamadoPage implements OnInit {
   imgSrc:any;
   isImg: boolean=false;
   images:any = [];
-  
+  barber: any = { nome: '', email: '' };
   constructor(
     private fb: FormBuilder,
     private avatarService: AvatarService,
@@ -39,40 +39,39 @@ export class ChamadoPage implements OnInit {
     private firestore: Firestore,
     private authService: AuthService,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.listarBanco;
-    this.credentials = this.fb.group({
-      descricao: ['', [Validators.required, Validators.minLength(10)]],
-      local: ['', [Validators.required]],
-     
-    });
+    this.barber = history.state.barber || { nome: '', email: '' };
+    console.log(this.barber.nome);
+    console.log(this.barber.email);
+    this.listarBanco();
   }
-  async chamarBabeiro() {
+
   
 
-      const chamado = {
-        imageUrl: this.imgSrc, // Update this line
-        nomeCliente: this.usuarios.nome,
-        emailCliente: this.usuarios.email,
-        nomeBarbeiro: this.barber.nome,
-        emailBarbeiro: this.barber.email,
-        descricao: this.descricao,
-        local: this.local
-      };
   
-      const document = doc(collection(this.firestore, 'chamados'));
-      try {
-        await setDoc(document, chamado);
-        console.log('Chamado added successfully');
-      } catch (error) {
-        console.error('Error adding chamado:', error);
-      }
-    
+  async chamarBabeiro() {
+    const chamado = {
+      imageUrl: this.imgSrc,
+      nomeCliente: this.usuarios[0].nome,
+      emailCliente: this.usuarios[0].email,
+      nomeBarbeiro: this.barber[0].nome,
+      emailBarbeiro: this.barber[0].email,
+      descricao: this.descricao?.value,
+      local: this.local?.value
+    };
+
+    const document = doc(collection(this.firestore, 'chamados'));
+    try {
+      await setDoc(document, chamado);
+      console.log('Chamado added successfully');
+    } catch (error) {
+      console.error('Error adding chamado:', error);
+    }
   }
-  
 
 
   get descricao() {
@@ -85,16 +84,19 @@ export class ChamadoPage implements OnInit {
 
 
 
-  carregarFoto(e: any){
+  async carregarFoto(e: any) {
     this.foto = e.target.files[0];
     const newName = uuidv4(this.foto.name);
-    this.imageRef = ref(this.storage, ``);
-    uploadBytes(this.imageRef, this.foto);
-    setTimeout(() => {
-      this.images=[];
-      
-    }, 2000)
-}
+    this.imageRef = ref(this.storage, `path/to/${newName}`);
+    
+    try {
+      await uploadBytes(this.imageRef, this.foto);
+      this.imgSrc = await getDownloadURL(this.imageRef);
+      this.images.push(this.imgSrc); // Add the uploaded image to the array
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  }
 
   selectImage(img: any, modal: any){
     this.imgSrc = img;
@@ -121,6 +123,9 @@ export class ChamadoPage implements OnInit {
     } else {
       console.error('User UID not available');
     }
+  }
+  hideShow(){
+    document.getElementById('cadImg')?.click()
   }
 }
 
