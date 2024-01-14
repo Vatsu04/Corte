@@ -22,7 +22,7 @@
  
     <div class="preview">
       <ion-avatar (click)="changeImage()">
-        <img alt="avatar" *ngIf="chamado?.imageData; else placeholder_avatar;" [src]="chamado?.imageData ?? ''"/>
+        <img alt="avatar" *ngIf="chamado?.imgSrc; else placeholder_avatar;" [src]="chamado?.imgSrc ?? ''"/>
         <ng-template #placeholder_avatar>
           <div class="fallback">
             <p>Select avatar</p>
