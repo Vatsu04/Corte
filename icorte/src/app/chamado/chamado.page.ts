@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogoPage } from '../catalogo/catalogo.page';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AvatarService } from '../services/avatar.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { collection, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
+import { Storage, uploadBytes, ref, listAll, getDownloadURL } from '@angular/fire/storage';
 import { Firestore } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import {v4 as uuidv4} from 'uuid';
+
+
 @Component({
   selector: 'app-chamado',
   templateUrl: './chamado.page.html',
@@ -19,9 +22,15 @@ export class ChamadoPage implements OnInit {
     local: ['', [Validators.required]],
    
   });
-  barber:any = [{nome: CatalogoPage.barber.nome, email: CatalogoPage.barber.email}]
-  chamado:any =[]
+  barber:any = [{nome: CatalogoPage.barber.nome, email: CatalogoPage.barber.email}];
+  chamado:any =[];
   usuarios: any = [{email:'', nome:''}];
+  foto: any;
+  imageRef:any;
+  imgSrc:any;
+  isImg: boolean=false;
+  images:any = [];
+  
   constructor(
     private fb: FormBuilder,
     private avatarService: AvatarService,
@@ -29,7 +38,8 @@ export class ChamadoPage implements OnInit {
     private alertController: AlertController,
     private firestore: Firestore,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -42,12 +52,9 @@ export class ChamadoPage implements OnInit {
   }
   async chamarBabeiro() {
   
-    
-    if (await this.verificarImagem()) {
-      console.log("Imagem obrigatória!"); 
-    } else {
+
       const chamado = {
-        imageUrl: this.chamado.imageData, // Update this line
+        imageUrl: this.imgSrc, // Update this line
         nomeCliente: this.usuarios.nome,
         emailCliente: this.usuarios.email,
         nomeBarbeiro: this.barber.nome,
@@ -63,7 +70,7 @@ export class ChamadoPage implements OnInit {
       } catch (error) {
         console.error('Error adding chamado:', error);
       }
-    }
+    
   }
   
 
@@ -76,62 +83,26 @@ export class ChamadoPage implements OnInit {
     return this.credentials.get('local');
   }
 
-  async verificarImagem() {
-    const userUID = await this.authService.getCurrentUserUID();
 
-    if (userUID) {
-      const userDoc = await getDoc(doc(this.firestore, "chamados", userUID));
 
-      if (userDoc.exists()) {
+  carregarFoto(e: any){
+    this.foto = e.target.files[0];
+    const newName = uuidv4(this.foto.name);
+    this.imageRef = ref(this.storage, ``);
+    uploadBytes(this.imageRef, this.foto);
+    setTimeout(() => {
+      this.images=[];
       
-        this.chamado = [{foto: userDoc.data()['imageUrl'] }];
-        if(this.chamado.foto == null || "" || undefined){
-          return false;
-        } else{
-          return true;
-        }
-      } else{
-        return false;
-      }
-  } else{
-    return false;
-  }
+    }, 2000)
+}
+
+  selectImage(img: any, modal: any){
+    this.imgSrc = img;
+    this.isImg = true;
+    modal.dismiss();
+  }  
 
 
-  }
-
-
-  async changeImage() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: false,
-        resultType: CameraResultType.Base64,
-        source: CameraSource.Photos,
-      });
-  
-      if (image) {
-        const loading = await this.loadingController.create();
-        await loading.present();
-  
-        // Set imageData property with base64 data
-        this.chamado.imageData = `data:image/jpeg;base64,${image.base64String}`;
-        
-        loading.dismiss();
-      } else {
-        console.log('Image capture canceled');
-      }
-    } catch (error) {
-      console.error('Error capturing image:', error);
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'An error occurred while capturing the image.',
-        buttons: ['OK'],
-      });
-      await alert.present();
-    }
-  }
-  
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();
 
@@ -152,3 +123,4 @@ export class ChamadoPage implements OnInit {
     }
   }
 }
+
