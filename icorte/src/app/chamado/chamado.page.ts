@@ -58,8 +58,8 @@ export class ChamadoPage implements OnInit {
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
       emailCliente: this.usuarios[0].email,
-      nomeBarbeiro: this.barber[0].nome,
-      emailBarbeiro: this.barber[0].email,
+      nomeBarbeiro: this.barber.nome,
+      emailBarbeiro: this.barber.email,
       descricao: this.descricao?.value,
       local: this.local?.value
     };
