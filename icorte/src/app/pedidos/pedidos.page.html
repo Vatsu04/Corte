@@ -23,11 +23,11 @@
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
 
 
-           
+          
         
             
 
-            <ion-button id="aceitar" (click)="">Aceitar </ion-button>
+            <ion-button id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local)">Aceitar </ion-button>
             <ion-button id="negar" (click)="negarPedido(pedido.id)">Negar </ion-button>
 
           </ion-card-content>

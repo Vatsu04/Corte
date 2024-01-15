@@ -49,7 +49,19 @@ const routes: Routes = [
   },   {
     path: 'chamado',
     loadChildren: () => import('./chamado/chamado.module').then( m => m.ChamadoPageModule)
+  },  {
+    path: 'pedidos-pendentes',
+    loadChildren: () => import('./pedidos-pendentes/pedidos-pendentes.module').then( m => m.PedidosPendentesPageModule)
+  },
+  {
+    path: 'editar-conta-usuario',
+    loadChildren: () => import('./editar-conta-usuario/editar-conta-usuario.module').then( m => m.EditarContaUsuarioPageModule)
+  },
+  {
+    path: 'editar-conta-barbeiro',
+    loadChildren: () => import('./editar-conta-barbeiro/editar-conta-barbeiro.module').then( m => m.EditarContaBarbeiroPageModule)
   }
+
      
 
 

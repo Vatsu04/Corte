@@ -22,6 +22,7 @@ import { AuthService } from '../services/auth.service';
 */
 
 export class PedidosPage implements OnInit {
+  pedido:any =[{nomeCliente:'', emailCliente:'', nomeBarbeiro:'', emailBarbeiro:'', descricao:'', local:'', imageUrL:''}];
   pedidos: any = [{nomeCliente:'', emailCliente:'', nomeBarbeiro:'', emailBarbeiro:'', descricao:'', local:'', imageUrL:''}];
   usuarios: any = [{email:'', nome:''}];
   barbeiros:any = [{nome:'', data_nascimento:'', email:'', especialidades:'', local_trabalho:'', cpf:'', foto:'', uid:''}]
@@ -93,7 +94,7 @@ async listarBanco() {
 }
 
 
-async negarItem(id:string){
+async negarPedido(id:string){
   await deleteDoc(doc(this.firestore, "Produtos", id));
   
   setTimeout(() => {
@@ -101,6 +102,31 @@ async negarItem(id:string){
     this.listarBanco()
    }, 2000);
 }
+
+async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _nomeBarbeiro: string, _emailBarbeiro: string, _descricao: string, _local:string){
+  
+  
+  const pedido ={
+    imageUrl: foto,
+    nomeCliente: _nomeCliente,
+    emailCliente: _emailCliente,
+    nomeBarbeiro: _nomeBarbeiro,
+    emailBarbeiro: _emailBarbeiro,
+    descricao: _descricao,
+    local: _local
+  };
+
+  const document = doc(collection(this.firestore, 'pedidos'))
+
+  try{
+    await setDoc(document, pedido);
+    console.log('Pedido added succesfully');
+  } catch(error) {
+    console.log("Error adding chamado:" , error)
+  }
+}
+
+
 
 }
 
