@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 
-import { collection, doc, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -38,11 +38,12 @@ export class PedidosPage implements OnInit {
 
 async listarChamados() {
   let i =0;
-  let j = 0;
+  
   const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
   querySnapshot.forEach((doc) => {
     
     this.teste = [...this.teste, { 
+    id: doc.id,
     nomeCliente: doc.data()['nomeCliente'],
     emailCliente: doc.data()['emailCliente'],
     imageUrl: doc.data()['imageUrl'], 
@@ -90,4 +91,16 @@ async listarBanco() {
     console.error('User UID not available');
   }
 }
+
+
+async negarItem(id:string){
+  await deleteDoc(doc(this.firestore, "Produtos", id));
+  
+  setTimeout(() => {
+    this.pedidos=[]
+    this.listarBanco()
+   }, 2000);
 }
+
+}
+
