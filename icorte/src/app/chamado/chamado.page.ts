@@ -33,9 +33,6 @@ export class ChamadoPage implements OnInit {
   barber: any = { nome: '', email: '' };
   constructor(
     private fb: FormBuilder,
-    private avatarService: AvatarService,
-    private loadingController: LoadingController,
-    private alertController: AlertController,
     private firestore: Firestore,
     private authService: AuthService,
     private router: Router,
