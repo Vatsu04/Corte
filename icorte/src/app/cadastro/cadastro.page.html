@@ -21,17 +21,17 @@
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="cpf" placeholder="CPF" formControlName="cpf"></ion-input>
-      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">Senha invalido!</ion-note>
+      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
-      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Senha invalido!</ion-note>
+      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Endereço invalido!</ion-note>
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
-      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
 
     </ion-item>
       <ion-button expand="full"   [disabled]="!credentials.valid" type="button" (click)="register()">Cadastrar conta</ion-button>

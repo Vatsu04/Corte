@@ -105,4 +105,45 @@ export class AuthService {
     });
  
   }
+
+  async editUserProfile(uid: string, updatedProfile: any): Promise<boolean> {
+    try {
+      const userDocRef = this.firestore.doc(`users/${uid}`);
+      await userDocRef.update(updatedProfile);
+  
+      return true;
+    } catch (error) {
+      console.error('Error editing user profile:', error);
+      return false;
+    }
+  }
+
+  async editBarberProfile(uid: string, updatedProfile: any): Promise<boolean> {
+    try {
+      const userDocRef = this.firestore.doc(`barbers/${uid}`);
+      await userDocRef.update(updatedProfile);
+  
+      return true;
+    } catch (error) {
+      console.error('Error editing user profile:', error);
+      return false;
+    }
+  }
+
+  async changeUserPassword(email: string, oldPassword: string, newPassword: string): Promise<boolean> {
+    try {
+      const user = await this.auth.signInWithEmailAndPassword(email, oldPassword);
+  
+      if (user && user.user) {
+        await user.user.updatePassword(newPassword);
+        return true;
+      } else {
+        console.error('Error changing user password: User not found');
+        return false;
+      }
+    } catch (error) {
+      console.error('Error changing user password:', error);
+      return false;
+    }
+  }
 }
