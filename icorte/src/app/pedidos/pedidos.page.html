@@ -3,7 +3,8 @@
     <ion-title>Pedidos requisitados</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-toast [isOpen]="isToastOpen" message="Pedido negado." [duration]="5000"
+(didDismiss)="mensagem(false)"></ion-toast>
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
@@ -28,7 +29,7 @@
             
 
             <ion-button id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local)">Aceitar </ion-button>
-            <ion-button id="negar" (click)="negarPedido(pedido.id)">Negar </ion-button>
+            <ion-button id="negar" (click)="negarPedido(true, pedido.id)">Negar </ion-button>
 
           </ion-card-content>
         </ion-card>

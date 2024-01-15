@@ -27,6 +27,8 @@ export class PedidosPage implements OnInit {
   usuarios: any = [{email:'', nome:''}];
   barbeiros:any = [{nome:'', data_nascimento:'', email:'', especialidades:'', local_trabalho:'', cpf:'', foto:'', uid:''}]
   teste:any = [];
+  isModalOpen = false;
+  isToastOpen = false;
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
@@ -36,7 +38,9 @@ export class PedidosPage implements OnInit {
   ngOnInit() {
   }
 
-
+  mensagem(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
 async listarChamados() {
   let i =0;
   
@@ -94,9 +98,9 @@ async listarBanco() {
 }
 
 
-async negarPedido(id:string){
+async negarPedido(isOpen:boolean, id:string){
   await deleteDoc(doc(this.firestore, "Produtos", id));
-  
+  this.mensagem(isOpen);
   setTimeout(() => {
     this.pedidos=[]
     this.listarBanco()

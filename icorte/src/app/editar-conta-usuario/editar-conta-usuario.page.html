@@ -1,13 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>editar_conta_usuario</ion-title>
+    <ion-title>Cadastrar usuário</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editar_conta_usuario</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="credentials">
+
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
+
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="cpf" placeholder="CPF" formControlName="cpf"></ion-input>
+      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
+      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+      <ion-button expand="full"   [disabled]="!credentials.valid" type="button" (click)="register()">Cadastrar conta</ion-button>
+      <ion-button expand="full" routerLink="/tab1" >Voltar</ion-button>
+      <ion-button expand="full" routerLink="/cadastro-barbeiro" >Cadastro Barbeiro</ion-button>
+ 
+     
+
+  </form>
 </ion-content>
