@@ -60,6 +60,10 @@ const routes: Routes = [
   {
     path: 'editar-conta-barbeiro',
     loadChildren: () => import('./editar-conta-barbeiro/editar-conta-barbeiro.module').then( m => m.EditarContaBarbeiroPageModule)
+  },
+  {
+    path: 'pedido-pendente-barbeiro',
+    loadChildren: () => import('./pedido-pendente-barbeiro/pedido-pendente-barbeiro.module').then( m => m.PedidoPendenteBarbeiroPageModule)
   }
 
      

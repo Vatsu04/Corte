@@ -12,7 +12,7 @@
           <ion-img [src]="pedidos.imageUrl" class="image-limit"></ion-img>
 
           <ion-card-header>
-            <ion-card-title class="nome">Pedido de {{ pedido.nomeCliente }}</ion-card-title>
+            <ion-card-title class="nome">Barbeiro: {{ pedido.nomeBarbeiro }}</ion-card-title>
           </ion-card-header>
         </ion-card>
 
@@ -27,8 +27,7 @@
         
             
 
-            <ion-button id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local)">Aceitar </ion-button>
-            <ion-button id="negar" (click)="negarPedido(true, pedido.id)">Negar </ion-button>
+            <ion-button id="negar" (click)="negarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
 
           </ion-card-content>
         </ion-card>

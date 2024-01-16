@@ -99,7 +99,7 @@ async listarBanco() {
 
 
 async negarPedido(isOpen:boolean, id:string){
-  await deleteDoc(doc(this.firestore, "Produtos", id));
+  await deleteDoc(doc(this.firestore, "chamados", id));
   this.mensagem(isOpen);
   setTimeout(() => {
     this.pedidos=[]

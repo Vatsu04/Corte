@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getDocs, Firestore, collection } from '@angular/fire/firestore';
+import { getDocs, Firestore, collection, deleteDoc, doc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-pedidos-pendentes',
@@ -8,6 +8,8 @@ import { getDocs, Firestore, collection } from '@angular/fire/firestore';
 })
 export class PedidosPendentesPage implements OnInit {
   pedidos:any = [];
+  isToastOpen:boolean = false;
+  isModalOpen:boolean = false;
   constructor(
     private firestore: Firestore
   ) { }
@@ -16,22 +18,37 @@ export class PedidosPendentesPage implements OnInit {
   }
 
   async listarBanco() {
-    let i =0;
+    
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
     querySnapshot.forEach((doc) => {
       
-      this.pedidos = [...this.pedidos, { nome: doc.data()['nome'], 
-      email: doc.data()['emaiL'],
-      especialidades: doc.data()['especialidades'], 
-      local_trabalho: doc.data()['local_trabalho'],
-      cpf: doc.data()['cpf'],
-      foto: doc.data()['imageUrl'] }]
+      this.pedidos = [...this.pedidos, { 
+      nomeCliente: doc.data()['nomeCliente'], 
+      emailCliente: doc.data()['emailCliente'],
+      nomeBarbeiro: doc.data()['nomeBaberio'], 
+      emailBarbeiro: doc.data()['emailBarbeiro'],
+      descricao: doc.data()['descricao'],
+      local: doc.data()['local'] }]
 
       
     });
     
     
   }
+
+  mensagem(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
+
+  async cancelarPedido(isOpen:boolean, id:string){
+    await deleteDoc(doc(this.firestore, "chamados", id));
+    this.mensagem(isOpen);
+    setTimeout(() => {
+      this.pedidos=[]
+      this.listarBanco()
+     }, 2000);
+  }
+  
 
   
 
