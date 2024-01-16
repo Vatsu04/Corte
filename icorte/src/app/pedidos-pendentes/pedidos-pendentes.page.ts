@@ -33,6 +33,6 @@ export class PedidosPendentesPage implements OnInit {
     
   }
 
-  
+   
 
 }

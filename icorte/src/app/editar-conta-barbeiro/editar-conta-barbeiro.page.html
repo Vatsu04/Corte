@@ -8,6 +8,7 @@
   <form [formGroup]="credentials">
 
 
+
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
       <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
@@ -18,7 +19,7 @@
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="oldPassword" placeholder="Senha Antiga" formControlName="oldPassword"></ion-input>
       <ion-note slot="error" *ngIf="(oldPassword?.dirty || oldPassword?.touched) && oldPassword?.errors">Senha invalido!</ion-note>
-
+</ion-item>
 
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input type="newPassword" placeholder="Senha Antiga" formControlName="newPassword"></ion-input>
@@ -46,16 +47,15 @@
   
       </ion-item>
   
-    <ion-item fill="solid" class="ion-margin-bottom">
-     <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento"></ion-input>
-     <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && nome?.errors">Data de Nascimento invalido!</ion-note>
-  
-  </ion-item>
-        <ion-button expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar conta</ion-button>
-  
-        <ion-button expand="full" routerLink="/tab3">Voltar</ion-button>
- 
-  
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento"></ion-input>
+        <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && nome?.errors">Data de Nascimento invalido!</ion-note>
+      </ion-item>
+      
+      <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentials.valid">Cadastrar conta</ion-button>
+      
+      <ion-button expand="full" routerLink="/tab3">Voltar</ion-button>
+      
     </form>
   </ion-content>
   

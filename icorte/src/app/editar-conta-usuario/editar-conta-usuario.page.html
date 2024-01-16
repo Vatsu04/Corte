@@ -1,12 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Editar usuário</ion-title>
+    <ion-title>Editar Usuário</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <form [formGroup]="credentials">
-
 
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
@@ -19,7 +18,7 @@
       <ion-input type="oldPassword" placeholder="Senha Antiga" formControlName="oldPassword"></ion-input>
       <ion-note slot="error" *ngIf="(oldPassword?.dirty || oldPassword?.touched) && oldPassword?.errors">Senha invalido!</ion-note>
 
-
+</ion-item>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input type="newPassword" placeholder="Senha Antiga" formControlName="newPassword"></ion-input>
         <ion-note slot="error" *ngIf="(newPassword?.dirty || newPassword?.touched) && newPassword?.errors">Senha invalido!</ion-note>
