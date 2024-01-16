@@ -56,7 +56,6 @@ export class Tab1Page {
   ngOnInit() {
     this.listarBanco();
     
-   
   }
 
 

@@ -43,11 +43,26 @@ const routes: Routes = [
     loadChildren: () => import('./tab3/tab3.module').then( m => m.Tab3PageModule)
   },
   
-  
   {
     path: 'catalogo',
     loadChildren: () => import('./catalogo/catalogo.module').then( m => m.CatalogoPageModule)
-  }      
+  },   {
+    path: 'chamado',
+    loadChildren: () => import('./chamado/chamado.module').then( m => m.ChamadoPageModule)
+  },  {
+    path: 'pedidos-pendentes',
+    loadChildren: () => import('./pedidos-pendentes/pedidos-pendentes.module').then( m => m.PedidosPendentesPageModule)
+  },
+  {
+    path: 'editar-conta-usuario',
+    loadChildren: () => import('./editar-conta-usuario/editar-conta-usuario.module').then( m => m.EditarContaUsuarioPageModule)
+  },
+  {
+    path: 'editar-conta-barbeiro',
+    loadChildren: () => import('./editar-conta-barbeiro/editar-conta-barbeiro.module').then( m => m.EditarContaBarbeiroPageModule)
+  }
+
+     
 
 
 
