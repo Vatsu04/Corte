@@ -36,6 +36,7 @@ export class PedidosPendentesPage implements OnInit {
     
   }
 
+
   mensagem(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
@@ -51,5 +52,6 @@ export class PedidosPendentesPage implements OnInit {
   
 
   
+
 
 }

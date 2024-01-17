@@ -26,6 +26,30 @@ export class EditarContaUsuarioPage implements OnInit {
 
   ngOnInit() {}
 
+
+  get email()  {
+    return this.credentials.get('email');
+  }
+  
+  get oldPassword()  {
+    return this.credentials.get('oldPassword');
+  }
+  
+  get newPassword()  {
+    return this.credentials.get('newPassword');
+  }
+  
+  get cpf()  {
+    return this.credentials.get('cpf');
+  }
+  
+  get endereco()  {
+    return this.credentials.get('endereco');
+  }
+  
+  get nome()  {
+    return this.credentials.get('nome');
+  }
   async editarPerfil(perfilAtualizado: any) {
     this.editUserProfile(perfilAtualizado);
     this.editUserPassword(perfilAtualizado);

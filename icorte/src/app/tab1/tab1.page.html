@@ -21,15 +21,18 @@
     <ion-text id="email">{{ usuarios[0].email }}</ion-text>
   </div>
 <div id="botoes">
-      <ion-button class="botao" (click)="logout()">
+      <ion-button class="botao" color="red" (click)="logout()">
         Log Out
       </ion-button>
 
       <br>
     
+
+    
+
       <ion-button  routerLink="/catalogo">Catálogo de Barbeiros</ion-button>
       <ion-button  routerLink="/pedidos-pendentes">Pedidos Pendentes</ion-button>
-      <ion-button  routerLink="/pedidos-pendentes">Editar Conta</ion-button>
+      <ion-button  routerLink="/editar-conta-usuario">Editar Conta</ion-button>
     </div>
   </ion-content>
 </ion-content>
