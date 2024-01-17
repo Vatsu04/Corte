@@ -24,15 +24,19 @@
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
             <form [formGroup]="credentials">
 
+              <ion-item fill="solid" class="ion-margin-bottom">
+                <ion-input type="text" placeholder="Preço" formControlName="preco"></ion-input>
+                <ion-note slot="error" *ngIf="(preco?.dirty || preco?.touched) && preco?.errors">Senha invalido!</ion-note>
+          
+              </ion-item>
 
-              
             </form>
 
           
         
             
 
-            <ion-button id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local)">Aceitar </ion-button>
+            <ion-button id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local, credentials.value)">Aceitar </ion-button>
             <ion-button id="negar" (click)="negarPedido(true, pedido.id)">Negar </ion-button>
 
           </ion-card-content>

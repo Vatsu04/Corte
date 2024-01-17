@@ -29,6 +29,44 @@ export class EditarContaBarbeiroPage implements OnInit {
 
   ngOnInit() {}
 
+
+  get email() {
+    return this.credentials.get('email');
+  }
+  
+  get oldPassword() {
+    return this.credentials.get('oldPassword');
+  }
+  
+  get newPassword() {
+    return this.credentials.get('newPassword');
+  }
+  
+  get cpf() {
+    return this.credentials.get('cpf');
+  }
+  
+  get endereco() {
+    return this.credentials.get('endereco');
+  }
+  
+  get nome() {
+    return this.credentials.get('nome');
+  }
+  
+  get especialidades() {
+    return this.credentials.get('especialidades');
+  }
+  
+  get local_trabalho() {
+    return this.credentials.get('local_trabalho');
+  }
+  
+  get data_nascimento() {
+    return this.credentials.get('data_nascimento');
+  }
+  
+
   async editarPerfil(perfilAtualizado: any) {
     this.editUserProfile(perfilAtualizado);
     this.editUserPassword(perfilAtualizado);

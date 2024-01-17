@@ -4,22 +4,14 @@ import { collection, deleteDoc, doc, Firestore, getDoc, getDocs, setDoc } from '
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.page.html',
   styleUrls: ['./pedidos.page.scss'],
 })
-  /*
-  imageUrl: this.imgSrc,
-  nomeCliente: this.usuarios[0].nome,
-  emailCliente: this.usuarios[0].email,
-  nomeBarbeiro: this.barber.nome,
-  emailBarbeiro: this.barber.email,
-  descricao: this.descricao?.value,
-  local: this.local?.value
 
-*/
 
 export class PedidosPage implements OnInit {
   pedido:any =[{nomeCliente:'', emailCliente:'', nomeBarbeiro:'', emailBarbeiro:'', descricao:'', local:'', imageUrL:''}];
@@ -29,18 +21,35 @@ export class PedidosPage implements OnInit {
   teste:any = [];
   isModalOpen = false;
   isToastOpen = false;
+  credentials: FormGroup = this.fb.group({
+    preco: ['', [Validators.required, Validators.minLength(2), this.isValidFloat]],
+  });
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+  
   }
 
   mensagem(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
+
+    isValidFloat(control: AbstractControl): { [key: string]: any } | null {
+    const floatValue = parseFloat(control.value);
+  
+    if (isNaN(floatValue)) {
+      return { 'invalidFloat': true };
+    }
+  
+    return null;
+  }
+
+
 async listarChamados() {
   let i =0;
   
@@ -75,6 +84,11 @@ async listarChamados() {
   }
 }
 
+get preco() {
+  return this.credentials.get('preco');
+}
+
+
 async listarBanco() {
   const userUID = await this.authService.getCurrentUserUID();
 
@@ -107,7 +121,7 @@ async negarPedido(isOpen:boolean, id:string){
    }, 2000);
 }
 
-async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _nomeBarbeiro: string, _emailBarbeiro: string, _descricao: string, _local:string){
+async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _nomeBarbeiro: string, _emailBarbeiro: string, _descricao: string, _local:string, credentials: any){
   
   
   const pedido ={
@@ -117,7 +131,8 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _
     nomeBarbeiro: _nomeBarbeiro,
     emailBarbeiro: _emailBarbeiro,
     descricao: _descricao,
-    local: _local
+    local: _local,
+    preco: credentials.preco
   };
 
   const document = doc(collection(this.firestore, 'pedidos'))
