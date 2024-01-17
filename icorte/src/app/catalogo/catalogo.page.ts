@@ -27,10 +27,6 @@ ngOnInit() {
 
     this.listarBanco();
   
-
-
- 
- 
     
   }
   

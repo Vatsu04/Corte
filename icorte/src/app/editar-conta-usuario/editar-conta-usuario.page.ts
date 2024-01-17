@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ToastController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editar-conta-usuario',
@@ -21,41 +22,51 @@ export class EditarContaUsuarioPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastController: ToastController,
+    private router:Router
   ) {}
 
   ngOnInit() {}
 
-
-  get email()  {
+  get email() {
     return this.credentials.get('email');
   }
-  
-  get oldPassword()  {
+
+  get oldPassword() {
     return this.credentials.get('oldPassword');
   }
-  
-  get newPassword()  {
+
+  get newPassword() {
     return this.credentials.get('newPassword');
   }
-  
-  get cpf()  {
+
+  get cpf() {
     return this.credentials.get('cpf');
   }
-  
-  get endereco()  {
+
+  get endereco() {
     return this.credentials.get('endereco');
   }
-  
-  get nome()  {
+
+  get nome() {
     return this.credentials.get('nome');
   }
+
   async editarPerfil(perfilAtualizado: any) {
-    this.editUserProfile(perfilAtualizado);
+    const success = await this.editUserProfile(perfilAtualizado);
+
+    if (success) {
+      this.presentToast('User profile updated successfully');
+
+    } else {
+      this.presentToast('Failed to update user profile');
+    }
+
     this.editUserPassword(perfilAtualizado);
   }
 
-  async editUserProfile(updatedProfile: any) {
+  async editUserProfile(updatedProfile: any): Promise<boolean> {
     const uid = await this.authService.getCurrentUserUID();
 
     if (uid) {
@@ -66,14 +77,10 @@ export class EditarContaUsuarioPage implements OnInit {
         email: updatedProfile.email,
       };
 
-      const success = await this.authService.editUserProfile(uid, userProfile);
-
-      if (success) {
-        console.log('User profile updated successfully');
-      } else {
-        console.error('Failed to update user profile');
-      }
+      return this.authService.editUserProfile(uid, userProfile);
     }
+
+    return false;
   }
 
   async editUserPassword(updatedProfile: any) {
@@ -84,9 +91,21 @@ export class EditarContaUsuarioPage implements OnInit {
     const success = await this.authService.changeUserPassword(email, oldPassword, newPassword);
 
     if (success) {
-      console.log('Password changed successfully');
+      this.presentToast('Password changed successfully');
+      this.router.navigateByUrl('/tab1', { replaceUrl: true });
     } else {
-      console.error('Failed to change password');
+      this.presentToast('Failed to change password');
     }
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'dark', // You can change the color based on your preference
+    });
+
+    toast.present();
   }
 }

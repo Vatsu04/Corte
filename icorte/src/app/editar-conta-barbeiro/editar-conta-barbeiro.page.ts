@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editar-conta-barbeiro',
@@ -24,7 +25,8 @@ export class EditarContaBarbeiroPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -72,41 +74,6 @@ export class EditarContaBarbeiroPage implements OnInit {
     this.editUserPassword(perfilAtualizado);
   }
 
-  get email() {
-    return this.credentials.get('email');
-  }
-
-  get oldPassword() {
-    return this.credentials.get('oldPassword');
-  }
-
-  get newPassword() {
-    return this.credentials.get('newPassword');
-  }
-
-  get cpf() {
-    return this.credentials.get('cpf');
-  }
-
-  get endereco() {
-    return this.credentials.get('endereco');
-  }
-
-  get nome() {
-    return this.credentials.get('nome');
-  }
-
-  get especialidades() {
-    return this.credentials.get('especialidades');
-  }
-
-  get local_trabalho() {
-    return this.credentials.get('local_trabalho');
-  }
-
-  get data_nascimento() {
-    return this.credentials.get('data_nascimento');
-  }
 
   
   async editUserProfile(updatedProfile: any) {
@@ -126,6 +93,7 @@ export class EditarContaBarbeiroPage implements OnInit {
 
       if (success) {
         console.log('User profile updated successfully');
+        
       } else {
         console.error('Failed to update user profile');
       }
@@ -141,6 +109,7 @@ export class EditarContaBarbeiroPage implements OnInit {
 
     if (success) {
       console.log('Password changed successfully');
+      this.router.navigateByUrl('/tab3', { replaceUrl: true });
     } else {
       console.error('Failed to change password');
     }

@@ -4,6 +4,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Storage } from '@angular/fire/storage';
 import { Auth, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from '@angular/fire/auth';
 import firebase from 'firebase/compat/app';
+import { Observable } from 'rxjs';
+
 import 'firebase/compat/auth'; // Import from 'compat' namespace
 
 @Injectable({
@@ -13,12 +15,17 @@ export class AuthService {
 
   constructor(
     private auth2: Auth,
+    
     private auth: AngularFireAuth,
     private firestore: AngularFirestore,
     private storage: Storage
-  ) {}
+  ) {
+    currentUser$: Observable<firebase.User | null>;
+  }
 
-
+  getCurrentUserObservable(): Observable<firebase.User | null> {
+    return this.auth.authState;
+  }
 
 
 
@@ -77,6 +84,26 @@ export class AuthService {
   }
 
 
+/*   async reauthenticateWithCredential(email: string, password: string): Promise<void> {
+    try {
+      const user = this.auth.currentUser;
+
+      if (user) {
+        const credential = await this.getEmailAuthProviderCredential(email, password);
+        await user.reauthenticateWithCredential(credential);
+      }
+    } catch (error) {
+      console.error('Error reauthenticating user:', error);
+    }
+  } */
+
+
+  async getEmailAuthProviderCredential(email: string, password: string) {
+    const credential = await this.auth.signInWithEmailAndPassword(email, password);
+    return credential;
+  }
+  
+
   async login ({email, password}: { email: string, password: string }) {
     try {
       const user = await signInWithEmailAndPassword(
@@ -93,6 +120,8 @@ export class AuthService {
   logout() {
     return signOut(this.auth2);
   }
+
+  
   getCurrentUserUID(): Promise<string | null> {
     return new Promise((resolve, reject) => {
       this.auth.onAuthStateChanged((user) => {
@@ -104,6 +133,10 @@ export class AuthService {
       });
     });
  
+  }
+
+  getCurrentUser() {
+    return this.auth.authState;
   }
 
   async editUserProfile(uid: string, updatedProfile: any): Promise<boolean> {
