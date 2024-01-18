@@ -51,6 +51,12 @@ export class ChamadoPage implements OnInit {
 
   
   async chamarBabeiro() {
+
+    if (!this.imgSrc) {
+      console.error('Please upload an image');
+      return;
+    }
+
     const chamado = {
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
