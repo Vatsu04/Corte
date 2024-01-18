@@ -56,7 +56,7 @@ export class Tab1Page {
 
   async ngOnInit() {
     await this.listarBanco();
-    console.log(this.usuarios[0]?.nome);
+
   }
 
 

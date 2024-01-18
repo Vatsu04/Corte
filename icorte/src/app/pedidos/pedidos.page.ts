@@ -78,18 +78,15 @@ export class PedidosPage implements OnInit {
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
       const testeNomeBarbeiro = this.teste[i].nomeBarbeiro.toLowerCase();
-const barbeiroNome = this.barbeiros[0].nome.toLowerCase();
-const testeEmailBarbeiro = this.teste[i].emailBarbeiro.toLowerCase();
-const barbeiroEmail = this.barbeiros[0].email.toLowerCase();
+      const barbeiroNome = this.barbeiros[0].nome.toLowerCase();
+      const testeEmailBarbeiro = this.teste[i].emailBarbeiro.toLowerCase();
+      const barbeiroEmail = this.barbeiros[0].email.toLowerCase(); // facilitar a comparação entre os dois parametros, mas n é necessário
 
-console.log('Teste Nome Barbeiro:', testeNomeBarbeiro);
-console.log('Barbeiro Nome:', barbeiroNome);
-console.log('Teste Email Barbeiro:', testeEmailBarbeiro);
-console.log('Barbeiro Email:', barbeiroEmail);
-if (testeNomeBarbeiro === barbeiroNome && testeEmailBarbeiro === barbeiroEmail) {
+
+if (testeNomeBarbeiro === barbeiroNome && testeEmailBarbeiro === barbeiroEmail) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste[i].nomeBarbeiro)
         console.log( this.barbeiros[0]?.nome)
-        this.pedidos[i] = this.teste[i];
+        this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
     console.log(this.pedidos); // Log the result for verification
@@ -141,7 +138,9 @@ async negarPedido(isOpen:boolean, id:string){
   });
 }
 
-async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _nomeBarbeiro: string, _emailBarbeiro: string, _descricao: string, _local:string, credentials: any){
+async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
+   _nomeBarbeiro: string, _emailBarbeiro: string,
+   _descricao: string, _local:string, credentials: any, isOpen:boolean, id:string){
   
   
   const pedido = {
@@ -160,6 +159,7 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _
   try{
     await setDoc(document, pedido);
     console.log('Pedido added succesfully');
+    this.negarPedido(isOpen, id);
   } catch(error) {
     console.log("Error adding pedido:" , error)
   }
@@ -167,6 +167,11 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _
 
 async returnToMenu(){
   this.router.navigateByUrl('/tab3', { replaceUrl: true });
+}
+
+async logout() {
+  await this.authService.logout();
+  this.router.navigateByUrl('/', { replaceUrl: true });
 }
 
 }

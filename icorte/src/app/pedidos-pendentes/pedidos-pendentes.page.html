@@ -9,7 +9,7 @@
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let pedido of pedidos">
         <ion-card>
-          <ion-img [src]="pedidos.imageUrl" class="image-limit"></ion-img>
+          <ion-img [src]="pedido.imageUrl" class="image-limit"></ion-img>
 
           <ion-card-header>
             <ion-card-title class="nome">Barbeiro: {{ pedido.nomeBarbeiro }}</ion-card-title>
@@ -19,23 +19,12 @@
         <ion-card>
           <ion-card-content>
             <p>Descrição: {{ pedido.descricao }}</p>
-            <p>Email do Cliente: {{ pedido.emailCliente }}</p>
+           
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
 
+            <ion-button id="negar" *ngIf="pedido.id" (click)="cancelarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
 
-          
-        
-            
-
-
-
-
-            <ion-button id="negar" (click)="cancelarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
             <ion-button id="negar" (click)="cancelarPedido(true, pedido.id)">Pagar </ion-button>
-
-<!-- 
-            <ion-button id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local)">Aceitar </ion-button>
-            <ion-button id="negar" (click)="negarPedido(true, pedido.id)">Negar </ion-button> -->
 
 
           </ion-card-content>
@@ -43,4 +32,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+<div id="botoes">
+  <ion-button id="retorno"    (click)="returnToMenu()">Menu</ion-button> <br>
+  <ion-button id="retorno"  (click)="logout()">Log Out</ion-button>
+  </div>
 </ion-content>

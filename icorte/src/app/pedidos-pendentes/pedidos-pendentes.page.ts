@@ -36,9 +36,10 @@ export class PedidosPendentesPage implements OnInit {
     querySnapshot.forEach((doc) => {
       
       this.teste = [...this.teste, { 
+      id: doc.id,
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
-      nomeBarbeiro: doc.data()['nomeBaberio'], 
+      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
       emailBarbeiro: doc.data()['emailBarbeiro'],
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
@@ -86,9 +87,20 @@ export class PedidosPendentesPage implements OnInit {
       this.pedidos=[]
       this.listarBanco()
      }, 2000);
+
+       this.router.navigateByUrl('/tab1', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['/pedidos-pendentes']);
+  });
   }
   
+async returnToMenu(){
+  this.router.navigateByUrl('/tab1', {replaceUrl:true});
+}
 
+async logout() {
+  await this.authService.logout();
+  this.router.navigateByUrl('/', { replaceUrl: true });
+}
   
 
 

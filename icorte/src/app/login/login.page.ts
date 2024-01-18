@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
      
-    });
+    }); // Campos Email e Senha obrigatórios, se não o botão não funciona
   }
 
  
@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const user = await this.authService.login(this.credentials.value);
+    const user = await this.authService.login(this.credentials.value); 
     await loading.dismiss();
 
     if (user) {

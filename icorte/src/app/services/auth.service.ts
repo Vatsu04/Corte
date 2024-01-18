@@ -27,12 +27,6 @@ export class AuthService {
     return this.auth.authState;
   }
 
-
-
-  
-
-
-
   async registerBarber(credentials: any) {
     try {
       const userCredential = await this.auth.createUserWithEmailAndPassword(
@@ -64,7 +58,7 @@ export class AuthService {
       const userCredential = await this.auth.createUserWithEmailAndPassword(
         credentials.email,
         credentials.password
-      );
+      ); // Criar usuário com email e senha
 
       const userDocRef = this.firestore.doc(`users/${userCredential.user?.uid}`);
       await userDocRef.set({
@@ -73,7 +67,7 @@ export class AuthService {
         endereco: credentials.endereco,
         
         nome: credentials.nome
-        // Add more fields as needed
+        //  cadastro dos campos no banco de dados
       });
 
       return userCredential.user;
@@ -141,7 +135,7 @@ export class AuthService {
 
   async editUserProfile(uid: string, updatedProfile: any): Promise<boolean> {
     try {
-      const userDocRef = this.firestore.doc(`users/${uid}`);
+      const userDocRef = this.firestore.doc(`users/${uid}`); // Editar os dados na base de dados
       await userDocRef.update(updatedProfile);
   
       return true;
@@ -153,7 +147,7 @@ export class AuthService {
 
   async editBarberProfile(uid: string, updatedProfile: any): Promise<boolean> {
     try {
-      const userDocRef = this.firestore.doc(`barbers/${uid}`);
+      const userDocRef = this.firestore.doc(`barbers/${uid}`); // Editar os dados na base de Dados
       await userDocRef.update(updatedProfile);
   
       return true;

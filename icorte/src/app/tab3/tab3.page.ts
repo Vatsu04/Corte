@@ -22,7 +22,7 @@ export class Tab3Page {
     private loadingController: LoadingController,
     private firestore: Firestore
   ) {
-    this.avatarService.getUserProfile().subscribe((data) => {
+    this.avatarService.getBarberProfile().subscribe((data) => {
       this.profile = data;
     });
   }
@@ -46,6 +46,7 @@ export class Tab3Page {
     } else {
       console.error('User UID not available');
     }
+    
   }
   
 
@@ -59,7 +60,7 @@ export class Tab3Page {
 
   async logout() {
     await this.authService.logout();
-    this.router.navigateByUrl('/login-barbeiro', { replaceUrl: true });
+    this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
   async changeImage() {
