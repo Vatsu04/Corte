@@ -36,10 +36,10 @@
         
             
 
-            <ion-button id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, 
+            <ion-button color="red" id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, 
             pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, 
             pedido.local, credentials.value, true, pedido.id)">Aceitar </ion-button>
-            <ion-button id="negar" (click)="negarPedido(true, pedido.id)">Negar </ion-button>
+            <ion-button color="red" id="negar" (click)="negarPedido(true, pedido.id)">Negar </ion-button>
 
           </ion-card-content>
         </ion-card>
@@ -47,7 +47,7 @@
     </ion-row>
   </ion-grid>
   <div id="botoes">
-  <ion-button id="retorno" expand="full"  (click)="returnToMenu()">Menu</ion-button> <br>
-  <ion-button id="retorno" expand="full"  (click)="logout()">Log Out</ion-button>
+  <ion-button color="red" id="retorno" expand="full"  (click)="returnToMenu()">Menu</ion-button> <br>
+  <ion-button color="red" id="retorno" expand="full"  (click)="logout()">Log Out</ion-button>
 </div>
 </ion-content>

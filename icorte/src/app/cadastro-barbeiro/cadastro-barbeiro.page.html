@@ -46,10 +46,11 @@
    <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && nome?.errors">Data de Nascimento invalido!</ion-note>
 
 </ion-item>
-      <ion-button expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar conta</ion-button>
-
-      <ion-button expand="full" routerLink="/cadastro">Cadastro Usuário</ion-button>
-      <ion-button expand="full" routerLink="/">Login Usuário</ion-button>
+      <ion-button class="button1" color="red" expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar Barbeiro</ion-button>
+  <br><hr>
+  
+      <ion-button color="red" expand="full" routerLink="/cadastro">Cadastro Usuário</ion-button>
+      <ion-button color="red" expand="full" routerLink="/">Login Usuário</ion-button>
 
   </form>
 </ion-content>

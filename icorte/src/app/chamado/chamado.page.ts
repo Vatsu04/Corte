@@ -20,7 +20,7 @@ export class ChamadoPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     descricao: ['', [Validators.required, Validators.minLength(10)]],
     local: ['', [Validators.required]],
-   
+    photo: ['', [Validators.required]],
   });
  
   chamado:any =[];

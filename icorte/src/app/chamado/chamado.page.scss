@@ -2,6 +2,11 @@ ion-avatar{
     width:128px;
     height:128px;
 }
+*{
+    margin-left: 10px;
+    margin-right: 10px;
+    
+}
 
 .preview{
     margin-top:50px;
@@ -20,3 +25,35 @@ ion-avatar{
     align-items: center;
     font-weight:500;
 }
+ion-button{
+    color: #DEAD04;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px #DEAD04;
+    background-color: black;
+    font-family:fantasy ;
+    font-size: 19px;
+}
+.radio{
+    color: black;
+   
+}
+
+ion-radio {
+    --border-radius: 4px;
+    --inner-border-radius: 4px;
+  
+    --color: #ddd;
+    --color-checked: black;
+  }
+  
+  ion-radio.ios::part(container) {
+    width: 20px;
+    height: 20px;
+  
+    border: 2px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .radio-checked.ios::part(container) {
+    border-color: #DEAD04;
+  }

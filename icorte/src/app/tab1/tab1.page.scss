@@ -1,6 +1,7 @@
 ion-avatar{
     width:128px;
     height:128px;
+   
 }
 
 .preview{
@@ -14,7 +15,7 @@ ion-avatar{
     height:128px;
     border-radius:50%;
     background: #bfbfbf;
-    
+
     display: flex;
     justify-content:center;
     align-items: center;
@@ -38,11 +39,11 @@ ion-avatar{
 #info{
     text-align: center;
 }
-/* ion-button{
+ion-button{
     color: #DEAD04;
     border-radius: 15px;
-    box-shadow: 2px 2px 2px #DEAD04;
+    box-shadow: 2px 2.5px 2px #DEAD04;
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
-} */
+}

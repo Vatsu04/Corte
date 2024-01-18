@@ -34,9 +34,10 @@
       <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
 
     </ion-item>
-      <ion-button expand="full"   [disabled]="!credentials.valid" type="button" (click)="register()">Cadastrar conta</ion-button>
-      <ion-button expand="full" routerLink="/" >Página Login</ion-button>
-      <ion-button expand="full" routerLink="/cadastro-barbeiro" >Cadastro Barbeiro</ion-button>
+      <ion-button class="button1" color="red" expand="full"   [disabled]="!credentials.valid" type="button" (click)="register()">Cadastrar conta</ion-button>
+   <br>
+      <ion-button color="red" expand="full" routerLink="/" >Página Login</ion-button>
+      <ion-button color="red" expand="full" routerLink="/cadastro-barbeiro" >Cadastro Barbeiro</ion-button>
  
      
 
