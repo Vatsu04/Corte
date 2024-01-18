@@ -43,7 +43,8 @@ export class PedidosPendentesPage implements OnInit {
       emailBarbeiro: doc.data()['emailBarbeiro'],
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
-      preco: doc.data()['preco'] }]
+      preco: doc.data()['preco'],
+      imageUrl: doc.data()['imageUrl'] }]
 
       
     });
