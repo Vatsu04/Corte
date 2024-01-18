@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-editar-conta-usuario',
   templateUrl: './editar-conta-usuario.page.html',

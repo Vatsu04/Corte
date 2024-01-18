@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {v4 as uuidv4} from 'uuid';
 import { NgModel } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-chamado',
@@ -20,7 +21,7 @@ export class ChamadoPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     descricao: ['', [Validators.required, Validators.minLength(10)]],
     local: ['', [Validators.required]],
-    photo: ['', [Validators.required]],
+  
   });
  
   chamado:any =[];
@@ -37,7 +38,8 @@ export class ChamadoPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -53,7 +55,13 @@ export class ChamadoPage implements OnInit {
   async chamarBabeiro() {
 
     if (!this.imgSrc) {
-      console.error('Please upload an image');
+      const toast = await this.toastController.create({
+        message: 'Por favor carregue uma imagem exemplo do seu corte desejado',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      toast.present();
       return;
     }
 

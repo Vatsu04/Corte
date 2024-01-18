@@ -29,7 +29,7 @@ Foto do corte de cabelo
     </ion-button>
     
     <!-- Use *ngIf to conditionally display the image -->
-    <img *ngIf="isImg"  formControlName="photo" alt="avatar" [src]="imgSrc" class="imgSrc">
+    <img *ngIf="isImg"  alt="avatar" [src]="imgSrc" class="imgSrc">
 
     <ion-button color="red" expand="full" [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
     
