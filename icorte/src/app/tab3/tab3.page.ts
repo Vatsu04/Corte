@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { DocumentData, Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-
+import { Directive, ElementRef, HostListener } from '@angular/core';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -20,12 +20,14 @@ export class Tab3Page {
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private el: ElementRef
   ) {
     this.avatarService.getBarberProfile().subscribe((data) => {
       this.profile = data;
     });
   }
+  
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();
 
