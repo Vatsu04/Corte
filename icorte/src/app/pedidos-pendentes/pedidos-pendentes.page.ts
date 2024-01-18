@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { getDocs, Firestore, collection, deleteDoc, doc } from '@angular/fire/firestore';
+import { getDocs, Firestore, collection, deleteDoc, doc, getDoc } from '@angular/fire/firestore';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedidos-pendentes',
@@ -7,42 +9,78 @@ import { getDocs, Firestore, collection, deleteDoc, doc } from '@angular/fire/fi
   styleUrls: ['./pedidos-pendentes.page.scss'],
 })
 export class PedidosPendentesPage implements OnInit {
+  teste:any = [];
   pedidos:any = [];
   isToastOpen:boolean = false;
   isModalOpen:boolean = false;
+  usuarios: any = [{email:'', nome:''}];
   constructor(
-    private firestore: Firestore
+    private firestore: Firestore,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.initializePage();
+  }
+  
+  async initializePage() {
+    await this.listarBanco();
+    this.listarPedidos();
+    console.log(this.pedidos);
   }
 
-  async listarBanco() {
+  async listarPedidos() {
     
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
     querySnapshot.forEach((doc) => {
       
-      this.pedidos = [...this.pedidos, { 
+      this.teste = [...this.teste, { 
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
       nomeBarbeiro: doc.data()['nomeBaberio'], 
       emailBarbeiro: doc.data()['emailBarbeiro'],
       descricao: doc.data()['descricao'],
-      local: doc.data()['local'] }]
+      local: doc.data()['local'], 
+      preco: doc.data()['preco'] }]
 
       
     });
     
-    
+    for (let i = 0; i < this.teste.length; i++) {
+    if(this.teste.nomeCliente == this.usuarios.nome && this.teste.emailCliente == this.usuarios.email){
+      this.pedidos[i] = this.teste[i];
+    }
+  }
   }
 
+
+  async listarBanco() {
+    const userUID = await this.authService.getCurrentUserUID();
+  
+    if (userUID) {
+      const userDoc = await getDoc(doc(this.firestore, "users", userUID));
+  
+      if (userDoc.exists()) {
+        console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
+        this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'] }];
+        console.log(this.usuarios[0]?.nome);
+      console.log(this.usuarios[0]?.email);
+      } else {
+        this.router.navigateByUrl('/tab3', {replaceUrl:true});
+      }
+    } else {
+      console.error('User UID not available');
+    }
+    return Promise.resolve(); // Resolve the promise when the function completes
+  }
 
   mensagem(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
 
   async cancelarPedido(isOpen:boolean, id:string){
-    await deleteDoc(doc(this.firestore, "chamados", id));
+    await deleteDoc(doc(this.firestore, "pedidos", id));
     this.mensagem(isOpen);
     setTimeout(() => {
       this.pedidos=[]

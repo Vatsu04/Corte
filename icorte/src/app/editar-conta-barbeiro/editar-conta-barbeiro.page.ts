@@ -114,4 +114,9 @@ export class EditarContaBarbeiroPage implements OnInit {
       console.error('Failed to change password');
     }
   }
+
+  
+async returnToMenu(){
+  this.router.navigateByUrl('/tab3', { replaceUrl: true });
+}
 }

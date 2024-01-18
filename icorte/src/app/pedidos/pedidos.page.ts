@@ -14,10 +14,10 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 
 
 export class PedidosPage implements OnInit {
-  pedido:any =[{nomeCliente:'', emailCliente:'', nomeBarbeiro:'', emailBarbeiro:'', descricao:'', local:'', imageUrL:''}];
-  pedidos: any = [{nomeCliente:'', emailCliente:'', nomeBarbeiro:'', emailBarbeiro:'', descricao:'', local:'', imageUrL:''}];
+  
+  pedidos: any = [];
   usuarios: any = [{email:'', nome:''}];
-  barbeiros:any = [{nome:'', data_nascimento:'', email:'', especialidades:'', local_trabalho:'', cpf:'', foto:'', uid:''}]
+  barbeiros:any = [{nome:'',  email:'', especialidades:''}]
   teste:any = [];
   isModalOpen = false;
   isToastOpen = false;
@@ -32,7 +32,13 @@ export class PedidosPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initializePage();
+  }
   
+  async initializePage() {
+    await this.listarBanco();
+    this.listarChamados();
+    console.log(this.pedidos);
   }
 
   mensagem(isOpen: boolean) {
@@ -50,39 +56,45 @@ export class PedidosPage implements OnInit {
   }
 
 
-async listarChamados() {
-  let i =0;
+  async listarChamados() {
+    const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
+    this.teste = []; // Clear the array before populating it
   
-  const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
-  querySnapshot.forEach((doc) => {
-    
-    this.teste = [...this.teste, { 
-    id: doc.id,
-    nomeCliente: doc.data()['nomeCliente'],
-    emailCliente: doc.data()['emailCliente'],
-    imageUrl: doc.data()['imageUrl'], 
-    local: doc.data()['imageUrl'],
-    descricao: doc.data()['descricao'],
-    nomeBarbeiro: doc.data()['nomeBarbeiro'],
-    emailBarbeiro: doc.data()['emailBarbeiro'],
-    
-     }]
+    querySnapshot.forEach((doc) => {
+      this.teste.push({ 
+        id: doc.id,
+        nomeCliente: doc.data()['nomeCliente'],
+        emailCliente: doc.data()['emailCliente'],
+        imageUrl: doc.data()['imageUrl'], 
+        local: doc.data()['local'],
+        descricao: doc.data()['descricao'],
+        nomeBarbeiro: doc.data()['nomeBarbeiro'],
+        emailBarbeiro: doc.data()['emailBarbeiro'],
+      });
+    });
+  
+    this.pedidos = []; // Initialize pedidos as an empty array
+   
+    for (let i = 0; i < this.teste.length; i++) {
+      console.log(this.barbeiros[0].nome)
+      const testeNomeBarbeiro = this.teste[i].nomeBarbeiro.toLowerCase();
+const barbeiroNome = this.barbeiros[0].nome.toLowerCase();
+const testeEmailBarbeiro = this.teste[i].emailBarbeiro.toLowerCase();
+const barbeiroEmail = this.barbeiros[0].email.toLowerCase();
 
-    
-  });
-  for (i; i < this.teste.length; i++) {
-    
-      if (this.teste[i].barberNome == this.barbeiros.nome && this.teste[i].barberEmail == this.barbeiros.email) {
-        this.pedidos.nomeCliente =this.teste.nomeCliente;
-        this.pedidos.emailCliente = this.teste.NomeCliente;
-        this.pedidos.imageUrl =this.teste.imageUrl;
-        this.pedidos.local = this.teste.local;
-        this.pedidos.nomeBarbeiro = this.teste.nomeBarbeiro;
-        this.pedidos.emailBarbeiro = this.teste.emailBarbeiro;
-
+console.log('Teste Nome Barbeiro:', testeNomeBarbeiro);
+console.log('Barbeiro Nome:', barbeiroNome);
+console.log('Teste Email Barbeiro:', testeEmailBarbeiro);
+console.log('Barbeiro Email:', barbeiroEmail);
+if (testeNomeBarbeiro === barbeiroNome && testeEmailBarbeiro === barbeiroEmail) {
+        console.log(this.teste[i].nomeBarbeiro)
+        console.log( this.barbeiros[0]?.nome)
+        this.pedidos[i] = this.teste[i];
+      }
     }
+    console.log(this.pedidos); // Log the result for verification
   }
-}
+  
 
 get preco() {
   return this.credentials.get('preco');
@@ -91,17 +103,16 @@ get preco() {
 
 async listarBanco() {
   const userUID = await this.authService.getCurrentUserUID();
-
+ 
   if (userUID) {
     const userDoc = await getDoc(doc(this.firestore, "barbers", userUID));
 
     if (userDoc.exists()) {
       console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
       this.barbeiros = [{ nome: userDoc.data()['nome'],
-       email: userDoc.data()['emaiL'], //Email com 2 Ls
+       email: userDoc.data()['emaiL'], 
        especialidades: userDoc.data()['especialidades']  }];
-      console.log(this.barbeiros[0]?.nome);
-  console.log(this.barbeiros[0]?.email);
+     
     } else {
       console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
       this.router.navigateByUrl('/login-barbeiro', { replaceUrl: true }); // Provavelmente vou mudar as duas páginas de login para uma página de login universal, mas ainda vou testar
@@ -109,22 +120,31 @@ async listarBanco() {
   } else {
     console.error('User UID not available');
   }
+  return Promise.resolve(); // Resolve the promise when the function completes
+  
 }
 
 
 async negarPedido(isOpen:boolean, id:string){
   await deleteDoc(doc(this.firestore, "chamados", id));
   this.mensagem(isOpen);
-  setTimeout(() => {
-    this.pedidos=[]
-    this.listarBanco()
-   }, 2000);
+  
+  // Wait for a short time to allow Firebase to process the deletion
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
+  this.pedidos = [];
+  await this.listarBanco();
+
+  // Reload the current route to refresh the page
+  this.router.navigateByUrl('/tab3', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['/pedidos']);
+  });
 }
 
 async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _nomeBarbeiro: string, _emailBarbeiro: string, _descricao: string, _local:string, credentials: any){
   
   
-  const pedido ={
+  const pedido = {
     imageUrl: foto,
     nomeCliente: _nomeCliente,
     emailCliente: _emailCliente,
@@ -141,11 +161,13 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, _
     await setDoc(document, pedido);
     console.log('Pedido added succesfully');
   } catch(error) {
-    console.log("Error adding chamado:" , error)
+    console.log("Error adding pedido:" , error)
   }
 }
 
-
+async returnToMenu(){
+  this.router.navigateByUrl('/tab3', { replaceUrl: true });
+}
 
 }
 

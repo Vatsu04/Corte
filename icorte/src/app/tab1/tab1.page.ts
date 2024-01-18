@@ -34,28 +34,29 @@ export class Tab1Page {
 
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();
-
+  
     if (userUID) {
       const userDoc = await getDoc(doc(this.firestore, "users", userUID));
-
+  
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
         this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'] }];
         console.log(this.usuarios[0]?.nome);
-    console.log(this.usuarios[0]?.email);
+      console.log(this.usuarios[0]?.email);
       } else {
-        
         this.router.navigateByUrl('/tab3', {replaceUrl:true});
       }
     } else {
       console.error('User UID not available');
     }
+    return Promise.resolve(); // Resolve the promise when the function completes
   }
   
+  
 
-  ngOnInit() {
-    this.listarBanco();
-    
+  async ngOnInit() {
+    await this.listarBanco();
+    console.log(this.usuarios[0]?.nome);
   }
 
 
