@@ -17,7 +17,7 @@ import { CpfMaskDirective } from './cpf-mask.directive';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CpfMaskDirective, DataMaskDirective],
   imports:
    [BrowserModule,
     AngularFirestoreModule,

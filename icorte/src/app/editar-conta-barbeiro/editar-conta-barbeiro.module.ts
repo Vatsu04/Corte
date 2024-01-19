@@ -18,6 +18,6 @@ import { DataMaskDirective } from '../data-mask.directive';
     EditarContaBarbeiroPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [EditarContaBarbeiroPage, CpfMaskDirective, DataMaskDirective]
+  declarations: [EditarContaBarbeiroPage]
 })
 export class EditarContaBarbeiroPageModule {}

@@ -17,6 +17,6 @@ import { CpfMaskDirective } from '../cpf-mask.directive';
     EditarContaUsuarioPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [EditarContaUsuarioPage, CpfMaskDirective]
+  declarations: [EditarContaUsuarioPage]
 })
 export class EditarContaUsuarioPageModule {}

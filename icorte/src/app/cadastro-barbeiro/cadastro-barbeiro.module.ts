@@ -15,6 +15,6 @@ import { DataMaskDirective } from '../data-mask.directive';
     CadastroBarbeiroPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [CadastroBarbeiroPage, CpfMaskDirective, DataMaskDirective]
+  declarations: [CadastroBarbeiroPage]
 })
 export class CadastroBarbeiroPageModule {}

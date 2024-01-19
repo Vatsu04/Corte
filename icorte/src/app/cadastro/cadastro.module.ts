@@ -17,6 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CadastroPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [CadastroPage, CpfMaskDirective],
+  declarations: [CadastroPage],
 })
 export class CadastroPageModule {}
