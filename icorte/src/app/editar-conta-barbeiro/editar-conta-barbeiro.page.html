@@ -24,7 +24,7 @@
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="CPF" formControlName="cpf" appCpfMask></ion-input>
+      <ion-input type="text" placeholder="CPF" formControlName="cpf" ></ion-input>
       <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
     </ion-item>
       <ion-item fill="solid" class="ion-margin-bottom">
@@ -45,8 +45,9 @@
       </ion-item>
   
       <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento" appDataMask></ion-input>
-        <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && nome?.errors">Data de Nascimento invalido!</ion-note>
+        <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento" 
+        ></ion-input>
+        <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && data_nascimento?.errors">Data de Nascimento invalido!</ion-note>
       </ion-item>
       
       <ion-button expand="full" type="button"  [disabled]="!credentials.valid">Editar conta</ion-button>
