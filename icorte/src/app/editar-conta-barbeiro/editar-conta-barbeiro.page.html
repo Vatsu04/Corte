@@ -50,9 +50,9 @@
         <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && data_nascimento?.errors">Data de Nascimento invalido!</ion-note>
       </ion-item>
       
-      <ion-button expand="full" type="button"  [disabled]="!credentials.valid">Editar conta</ion-button>
+      <ion-button color="red" expand="full" type="button"  [disabled]="!credentials.valid">Editar conta</ion-button>
       
-      <ion-button expand="full" routerLink="/tab3">Voltar</ion-button>
+      <ion-button color="red" expand="full" routerLink="/tab3">Voltar</ion-button>
       
   
   

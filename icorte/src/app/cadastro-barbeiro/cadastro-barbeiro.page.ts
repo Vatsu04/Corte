@@ -95,5 +95,9 @@ export class CadastroBarbeiroPage implements OnInit {
       message,
       buttons: ['OK'],
     });
+    
+}
+async returnToMenu(){
+  this.router.navigateByUrl('/login', { replaceUrl: true });
 }
 }
