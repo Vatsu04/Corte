@@ -49,7 +49,8 @@ const routes: Routes = [
   },   {
     path: 'chamado',
     loadChildren: () => import('./chamado/chamado.module').then( m => m.ChamadoPageModule)
-  },  {
+  },
+  {
     path: 'pedidos-pendentes',
     loadChildren: () => import('./pedidos-pendentes/pedidos-pendentes.module').then( m => m.PedidosPendentesPageModule)
   },

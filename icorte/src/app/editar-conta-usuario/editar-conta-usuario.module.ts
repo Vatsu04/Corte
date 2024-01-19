@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditarContaUsuarioPageRoutingModule } from './editar-conta-usuario-routing.module';
 
 import { EditarContaUsuarioPage } from './editar-conta-usuario.page';
+import { CpfMaskDirective } from '../cpf-mask.directive';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { EditarContaUsuarioPage } from './editar-conta-usuario.page';
     EditarContaUsuarioPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [EditarContaUsuarioPage]
+  declarations: [EditarContaUsuarioPage, CpfMaskDirective]
 })
 export class EditarContaUsuarioPageModule {}

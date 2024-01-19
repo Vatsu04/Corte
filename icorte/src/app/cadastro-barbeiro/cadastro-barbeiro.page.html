@@ -19,11 +19,14 @@
       <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
 
     </ion-item>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="CPF" formControlName="cpf"></ion-input>
-      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
 
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="CPF" formControlName="cpf" maxLength="14" appCpfMask></ion-input>
+      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
     </ion-item>
+
+
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="text" placeholder="Especialidades" formControlName="especialidades"></ion-input>
       <ion-note slot="error" *ngIf="(especialidades?.dirty || especialidades?.touched) && especialidades?.errors">Especialidades invalidas!</ion-note>
@@ -42,7 +45,7 @@
     </ion-item>
 
   <ion-item fill="solid" class="ion-margin-bottom">
-   <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento"></ion-input>
+   <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento" appDataMask></ion-input>
    <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && nome?.errors">Data de Nascimento invalido!</ion-note>
 
 </ion-item>

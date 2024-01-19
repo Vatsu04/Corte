@@ -26,7 +26,7 @@
 
     </ion-item>
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cpf" placeholder="CPF" formControlName="cpf"></ion-input>
+      <ion-input type="cpf" placeholder="CPF" formControlName="cpf" appCpfMask></ion-input>
       <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
 
     </ion-item>
@@ -41,8 +41,8 @@
 
     </ion-item>
  
-    <ion-button color="red" expand="full" type="button" (click)="editarPerfil(credentials.value)" [disabled]="!credentials.valid">Editar Perfil</ion-button>   
-    <ion-button color="red" expand="full" routerLink="/tab1">Voltar</ion-button>
+    <ion-button expand="full" type="button" (click)="editarPerfil(credentials.value)" [disabled]="!credentials.valid">Editar Perfil</ion-button>   
+    <ion-button expand="full" routerLink="/tab1">Voltar</ion-button>
  
      
 

@@ -3,12 +3,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-
+import { CpfMaskDirective } from '../cpf-mask.directive';
 
 @Component({
   selector: 'app-cadastro-barbeiro',
   templateUrl: './cadastro-barbeiro.page.html',
   styleUrls: ['./cadastro-barbeiro.page.scss'],
+  
+  
 })
 export class CadastroBarbeiroPage implements OnInit {
   credentials: FormGroup = this.fb.group({
