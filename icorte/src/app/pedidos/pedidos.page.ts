@@ -70,6 +70,7 @@ export class PedidosPage implements OnInit {
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro']
       });
     });
   
@@ -77,13 +78,12 @@ export class PedidosPage implements OnInit {
    
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
-      const testeNomeBarbeiro = this.teste[i].nomeBarbeiro.toLowerCase();
-      const barbeiroNome = this.barbeiros[0].nome.toLowerCase();
-      const testeEmailBarbeiro = this.teste[i].emailBarbeiro.toLowerCase();
-      const barbeiroEmail = this.barbeiros[0].email.toLowerCase(); // facilitar a comparação entre os dois parametros, mas n é necessário
+      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
+      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
+      
 
 
-if (testeNomeBarbeiro === barbeiroNome && testeEmailBarbeiro === barbeiroEmail) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste[i].nomeBarbeiro)
         console.log( this.barbeiros[0]?.nome)
         this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
@@ -108,7 +108,8 @@ async listarBanco() {
       console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
       this.barbeiros = [{ nome: userDoc.data()['nome'],
        email: userDoc.data()['emaiL'], 
-       especialidades: userDoc.data()['especialidades']  }];
+       especialidades: userDoc.data()['especialidades'],
+       cpf: userDoc.data()['cpf']  }];
      
     } else {
       console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');

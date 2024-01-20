@@ -13,7 +13,9 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class Tab3Page {
   profile: null | DocumentData | undefined = null;
-  barbeiros:any = [{nome:'', data_nascimento:'', email:'', especialidades:'', local_trabalho:'', cpf:'', foto:'', uid:''}]
+  barbeiros:any = [{nome:'', data_nascimento:'', email:'', especialidades:'', local_trabalho:'', cpf:'', foto:'', uid:''}];
+  teste:any = [];
+  pedidos:any = [];
   constructor(
     private avatarService: AvatarService,
     private authService: AuthService,
@@ -51,13 +53,51 @@ export class Tab3Page {
     
   }
   
+  
 
   ngOnInit() {
     this.listarBanco();
     
    
   }
+  async listarPedidos() {
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
+    this.teste = []; // Clear the array before populating it
+  
+    querySnapshot.forEach((doc) => {
+      this.teste.push({ 
+        id: doc.id,
+        nomeCliente: doc.data()['nomeCliente'],
+        emailCliente: doc.data()['emailCliente'],
+        imageUrl: doc.data()['imageUrl'], 
+        local: doc.data()['local'],
+        descricao: doc.data()['descricao'],
+        nomeBarbeiro: doc.data()['nomeBarbeiro'],
+        emailBarbeiro: doc.data()['emailBarbeiro'],
+      });
+    });
+  
+    this.pedidos = []; // Initialize pedidos as an empty array
+   
+    for (let i = 0; i < this.teste.length; i++) {
+      console.log(this.barbeiros[0].nome)
+      const testeNomeBarbeiro = this.teste[i].nomeBarbeiro.toLowerCase();
+const barbeiroNome = this.barbeiros[0].nome.toLowerCase();
+const testeEmailBarbeiro = this.teste[i].emailBarbeiro.toLowerCase();
+const barbeiroEmail = this.barbeiros[0].email.toLowerCase();
 
+console.log('Teste Nome Barbeiro:', testeNomeBarbeiro);
+console.log('Barbeiro Nome:', barbeiroNome);
+console.log('Teste Email Barbeiro:', testeEmailBarbeiro);
+console.log('Barbeiro Email:', barbeiroEmail);
+if (testeNomeBarbeiro === barbeiroNome && testeEmailBarbeiro === barbeiroEmail) {
+        console.log(this.teste[i].nomeBarbeiro)
+        console.log( this.barbeiros[0]?.nome)
+        this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+      }
+    }
+    console.log(this.pedidos); // Log the result for verification
+  }
 
 
   async logout() {

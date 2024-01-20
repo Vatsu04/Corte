@@ -15,8 +15,6 @@ export class EditarContaBarbeiroPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     oldPassword: ['', [Validators.required, Validators.minLength(6)]],
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.minLength(11)]],
-   
     nome: ['', [Validators.required, Validators.minLength(10)]],
     especialidades: ['', [Validators.required, Validators.minLength(7)]],
     local_trabalho: ['', [Validators.required, Validators.minLength(10)]],
@@ -44,9 +42,7 @@ export class EditarContaBarbeiroPage implements OnInit {
     return this.credentials.get('newPassword');
   }
   
-  get cpf() {
-    return this.credentials.get('cpf');
-  }
+  
   
   get endereco() {
     return this.credentials.get('endereco');

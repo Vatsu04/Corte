@@ -16,7 +16,8 @@ export class CadastroPage implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]],
     cpf: ['', [Validators.required, Validators.minLength(11)]],
     endereco: ['', [Validators.required, Validators.minLength(10)]],
-
+    tipo_cabelo: ['', [Validators.required]],
+    tamanho_cabelo: ['', [Validators.required]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
   });
 
@@ -27,6 +28,10 @@ export class CadastroPage implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
+
+  get tipo_cabelo(){
+    return this.credentials.get('tipo_cabelo');
+  }
 
   get email() {
     return this.credentials.get('email');

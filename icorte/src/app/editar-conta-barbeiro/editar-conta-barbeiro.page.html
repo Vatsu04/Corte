@@ -10,45 +10,66 @@
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
       <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
+
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Senha Antiga" formControlName="oldPassword"></ion-input>
-      <ion-note slot="error" *ngIf="(oldPassword?.dirty || oldPassword?.touched) && oldPassword?.errors">Senha invalido!</ion-note>
-    </ion-item>
+      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Senha Nova" formControlName="newPassword"></ion-input>
-      <ion-note slot="error" *ngIf="(newPassword?.dirty || newPassword?.touched) && newPassword?.errors">Senha invalido!</ion-note>
     </ion-item>
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="CPF" formControlName="cpf" ></ion-input>
+      <ion-input type="text" placeholder="CPF" formControlName="cpf" maxLength="14" ></ion-input>
       <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
     </ion-item>
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input type="text" placeholder="Especialidades" formControlName="especialidades"></ion-input>
-        <ion-note slot="error" *ngIf="(especialidades?.dirty || especialidades?.touched) && especialidades?.errors">Especialidades invalidas!</ion-note>
-  
-      </ion-item>
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
-        <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
-  
-      </ion-item>
-  
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input type="text" placeholder="Local de Trabalho / Endereço" formControlName="local_trabalho"></ion-input>
-        <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
-  
-      </ion-item>
-  
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input type="text" placeholder="Data de Nascimento" formControlName="data_nascimento" 
-        ></ion-input>
-        <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && data_nascimento?.errors">Data de Nascimento invalido!</ion-note>
-      </ion-item>
+
+    <ion-checkbox-group formControlName="tipo_cabelo">
+      <ion-checkbox class="checkbox" value="Crespo">Crespo</ion-checkbox><br />
+      <ion-checkbox class="checkbox" value="Ondulado">Ondulado</ion-checkbox><br />
+      <ion-checkbox class="checkbox" value="Liso">Liso</ion-checkbox><br />
+
+      <ion-note slot="error" *ngIf="(tipo_cabelo?.dirty || tipo_cabelo?.touched) && tipo_cabelo?.errors">
+        Tipo inválido!
+      </ion-note>
+    </ion-checkbox-group>
+
+    <ion-checkbox-group formControlName="tamanho_cabelo">
+      <ion-checkbox class="checkbox" value="Muito curto">Muito Curto</ion-checkbox><br />
+      <ion-checkbox class="checkbox" value="Curto">Curto</ion-checkbox><br />
+      <ion-checkbox class="checkbox" value="Médio">Liso</ion-checkbox><br />
+      <ion-checkbox class="checkbox" value="Longo">Liso</ion-checkbox><br />
+      <ion-checkbox class="checkbox" value="Muito longo">Liso</ion-checkbox><br />
+
+      <ion-note slot="error" *ngIf="(tamanho_cabelo?.dirty || tamanho_cabelo?.touched) && tamanho_cabelo?.errors">
+        Tamanho inválido!
+      </ion-note>
+    </ion-checkbox-group>
+   
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Local de Trabalho / Endereço" formControlName="local_trabalho"></ion-input>
+      <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label position="floating">Data de Nascimento</ion-label>
+      <ion-datetime
+        formControlName="data_nascimento"
+        displayFormat="DD/MM/YYYY"
+        placeholder="Selecione a data"
+      ></ion-datetime>
+      <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && data_nascimento?.errors">
+        Data de Nascimento inválida!
+      </ion-note>
+    </ion-item>
       
       <ion-button color="red" expand="full" type="button"  [disabled]="!credentials.valid">Editar conta</ion-button>
       

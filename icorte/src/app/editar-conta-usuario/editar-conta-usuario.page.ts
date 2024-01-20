@@ -16,7 +16,6 @@ export class EditarContaUsuarioPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     oldPassword: ['', [Validators.required, Validators.minLength(6)]],
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.minLength(11)]],
     endereco: ['', [Validators.required, Validators.minLength(10)]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
   });
@@ -40,10 +39,6 @@ export class EditarContaUsuarioPage implements OnInit {
 
   get newPassword() {
     return this.credentials.get('newPassword');
-  }
-
-  get cpf() {
-    return this.credentials.get('cpf');
   }
 
   get endereco() {
@@ -72,7 +67,7 @@ export class EditarContaUsuarioPage implements OnInit {
 
     if (uid) {
       const userProfile = {
-        cpf: updatedProfile.cpf,
+        
         endereco: updatedProfile.endereco,
         nome: updatedProfile.nome,
         email: updatedProfile.email,

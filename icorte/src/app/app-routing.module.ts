@@ -65,7 +65,15 @@ const routes: Routes = [
   {
     path: 'pedido-pendente-barbeiro',
     loadChildren: () => import('./pedido-pendente-barbeiro/pedido-pendente-barbeiro.module').then( m => m.PedidoPendenteBarbeiroPageModule)
+  },  {
+    path: 'pedidos-completos-cliente',
+    loadChildren: () => import('./pedidos-completos-cliente/pedidos-completos-cliente.module').then( m => m.PedidosCompletosClientePageModule)
+  },
+  {
+    path: 'pedidos-completos-barbeiro',
+    loadChildren: () => import('./pedidos-completos-barbeiro/pedidos-completos-barbeiro.module').then( m => m.PedidosCompletosBarbeiroPageModule)
   }
+
 
      
 

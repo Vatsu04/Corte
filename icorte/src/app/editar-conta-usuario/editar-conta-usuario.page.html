@@ -25,11 +25,29 @@
 
 
     </ion-item>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cpf" placeholder="CPF" formControlName="cpf"></ion-input>
-      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
+  
+    <ion-radio-group formControlName="tipo_cabelo">
+      <ion-radio class="checkbox" value="Crespo">Crespo</ion-radio><br />
+      <ion-radio class="checkbox" value="Ondulado">Ondulado</ion-radio><br />
+      <ion-radio class="checkbox" value="Liso">Liso</ion-radio><br />
 
-    </ion-item>
+      <ion-note slot="error" *ngIf="(tipo_cabelo?.dirty || tipo_cabelo?.touched) && tipo_cabelo?.errors">
+        Tipo inválido!
+      </ion-note>
+    </ion-radio-group>
+
+    <ion-radio-group formControlName="tamanho_cabelo">
+      <ion-radio class="checkbox" value="Muito curto">Muito Curto</ion-radio><br />
+      <ion-radio class="checkbox" value="Curto">Curto</ion-radio><br />
+      <ion-radio class="checkbox" value="Médio">Liso</ion-radio><br />
+      <ion-radio class="checkbox" value="Longo">Liso</ion-radio><br />
+      <ion-radio class="checkbox" value="Muito longo">Liso</ion-radio><br />
+
+      <ion-note slot="error" *ngIf="(tamanho_cabelo?.dirty || tamanho_cabelo?.touched) && tamanho_cabelo?.errors">
+        Tamanho inválido!
+      </ion-note>
+    </ion-radio-group>
+
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
       <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Endereco invalido!</ion-note>
