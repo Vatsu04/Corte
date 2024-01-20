@@ -28,6 +28,7 @@ export class PedidosPendentesPage implements OnInit {
     await this.listarBanco();
     this.listarPedidos();
     console.log(this.pedidos);
+    console.log(this.pedidos.id);
   }
 
   async listarPedidos() {

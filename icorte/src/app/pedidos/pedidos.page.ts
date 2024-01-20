@@ -45,6 +45,10 @@ export class PedidosPage implements OnInit {
     this.isToastOpen = isOpen;
   }
 
+  message(isOpen: boolean){
+    this.isToastOpen = isOpen;
+  }
+
     isValidFloat(control: AbstractControl): { [key: string]: any } | null {
     const floatValue = parseFloat(control.value);
   
@@ -125,7 +129,7 @@ async listarBanco() {
 
 async negarPedido(isOpen:boolean, id:string){
   await deleteDoc(doc(this.firestore, "chamados", id));
-  this.mensagem(isOpen);
+  
   
   // Wait for a short time to allow Firebase to process the deletion
   await new Promise(resolve => setTimeout(resolve, 2000));
@@ -137,6 +141,11 @@ async negarPedido(isOpen:boolean, id:string){
   this.router.navigateByUrl('/tab3', { skipLocationChange: true }).then(() => {
     this.router.navigate(['/pedidos']);
   });
+}
+
+async negar(isOpen:boolean, id:string){
+  this.negarPedido(isOpen, id);
+  this.mensagem(isOpen);
 }
 
 async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
@@ -161,6 +170,7 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
     await setDoc(document, pedido);
     console.log('Pedido added succesfully');
     this.negarPedido(isOpen, id);
+    this.message(isOpen)
   } catch(error) {
     console.log("Error adding pedido:" , error)
   }
