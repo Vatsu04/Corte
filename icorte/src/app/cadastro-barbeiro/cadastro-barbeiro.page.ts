@@ -44,9 +44,10 @@ export class CadastroBarbeiroPage implements OnInit {
     return this.credentials.get('especialidade_tipo_cabelo');
   }
 
-  get especialidade_tamanho_cabelo(){
-    return this.credentials.get('especialidade_tipo_cabelo');
-  }
+ get especialidade_tamanho_cabelo() {
+  return this.credentials.get('especialidade_tamanho_cabelo');
+}
+
 
   get cpf() {
     return this.credentials.get('cpf');
@@ -106,7 +107,5 @@ export class CadastroBarbeiroPage implements OnInit {
     });
     
 }
-async returnToMenu(){
-  this.router.navigateByUrl('/login', { replaceUrl: true });
-}
+
 }

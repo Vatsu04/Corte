@@ -45,10 +45,10 @@ export class AvatarService {
   
       if (userDoc.exists()) {
         // Get the existing user fields
-        const { nome, cpf, email, endereco } = userDoc.data();
+        const { nome, cpf, email, endereco, tipo_cabelo, tamanho_cabelo } = userDoc.data();
   
         // Update only the imageUrl field and maintain other fields
-        await updateDoc(userDocRef, { imageUrl, nome, cpf, email, endereco });
+        await updateDoc(userDocRef, { imageUrl, nome, cpf, email, endereco, tipo_cabelo, tamanho_cabelo });
   
         return true;
       } else {
@@ -94,10 +94,10 @@ export class AvatarService {
   
       if (barberDoc.exists()) {
         // Get the existing user fields
-        const { nome, cpf, emaiL, local_trabalho, especialidades } = barberDoc.data();
+        const { nome, cpf, emaiL, local_trabalho,  especialidade_tamanho_cabelo, especialidade_tipo_cabelo } = barberDoc.data();
   
         // Update only the imageUrl field and maintain other fields
-        await updateDoc(barberDocRef, { imageUrl, nome, cpf, emaiL, local_trabalho, especialidades });
+        await updateDoc(barberDocRef, { imageUrl, nome, cpf, emaiL, local_trabalho, especialidade_tamanho_cabelo, especialidade_tipo_cabelo });
   
         return true;
       } else {

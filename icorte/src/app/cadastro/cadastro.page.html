@@ -7,63 +7,92 @@
 <ion-content [fullscreen]="true">
   <form [formGroup]="credentials">
 
-
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
-
+      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email inválido!</ion-note>
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
-      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
-
+      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha inválida!</ion-note>
     </ion-item>
+
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="cpf" placeholder="CPF" formControlName="cpf" appCpfMask></ion-input>
-      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
-
+      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF inválido!</ion-note>
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
-      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Endereço invalido!</ion-note>
+      <ion-input type="endereco" placeholder="Endereço" formControlName="endereco"></ion-input>
+      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Endereço inválido!</ion-note>
+    </ion-item>
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome inválido!</ion-note>
     </ion-item>
 
-    <ion-radio-group formControlName="tipo_cabelo">
-      <ion-radio class="checkbox" value="Crespo">Crespo</ion-radio><br />
-      <ion-radio class="checkbox" value="Ondulado">Ondulado</ion-radio><br />
-      <ion-radio class="checkbox" value="Liso">Liso</ion-radio><br />
-
+    <h2>Tipo de Cabelo</h2>
+    <ion-radio-group formControlName="tipo_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Crespo"></ion-radio>
+            <ion-label>Crespo</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Ondulado"></ion-radio>
+            <ion-label>Ondulado</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Liso"></ion-radio>
+            <ion-label>Liso</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
       <ion-note slot="error" *ngIf="(tipo_cabelo?.dirty || tipo_cabelo?.touched) && tipo_cabelo?.errors">
         Tipo inválido!
       </ion-note>
     </ion-radio-group>
 
-    <ion-radio-group formControlName="tamanho_cabelo">
-      <ion-radio class="checkbox" value="Muito curto">Muito Curto</ion-radio><br />
-      <ion-radio class="checkbox" value="Curto">Curto</ion-radio><br />
-      <ion-radio class="checkbox" value="Médio">Liso</ion-radio><br />
-      <ion-radio class="checkbox" value="Longo">Liso</ion-radio><br />
-      <ion-radio class="checkbox" value="Muito longo">Liso</ion-radio><br />
-
+    <h2>Tamanho de Cabelo</h2>
+    <ion-radio-group formControlName="tamanho_cabelo" class="radio-group-horizontal">
+      <ion-row>
+       
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Curto"></ion-radio>
+            <ion-label>Curto</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Médio"></ion-radio>
+            <ion-label>Médio</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Longo"></ion-radio>
+            <ion-label>Longo</ion-label>
+          </ion-item>
+        </ion-col>
+     
+      </ion-row>
       <ion-note slot="error" *ngIf="(tamanho_cabelo?.dirty || tamanho_cabelo?.touched) && tamanho_cabelo?.errors">
         Tamanho inválido!
       </ion-note>
     </ion-radio-group>
 
+   
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
-      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
-
-    </ion-item>
-      <ion-button class="button1" color="red" expand="full"   [disabled]="!credentials.valid" type="button" (click)="register()">Cadastrar conta</ion-button>
-   <br>
-      <ion-button color="red" expand="full" routerLink="/" >Página Login</ion-button>
-      <ion-button color="red" expand="full" routerLink="/cadastro-barbeiro" >Cadastro Barbeiro</ion-button>
- 
-     
+    <ion-button class="button1" color="red" expand="full" [disabled]="!credentials.valid" type="button" (click)="register()">Cadastrar conta</ion-button>
+    <br>
+    <ion-button color="red" expand="full" routerLink="/">Página Login</ion-button>
+    <ion-button color="red" expand="full" routerLink="/cadastro-barbeiro">Cadastro Barbeiro</ion-button>
 
   </form>
 </ion-content>

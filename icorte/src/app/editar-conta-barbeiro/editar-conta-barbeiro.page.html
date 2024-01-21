@@ -14,39 +14,72 @@
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
-      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
+      <ion-input type="password" placeholder="Senha Antiga" formControlName="oldPassword"></ion-input>
+      <ion-note slot="error" *ngIf="(oldPassword?.dirty || oldPassword?.touched) && oldPassword?.errors">Senha invalido!</ion-note>
+
+</ion-item>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="password" placeholder="Senha Nova" formControlName="newPassword"></ion-input>
+        <ion-note slot="error" *ngIf="(newPassword?.dirty || newPassword?.touched) && newPassword?.errors">Senha invalido!</ion-note>
+
 
     </ion-item>
 
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="CPF" formControlName="cpf" maxLength="14" ></ion-input>
-      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF invalido!</ion-note>
-    </ion-item>
-
-    <ion-checkbox-group formControlName="tipo_cabelo">
-      <ion-checkbox class="checkbox" value="Crespo">Crespo</ion-checkbox><br />
-      <ion-checkbox class="checkbox" value="Ondulado">Ondulado</ion-checkbox><br />
-      <ion-checkbox class="checkbox" value="Liso">Liso</ion-checkbox><br />
-
-      <ion-note slot="error" *ngIf="(tipo_cabelo?.dirty || tipo_cabelo?.touched) && tipo_cabelo?.errors">
+  
+    <h2>Especialidade para Tipo de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tipo_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Crespo"></ion-radio>
+            <ion-label>Crespo</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Ondulado"></ion-radio>
+            <ion-label>Ondulado</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Liso"></ion-radio>
+            <ion-label>Liso</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tipo_cabelo?.dirty || especialidade_tipo_cabelo?.touched) && especialidade_tipo_cabelo?.errors">
         Tipo inválido!
       </ion-note>
-    </ion-checkbox-group>
-
-    <ion-checkbox-group formControlName="tamanho_cabelo">
-      <ion-checkbox class="checkbox" value="Muito curto">Muito Curto</ion-checkbox><br />
-      <ion-checkbox class="checkbox" value="Curto">Curto</ion-checkbox><br />
-      <ion-checkbox class="checkbox" value="Médio">Liso</ion-checkbox><br />
-      <ion-checkbox class="checkbox" value="Longo">Liso</ion-checkbox><br />
-      <ion-checkbox class="checkbox" value="Muito longo">Liso</ion-checkbox><br />
-
-      <ion-note slot="error" *ngIf="(tamanho_cabelo?.dirty || tamanho_cabelo?.touched) && tamanho_cabelo?.errors">
+    </ion-radio-group>
+    
+    <h2>Especialidade para Tamanho de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tamanho_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Curto"></ion-radio>
+            <ion-label>Curto</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Médio"></ion-radio>
+            <ion-label>Médio</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Longo"></ion-radio>
+            <ion-label>Longo</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tamanho_cabelo?.dirty || especialidade_tamanho_cabelo?.touched) && especialidade_tamanho_cabelo?.errors">
         Tamanho inválido!
       </ion-note>
-    </ion-checkbox-group>
-   
+    </ion-radio-group>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
       <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
