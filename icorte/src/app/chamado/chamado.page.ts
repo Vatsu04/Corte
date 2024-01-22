@@ -70,6 +70,7 @@ export class ChamadoPage implements OnInit {
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
       emailCliente: this.usuarios[0].email,
+      cpfCliente: this.usuarios[0].cpf,
       nomeBarbeiro: this.barber.nome,
       emailBarbeiro: this.barber.email,
       cpfBarbeiro: this.barber.cpf,
@@ -131,7 +132,7 @@ export class ChamadoPage implements OnInit {
 
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
-        this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'] }];
+        this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'], cpf: userDoc.data()['cpf'] }];
         console.log(this.usuarios[0]?.nome);
     console.log(this.usuarios[0]?.email);
       } else {

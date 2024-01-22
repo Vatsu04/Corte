@@ -18,7 +18,7 @@
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cpf" placeholder="CPF" formControlName="cpf" appCpfMask></ion-input>
+      <ion-input type="cpf" placeholder="CPF" formControlName="cpf" maxLength="14" appCpfMask></ion-input>
       <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF inválido!</ion-note>
     </ion-item>
 

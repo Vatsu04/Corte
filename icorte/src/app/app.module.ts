@@ -12,12 +12,11 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { DataMaskDirective } from './data-mask.directive';
-import { CpfMaskDirective } from './cpf-mask.directive';
+
 
 
 @NgModule({
-  declarations: [AppComponent, CpfMaskDirective, DataMaskDirective],
+  declarations: [AppComponent],
   imports:
    [BrowserModule,
     AngularFirestoreModule,

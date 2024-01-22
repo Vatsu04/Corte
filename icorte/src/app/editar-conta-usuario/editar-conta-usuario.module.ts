@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditarContaUsuarioPageRoutingModule } from './editar-conta-usuario-routing.module';
 
 import { EditarContaUsuarioPage } from './editar-conta-usuario.page';
-import { CpfMaskDirective } from '../cpf-mask.directive';
+
 
 @NgModule({
   imports: [

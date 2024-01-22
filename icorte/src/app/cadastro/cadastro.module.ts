@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-import { DataMaskDirective } from '../data-mask.directive';
+
 import { CadastroPageRoutingModule } from './cadastro-routing.module';
-import { CpfMaskDirective } from '../cpf-mask.directive';
+
 import { CadastroPage } from './cadastro.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CpfMaskModule } from '../Mask/cpf-mask.module';
+
+
 
 @NgModule({
   imports: [
@@ -16,6 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     CadastroPageRoutingModule,
     ReactiveFormsModule,
+    CpfMaskModule
+
+    
   ],
   declarations: [CadastroPage],
 })

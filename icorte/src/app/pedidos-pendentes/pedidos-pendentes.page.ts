@@ -13,7 +13,7 @@ export class PedidosPendentesPage implements OnInit {
   pedidos:any = [];
   isToastOpen:boolean = false;
   isModalOpen:boolean = false;
-  usuarios: any = [{email:'', nome:''}];
+  usuarios: any = [{email:'', nome:'', cpf: ''}];
   pedidoPago:boolean = false;
   pedidoConfirmado:boolean = false;
   pedidoCompleto:boolean = true;
@@ -43,8 +43,10 @@ export class PedidosPendentesPage implements OnInit {
       id: doc.id,
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
+      cpfCliente: doc.data()['cpfCliente'],
       nomeBarbeiro: doc.data()['nomeBarbeiro'], 
       emailBarbeiro: doc.data()['emailBarbeiro'],
+      cpfBarbeiro: doc.data()['cpfBarbeiro'],
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
@@ -52,7 +54,7 @@ export class PedidosPendentesPage implements OnInit {
     });
     
     for (let i = 0; i < this.teste.length; i++) {
-    if(this.teste.nomeCliente == this.usuarios.nome && this.teste.emailCliente == this.usuarios.email){
+    if(this.teste[i].cpfCliente === this.usuarios.cpf){
       this.pedidos[i] = this.teste[i];
     }
   }
@@ -67,7 +69,7 @@ export class PedidosPendentesPage implements OnInit {
   
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
-        this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'] }];
+        this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'], cpf: userDoc.data()['cpf'] }];
         console.log(this.usuarios[0]?.nome);
       console.log(this.usuarios[0]?.email);
       } else {
