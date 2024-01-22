@@ -15,10 +15,9 @@ export class EditarContaBarbeiroPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     oldPassword: ['', [Validators.required, Validators.minLength(6)]],
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.minLength(11)]],
-   
     nome: ['', [Validators.required, Validators.minLength(10)]],
-    especialidades: ['', [Validators.required, Validators.minLength(7)]],
+    especialidade_tipo_cabelo: ['', [Validators.required]],
+    especialidade_tamanho_cabelo: ['', [Validators.required]],
     local_trabalho: ['', [Validators.required, Validators.minLength(10)]],
     data_nascimento: ['', [Validators.required]],
   });
@@ -44,8 +43,12 @@ export class EditarContaBarbeiroPage implements OnInit {
     return this.credentials.get('newPassword');
   }
   
-  get cpf() {
-    return this.credentials.get('cpf');
+  get especialidade_tipo_cabelo(){
+    return this.credentials.get('especialidade_tipo_cabelo');
+  }
+
+  get especialidade_tamanho_cabelo(){
+    return this.credentials.get('especialidade_tipo_cabelo');
   }
   
   get endereco() {
@@ -56,9 +59,6 @@ export class EditarContaBarbeiroPage implements OnInit {
     return this.credentials.get('nome');
   }
   
-  get especialidades() {
-    return this.credentials.get('especialidades');
-  }
   
   get local_trabalho() {
     return this.credentials.get('local_trabalho');

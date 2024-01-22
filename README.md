@@ -10,11 +10,6 @@ ICorte - Aplicativo cuja finalidade é facilitar a vida de cidadãos que visam e
 <br/>
 
 ### Como utilizar o aplicativo.
-- Para uma melhor visualização utilize a resolução de 1280x720.
-- Passeios disponíveis apenas no Rio de Janeiro.<br/>
-- Login para visualização de todas as funcionalidades de usuário:<br/> email: andressa@gmail.com<br/> senha: 123<br/>
-- Para compra de passeio você pode digitar um cartão aleatório na validação de checkout.
-- Fotos do usuário são disponibilizadas pelos fotógrafos através da aplicação administrativa com login de Fotógrafo. <a href="https://github.com/plfmoura/SquadProject-AdminAzulTurismo">App Administrativo</a> 
 
 Fluxo do usuário:<br/>
 - Entrar na aplicação > selecionar passeio > efetuar login/efetuar cadastro > iniciar compra > finalizar compra > visualizar compra no perfil.<br/>

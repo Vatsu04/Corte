@@ -21,7 +21,7 @@ export class ChamadoPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     descricao: ['', [Validators.required, Validators.minLength(10)]],
     local: ['', [Validators.required]],
-    horario: ['', ]
+    dataHora: ['', Validators.required ]
   });
  
   chamado:any =[];
@@ -31,7 +31,7 @@ export class ChamadoPage implements OnInit {
   imgSrc:any;
   isImg: boolean=false;
   images:any = [];
-  barber: any = { nome: '', email: '' };
+  barber: any = { nome: '', email: '', cpf:'' };
   constructor(
     private fb: FormBuilder,
     private firestore: Firestore,
@@ -43,9 +43,10 @@ export class ChamadoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.barber = history.state.barber || { nome: '', email: '' };
+    this.barber = history.state.barber || { nome: '', email: '', cpf:'' };
     console.log(this.barber.nome);
     console.log(this.barber.email);
+    console.log(this.barber.cpf);
     this.listarBanco();
   }
 
@@ -71,8 +72,10 @@ export class ChamadoPage implements OnInit {
       emailCliente: this.usuarios[0].email,
       nomeBarbeiro: this.barber.nome,
       emailBarbeiro: this.barber.email,
+      cpfBarbeiro: this.barber.cpf,
       descricao: this.descricao?.value,
-      local: this.local?.value
+      local: this.local?.value,
+      horario: this.dataHora?.value
     };
 
     const document = doc(collection(this.firestore, 'chamados'));
@@ -91,6 +94,10 @@ export class ChamadoPage implements OnInit {
 
   get local(){
     return this.credentials.get('local');
+  }
+
+  get dataHora(){
+    return this.credentials.get('dataHora');
   }
 
 

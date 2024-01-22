@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getDocs, Firestore, collection, deleteDoc, doc, getDoc } from '@angular/fire/firestore';
+import { getDocs, Firestore, collection, deleteDoc, doc, getDoc, setDoc } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,9 @@ export class PedidosPendentesPage implements OnInit {
   isToastOpen:boolean = false;
   isModalOpen:boolean = false;
   usuarios: any = [{email:'', nome:''}];
+  pedidoPago:boolean = false;
+  pedidoConfirmado:boolean = false;
+  pedidoCompleto:boolean = true;
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
@@ -28,6 +31,7 @@ export class PedidosPendentesPage implements OnInit {
     await this.listarBanco();
     this.listarPedidos();
     console.log(this.pedidos);
+    console.log(this.pedidos.id);
   }
 
   async listarPedidos() {
@@ -45,8 +49,6 @@ export class PedidosPendentesPage implements OnInit {
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
       imageUrl: doc.data()['imageUrl'] }]
-
-      
     });
     
     for (let i = 0; i < this.teste.length; i++) {
@@ -77,13 +79,84 @@ export class PedidosPendentesPage implements OnInit {
     return Promise.resolve(); // Resolve the promise when the function completes
   }
 
+  pago(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
+
+
+  confirma(isOpen: boolean){
+    this.isToastOpen = isOpen;
+  }
+
+
+
+  async pagarPedido(isOpen: boolean){
+    this.pago(isOpen);
+    this.pedidoPago = isOpen;
+  }
+
+  async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
+    _nomeBarbeiro: string, _emailBarbeiro: string,
+    _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){
+    this.pago(isOpen);
+    if(this.pedidoPago != true){
+      this.mensagem(isOpen);
+    } else{
+      this.confirma(isOpen);
+      this.pedidoConfirmado = isOpen;
+      this.aceitarPedido(foto, _nomeCliente, _emailCliente,
+        _nomeBarbeiro, _emailBarbeiro,
+        _descricao, _local, _preco, _cpfBarbeiro, isOpen, id );
+
+      
+      this.cancelarPedido(isOpen, id)
+    }
+    
+  } 
+
+
   mensagem(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
 
-  async cancelarPedido(isOpen:boolean, id:string){
-    await deleteDoc(doc(this.firestore, "pedidos", id));
-    this.mensagem(isOpen);
+  message(isOpen: boolean){
+    this.isToastOpen = isOpen;
+  }
+  async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
+    _nomeBarbeiro: string, _emailBarbeiro: string,
+    _descricao: string, _local:string, preco:string, cpfBarbeiro: string, isOpen:boolean, id:string){
+   
+   
+   const pedidos_feitos = {
+     id: id,
+     imageUrl: foto,
+     nomeCliente: _nomeCliente,
+     emailCliente: _emailCliente,
+     nomeBarbeiro: _nomeBarbeiro,
+     emailBarbeiro: _emailBarbeiro,
+     descricao: _descricao,
+     local: _local,
+     preco: preco,
+     cpfBarbeiro: cpfBarbeiro
+   };
+ 
+   const document = doc(collection(this.firestore, 'pedidos_feitos'))
+ 
+   try{
+     await setDoc(document, pedidos_feitos);
+     console.log('Pedido added succesfully');
+   
+    
+   } catch(error) {
+     console.log("Error adding pedido:" , error)
+   }
+ }
+ 
+
+
+  async cancelarPedido(isOpen:boolean, id:string){ // deletar o pedido do banco de dados
+    await deleteDoc(doc(this.firestore, "pedidos", id)); // Apaga do banco de dados de acordo com o ID
+    
     setTimeout(() => {
       this.pedidos=[]
       this.listarBanco()

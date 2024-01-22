@@ -16,8 +16,9 @@ export class EditarContaUsuarioPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     oldPassword: ['', [Validators.required, Validators.minLength(6)]],
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
-    cpf: ['', [Validators.required, Validators.minLength(11)]],
     endereco: ['', [Validators.required, Validators.minLength(10)]],
+    tipo_cabelo:  ['', Validators.required],
+    tamanho_cabelo: ['', Validators.required],
     nome: ['', [Validators.required, Validators.minLength(10)]],
   });
 
@@ -42,16 +43,20 @@ export class EditarContaUsuarioPage implements OnInit {
     return this.credentials.get('newPassword');
   }
 
-  get cpf() {
-    return this.credentials.get('cpf');
-  }
-
   get endereco() {
     return this.credentials.get('endereco');
   }
 
   get nome() {
     return this.credentials.get('nome');
+  }
+
+  get tamanho_cabelo(){
+    return this.credentials.get('tamanho_cabelo');
+  }
+
+  get tipo_cabelo(){
+    return this.credentials.get('tipo_cabelo');
   }
 
   async editarPerfil(perfilAtualizado: any) {
@@ -72,7 +77,7 @@ export class EditarContaUsuarioPage implements OnInit {
 
     if (uid) {
       const userProfile = {
-        cpf: updatedProfile.cpf,
+        
         endereco: updatedProfile.endereco,
         nome: updatedProfile.nome,
         email: updatedProfile.email,

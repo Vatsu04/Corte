@@ -45,6 +45,10 @@ export class PedidosPage implements OnInit {
     this.isToastOpen = isOpen;
   }
 
+  message(isOpen: boolean){
+    this.isToastOpen = isOpen;
+  }
+
     isValidFloat(control: AbstractControl): { [key: string]: any } | null {
     const floatValue = parseFloat(control.value);
   
@@ -70,6 +74,7 @@ export class PedidosPage implements OnInit {
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro']
       });
     });
   
@@ -77,13 +82,12 @@ export class PedidosPage implements OnInit {
    
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
-      const testeNomeBarbeiro = this.teste[i].nomeBarbeiro.toLowerCase();
-      const barbeiroNome = this.barbeiros[0].nome.toLowerCase();
-      const testeEmailBarbeiro = this.teste[i].emailBarbeiro.toLowerCase();
-      const barbeiroEmail = this.barbeiros[0].email.toLowerCase(); // facilitar a comparação entre os dois parametros, mas n é necessário
+      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
+      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
+      
 
 
-if (testeNomeBarbeiro === barbeiroNome && testeEmailBarbeiro === barbeiroEmail) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste[i].nomeBarbeiro)
         console.log( this.barbeiros[0]?.nome)
         this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
@@ -108,7 +112,8 @@ async listarBanco() {
       console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
       this.barbeiros = [{ nome: userDoc.data()['nome'],
        email: userDoc.data()['emaiL'], 
-       especialidades: userDoc.data()['especialidades']  }];
+       especialidades: userDoc.data()['especialidades'],
+       cpf: userDoc.data()['cpf']  }];
      
     } else {
       console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
@@ -124,7 +129,7 @@ async listarBanco() {
 
 async negarPedido(isOpen:boolean, id:string){
   await deleteDoc(doc(this.firestore, "chamados", id));
-  this.mensagem(isOpen);
+  
   
   // Wait for a short time to allow Firebase to process the deletion
   await new Promise(resolve => setTimeout(resolve, 2000));
@@ -138,9 +143,14 @@ async negarPedido(isOpen:boolean, id:string){
   });
 }
 
+async negar(isOpen:boolean, id:string){
+  this.negarPedido(isOpen, id);
+  this.mensagem(isOpen);
+}
+
 async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
    _nomeBarbeiro: string, _emailBarbeiro: string,
-   _descricao: string, _local:string, credentials: any, isOpen:boolean, id:string){
+   _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string){
   
   
   const pedido = {
@@ -160,6 +170,7 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
     await setDoc(document, pedido);
     console.log('Pedido added succesfully');
     this.negarPedido(isOpen, id);
+    this.message(isOpen)
   } catch(error) {
     console.log("Error adding pedido:" , error)
   }

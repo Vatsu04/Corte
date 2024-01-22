@@ -16,8 +16,8 @@ export class CadastroBarbeiroPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
-    especialidades: ['', [Validators.required, Validators.minLength(12)]],
-   
+    especialidade_tipo_cabelo: ['', [Validators.required]],
+    especialidade_tamanho_cabelo: ['', [Validators.required]],
     local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -39,6 +39,15 @@ export class CadastroBarbeiroPage implements OnInit {
   get password() {
     return this.credentials.get('password');
   }
+
+  get especialidade_tipo_cabelo(){
+    return this.credentials.get('especialidade_tipo_cabelo');
+  }
+
+ get especialidade_tamanho_cabelo() {
+  return this.credentials.get('especialidade_tamanho_cabelo');
+}
+
 
   get cpf() {
     return this.credentials.get('cpf');
@@ -82,7 +91,8 @@ export class CadastroBarbeiroPage implements OnInit {
     this.credentials = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
-    especialidades: ['', [Validators.required, Validators.minLength(12)]],
+    especialidade_tipo_cabelo: ['', [Validators.required]],
+    especialidade_tamanho_cabelo: ['', [Validators.required]],
     local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -97,7 +107,5 @@ export class CadastroBarbeiroPage implements OnInit {
     });
     
 }
-async returnToMenu(){
-  this.router.navigateByUrl('/login', { replaceUrl: true });
-}
+
 }

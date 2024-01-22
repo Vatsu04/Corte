@@ -16,7 +16,8 @@ export class CadastroPage implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]],
     cpf: ['', [Validators.required, Validators.minLength(11)]],
     endereco: ['', [Validators.required, Validators.minLength(10)]],
-
+    tipo_cabelo: ['', [Validators.required]],
+    tamanho_cabelo: ['', [Validators.required]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
   });
 
@@ -27,6 +28,14 @@ export class CadastroPage implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
+
+  get tipo_cabelo(){
+    return this.credentials.get('tipo_cabelo');
+  }
+
+  get tamanho_cabelo(){
+    return this.credentials.get('tamanho_cabelo');
+  }
 
   get email() {
     return this.credentials.get('email');
@@ -57,8 +66,9 @@ export class CadastroPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       cpf: ['', [Validators.required, Validators.minLength(11)]],
-    endereco: ['', [Validators.required, Validators.minLength(10)]],
-
+      endereco: ['', [Validators.required, Validators.minLength(10)]],
+      tipo_cabelo: ['', [Validators.required]],
+    tamanho_cabelo: ['', [Validators.required]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
@@ -77,7 +87,9 @@ export class CadastroPage implements OnInit {
   }
  
 
- 
+  async cadastroBarbeiro(){
+    this.router.navigateByUrl('/cadastro-barbeiro', { replaceUrl: true });
+  }
 
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({

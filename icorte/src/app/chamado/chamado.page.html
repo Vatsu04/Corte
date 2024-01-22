@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Add ngModel directive to bind values to the form controls -->
+
 <ion-content [fullscreen]="true">
   <form [formGroup]="credentials" (ngSubmit)="chamarBabeiro()">
 
@@ -15,28 +15,51 @@
       </ion-note>
     </ion-item>
 
-    <!-- Use [(ngModel)] to bind the selected value to the model -->
     <ion-radio-group formControlName="local">
-      <ion-radio class="checkbox" value="Moradia do Cliente">Em casa</ion-radio><br />
-      <ion-radio class="checkbox" value="Local de Trabalho">No local de trabalho do Barbeiro</ion-radio><br />
-      <ion-note slot="error" *ngIf="(local?.dirty || local?.touched) && local?.errors">
-        Local inválido!
+      <ion-list-header>
+        Selecione o local:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Em casa</ion-label>
+        <ion-radio slot="start" value="Moradia do Cliente"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No local de trabalho do Barbeiro</ion-label>
+        <ion-radio slot="start" value="Local de Trabalho"></ion-radio>
+      </ion-item>
+      <ion-note slot="end" *ngIf="(local?.dirty || local?.touched) && local?.errors">
+     
+          Local inválido!
+   
       </ion-note>
     </ion-radio-group>
     <br>
-    <ion-button color="red" expand="full" id="open-modal" (click)="hideShow()">
+    <ion-button color="red" fill="outline" expand="block" id="open-modal" (click)="hideShow()">
 Foto do corte de cabelo
     </ion-button>
-    
+    <h2>Data e Horário:</h2>
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label></ion-label>
+      <ion-datetime
+        formControlName="dataHora"
+        displayFormat="DD/MM HH:mm"
+        pickerFormat="DD MMMM HH:mm"
+        placeholder="Selecione a data e horário"
+      ></ion-datetime>
+      <ion-note slot="error" *ngIf="(dataHora?.dirty || dataHora?.touched) && dataHora?.errors">
+        Data e horário inválidos!
+      </ion-note>
+    </ion-item>
     <!-- Use *ngIf to conditionally display the image -->
     <img *ngIf="isImg"  alt="avatar" [src]="imgSrc" class="imgSrc">
 
     <ion-button color="red" expand="full" [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
-      <br>
-    <ion-button color="red" expand="full" routerLink="/tab1"> Voltar </ion-button>
     
+    <ion-button color="red" expand="full" routerLink="/tab1" >Menu</ion-button>
+
 
   </form>
+  
 </ion-content>
 
 <ion-modal #modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">

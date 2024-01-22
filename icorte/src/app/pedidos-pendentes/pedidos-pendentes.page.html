@@ -4,6 +4,14 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-toast [isOpen]="isToastOpen" message="Pedido pago." [duration]="5000"
+(didDismiss)="pago(false)"></ion-toast>
+<ion-toast [isOpen]="isToastOpen" message="Pedido completo." [duration]="5000"
+(didDismiss)="confirma(false)"></ion-toast>
+<ion-toast [isOpen]="isToastOpen" message="Pague o pedido antes de confirmar o recebimento dele!." [duration]="5000"
+(didDismiss)="mensagem(false)"></ion-toast>
+
+
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
@@ -24,8 +32,12 @@
 
             <ion-button color="red" id="negar" *ngIf="pedido.id" (click)="cancelarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
 
-            <ion-button color="red" id="negar" (click)="cancelarPedido(true, pedido.id)">Pagar </ion-button>
+            <ion-button color="red" id="negar" (click)="pagarPedido(true)" >Pagar </ion-button>
 
+            <ion-button color="red" id="negar" (click)="confirmarPedido(pedido.imageUrl, pedido.nomeCliente,
+             pedido.emailCliente, 
+            pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local, pedido.preco, pedido.cpfBarbeiro,
+            true, pedido.id)" >Confirmar Serviço Completo </ion-button>
 
           </ion-card-content>
         </ion-card>

@@ -38,7 +38,8 @@ export class AuthService {
       await userDocRef.set({
         emaiL: credentials.email,
         cpf: credentials.cpf,
-        especialidades: credentials.especialidades,
+        especialidade_tamanho_cabelo: credentials.especialidade_tamanho_cabelo,
+        especialidade_tipo_cabelo: credentials.especialidade_tipo_cabelo,
       
         nome: credentials.nome,
         local_trabalho: credentials.local_trabalho,
@@ -65,7 +66,8 @@ export class AuthService {
         email: credentials.email,
         cpf: credentials.cpf,
         endereco: credentials.endereco,
-        
+        tamanho_cabelo: credentials.tamanho_cabelo,
+        tipo_cabelo: credentials.tipo_cabelo,
         nome: credentials.nome
         //  cadastro dos campos no banco de dados
       });
