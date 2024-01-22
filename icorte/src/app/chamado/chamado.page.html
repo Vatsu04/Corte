@@ -24,7 +24,7 @@
       </ion-note>
     </ion-radio-group>
     <br>
-    <ion-button color="red" fill="outline" expand="block" id="open-modal" (click)="hideShow()">
+    <ion-button color="red" expand="full" id="open-modal" (click)="hideShow()">
 Foto do corte de cabelo
     </ion-button>
     
@@ -32,8 +32,8 @@ Foto do corte de cabelo
     <img *ngIf="isImg"  alt="avatar" [src]="imgSrc" class="imgSrc">
 
     <ion-button color="red" expand="full" [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
-    
-    <ion-button color="red" expand="full" routerLink="/tab1" >Menu</ion-button>
+      <br>
+    <ion-button color="red" expand="full" routerLink="/tab1"> Voltar </ion-button>
     
 
   </form>
