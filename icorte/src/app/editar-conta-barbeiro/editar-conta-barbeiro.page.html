@@ -92,17 +92,7 @@
 
     </ion-item>
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">Data de Nascimento</ion-label>
-      <ion-datetime
-        formControlName="data_nascimento"
-        displayFormat="DD/MM/YYYY"
-        placeholder="Selecione a data"
-      ></ion-datetime>
-      <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && data_nascimento?.errors">
-        Data de Nascimento inválida!
-      </ion-note>
-    </ion-item>
+ 
       
       <ion-button color="red" expand="full" type="button" class="button1"  [disabled]="!credentials.valid">Editar conta</ion-button>
       <br>

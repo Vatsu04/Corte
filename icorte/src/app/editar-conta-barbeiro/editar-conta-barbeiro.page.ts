@@ -19,7 +19,7 @@ export class EditarContaBarbeiroPage implements OnInit {
     especialidade_tipo_cabelo: ['', [Validators.required]],
     especialidade_tamanho_cabelo: ['', [Validators.required]],
     local_trabalho: ['', [Validators.required, Validators.minLength(10)]],
-    data_nascimento: ['', [Validators.required]],
+
   });
 
   constructor(
@@ -81,7 +81,7 @@ export class EditarContaBarbeiroPage implements OnInit {
 
     if (uid) {
       const userProfile = {
-        cpf: updatedProfile.cpf,
+      
         local_trabalho: updatedProfile.local_trabalho,
         nome: updatedProfile.nome,
         email: updatedProfile.email,

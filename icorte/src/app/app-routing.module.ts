@@ -10,7 +10,7 @@ const redirectLoggedInHome = () => [redirectLoggedInTo(['tab1'])];
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule),
+    loadChildren: () => import('./pag-inicial/pag-inicial.module').then(m => m.PagInicialPageModule),
     canActivate: [redirectLoggedInHome]
   },
   {
@@ -65,13 +65,18 @@ const routes: Routes = [
   {
     path: 'pedido-pendente-barbeiro',
     loadChildren: () => import('./pedido-pendente-barbeiro/pedido-pendente-barbeiro.module').then( m => m.PedidoPendenteBarbeiroPageModule)
-  },  {
+  },
+  {
     path: 'pedidos-completos-cliente',
     loadChildren: () => import('./pedidos-completos-cliente/pedidos-completos-cliente.module').then( m => m.PedidosCompletosClientePageModule)
   },
   {
     path: 'pedidos-completos-barbeiro',
     loadChildren: () => import('./pedidos-completos-barbeiro/pedidos-completos-barbeiro.module').then( m => m.PedidosCompletosBarbeiroPageModule)
+  },
+  {
+    path: 'pag-inicial',
+    loadChildren: () => import('./pag-inicial/pag-inicial.module').then( m => m.PagInicialPageModule)
   }
 
 

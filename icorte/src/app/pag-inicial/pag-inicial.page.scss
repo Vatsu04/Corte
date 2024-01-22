@@ -1,0 +1,50 @@
+ion-avatar{
+    width:128px;
+    height:128px;
+   
+}
+
+.preview{
+    margin-top:50px;
+    display:flex;
+    justify-content:center;
+}
+
+.fallback{
+    width:128px;
+    height:128px;
+    border-radius:50%;
+    background: #bfbfbf;
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-weight:500;
+}
+
+#botoes{
+    padding-top: 30px;
+    text-align: center;
+}
+
+.botao{
+    width:200px;
+    }
+
+#email{
+    font-size: 12px;
+    color:rgb(85, 85, 84)
+}
+
+#info{
+    text-align: center;
+}
+ion-button{
+    color: #DEAD04;
+    border-radius: 15px;
+    box-shadow: 2px 2.5px 2px #DEAD04;
+    background-color: black;
+    font-family:fantasy ;
+    font-size: 19px;
+    width: 250px;
+}
