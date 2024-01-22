@@ -75,8 +75,8 @@ const routes: Routes = [
     loadChildren: () => import('./pedidos-completos-barbeiro/pedidos-completos-barbeiro.module').then( m => m.PedidosCompletosBarbeiroPageModule)
   },
   {
-    path: 'pag-inicial',
-    loadChildren: () => import('./pag-inicial/pag-inicial.module').then( m => m.PagInicialPageModule)
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
 
 
