@@ -123,7 +123,7 @@ export class AvatarService {
     const storageRef = ref(this.storage, path);
   
     try {
-      // Upload the image to storage
+      
       await uploadString(storageRef, cameraFile.base64String ?? '', 'base64');
   
       // Get the download URL of the uploaded image
