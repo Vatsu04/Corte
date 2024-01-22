@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PedidosCompletosBarbeiroPageRoutingModule } from './pedidos-completos-barbeiro-routing.module';
 
 import { PedidosCompletosBarbeiroPage } from './pedidos-completos-barbeiro.page';
+import { RatingModule } from '../rating/rating.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PedidosCompletosBarbeiroPageRoutingModule
+    PedidosCompletosBarbeiroPageRoutingModule,
+    RatingModule
   ],
   declarations: [PedidosCompletosBarbeiroPage]
 })

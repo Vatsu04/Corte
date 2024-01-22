@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PedidosCompletosClientePageRoutingModule } from './pedidos-completos-cliente-routing.module';
 
 import { PedidosCompletosClientePage } from './pedidos-completos-cliente.page';
+import { RatingModule } from '../rating/rating.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PedidosCompletosClientePageRoutingModule
+    PedidosCompletosClientePageRoutingModule,
+    RatingModule
   ],
   declarations: [PedidosCompletosClientePage]
 })
