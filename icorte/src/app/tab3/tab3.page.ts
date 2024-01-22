@@ -79,6 +79,7 @@ export class Tab3Page {
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro']
       });
     });
   
@@ -86,16 +87,12 @@ export class Tab3Page {
    
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
-      const testeNomeBarbeiro = this.teste[i].nomeBarbeiro.toLowerCase();
-const barbeiroNome = this.barbeiros[0].nome.toLowerCase();
-const testeEmailBarbeiro = this.teste[i].emailBarbeiro.toLowerCase();
-const barbeiroEmail = this.barbeiros[0].email.toLowerCase();
+      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
+      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
+      
 
-console.log('Teste Nome Barbeiro:', testeNomeBarbeiro);
-console.log('Barbeiro Nome:', barbeiroNome);
-console.log('Teste Email Barbeiro:', testeEmailBarbeiro);
-console.log('Barbeiro Email:', barbeiroEmail);
-if (testeNomeBarbeiro === barbeiroNome && testeEmailBarbeiro === barbeiroEmail) {
+
+if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste[i].nomeBarbeiro)
         console.log( this.barbeiros[0]?.nome)
         this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro

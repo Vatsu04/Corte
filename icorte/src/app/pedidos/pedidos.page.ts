@@ -150,7 +150,7 @@ async negar(isOpen:boolean, id:string){
 
 async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
    _nomeBarbeiro: string, _emailBarbeiro: string,
-   _descricao: string, _local:string, credentials: any, isOpen:boolean, id:string){
+   _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string){
   
   
   const pedido = {
