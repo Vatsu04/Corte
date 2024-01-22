@@ -14,6 +14,9 @@ export class PedidosPendentesPage implements OnInit {
   isToastOpen:boolean = false;
   isModalOpen:boolean = false;
   usuarios: any = [{email:'', nome:''}];
+  pedidoPago:boolean = false;
+  pedidoConfirmado:boolean = false;
+  pedidoCompleto:boolean = true;
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
@@ -46,8 +49,6 @@ export class PedidosPendentesPage implements OnInit {
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
       imageUrl: doc.data()['imageUrl'] }]
-
-      
     });
     
     for (let i = 0; i < this.teste.length; i++) {
@@ -78,13 +79,38 @@ export class PedidosPendentesPage implements OnInit {
     return Promise.resolve(); // Resolve the promise when the function completes
   }
 
-  mensagem(isOpen: boolean) {
+  pago(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
 
+
+  confirma(isOpen: boolean){
+    this.isToastOpen = isOpen;
+  }
+  mensagem(isOpen: boolean){
+    this.isToastOpen = isOpen;
+  }
+
+
+  async pagarPedido(isOpen: boolean){
+    this.pago(isOpen);
+    this.pedidoPago = isOpen;
+  }
+
+  async confirmarPedido(isOpen: boolean){
+    this.pago(isOpen);
+    if(this.pedidoPago != true){
+      this.mensagem(isOpen);
+    } else{
+      this.confirma(isOpen);
+      this.pedidoConfirmado = isOpen;
+    }
+    
+  } 
+
   async cancelarPedido(isOpen:boolean, id:string){
     await deleteDoc(doc(this.firestore, "pedidos", id));
-    this.mensagem(isOpen);
+    this.pago(isOpen);
     setTimeout(() => {
       this.pedidos=[]
       this.listarBanco()

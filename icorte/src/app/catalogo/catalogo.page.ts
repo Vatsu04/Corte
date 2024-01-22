@@ -42,20 +42,16 @@ export class CatalogoPage {
 
   async listarBanco() {
     const querySnapshot = await getDocs(collection(this.firestore, 'barbers'));
-    querySnapshot.forEach((doc) => {
-      this.barbeiros = [
-        ...this.barbeiros,
-        {
-          nome: doc.data()['nome'],
-          email: doc.data()['emaiL'],
-          especialidade_tamanho_cabelo: doc.data()['especialidade_tamanho_cabelo'],
-          especialidade_tipo_cabelo: doc.data()['especialidade_tipo_cabelo'],
-          local_trabalho: doc.data()['local_trabalho'],
-          cpf: doc.data()['cpf'],
-          foto: doc.data()['imageUrl'],
-        }
-      ];
-    });
+    this.originalBarbeiros = querySnapshot.docs.map((doc) => ({
+      nome: doc.data()['nome'],
+      email: doc.data()['emaiL'],
+      especialidade_tamanho_cabelo: doc.data()['especialidade_tamanho_cabelo'],
+      especialidade_tipo_cabelo: doc.data()['especialidade_tipo_cabelo'],
+      local_trabalho: doc.data()['local_trabalho'],
+      cpf: doc.data()['cpf'],
+      foto: doc.data()['imageUrl'],
+    }));
+    this.barbeiros = [...this.originalBarbeiros];
   }
 
   async logout() {
@@ -74,11 +70,7 @@ export class CatalogoPage {
     const tipoCabelo = this.filterForm.get('tipoCabelo')?.value;
     const tamanhoCabelo = this.filterForm.get('tamanhoCabelo')?.value;
   
-    // Create a copy of the original barbeiros array
-    const filteredBarbeiros = this.barbeiros;
-  
-    // Apply the filters to the copied array
-    this.barbeiros = filteredBarbeiros.filter((barbeiro) => {
+    this.barbeiros = this.originalBarbeiros.filter((barbeiro) => {
       if (tipoCabelo && tipoCabelo !== '' && barbeiro.especialidade_tipo_cabelo !== tipoCabelo) {
         return false;
       }
