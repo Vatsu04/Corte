@@ -1,16 +1,19 @@
 ion-button{
     color: #DEAD04;
     border-radius: 15px;
-    box-shadow: 2px 2px 2px #DEAD04;
+    border: 2px solid #DEAD04;
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
+    width: 350px;
+   margin-left: 13px;
 }
-.button1{
-    color: black;
-    border-radius: 15px;
-    box-shadow: 2.5px 2.5px 2.5px black;
-    background-color: #DEAD04;
-    font-family:fantasy ;
-    font-size: 19px;
+
+.back{
+    border: 2px #FF0000 solid;
+    color: #ff0000 ;
+}
+h2{
+    font-size: 17px;
+    margin-left: 10px;
 }
