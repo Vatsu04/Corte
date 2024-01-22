@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { getDocs, Firestore, collection, deleteDoc, doc, getDoc, setDoc } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pedidos-pendentes',
@@ -20,7 +21,8 @@ export class PedidosPendentesPage implements OnInit {
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,7 @@ export class PedidosPendentesPage implements OnInit {
   
   async initializePage() {
     await this.listarBanco();
-    this.listarPedidos();
+    await this.listarPedidos();
     console.log(this.pedidos);
     console.log(this.pedidos.id);
   }
@@ -89,22 +91,44 @@ export class PedidosPendentesPage implements OnInit {
   confirma(isOpen: boolean){
     this.isToastOpen = isOpen;
   }
-
+  mensagem(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
 
 
   async pagarPedido(isOpen: boolean){
-    this.pago(isOpen);
+    
+    const toast = await this.toastController.create({
+      message: 'Pedido Pago',
+      duration: 2000,
+      color: 'blue',
+      position: 'top'
+    });
+    toast.present();
+    
     this.pedidoPago = isOpen;
   }
 
   async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
     _nomeBarbeiro: string, _emailBarbeiro: string,
     _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){
-    this.pago(isOpen);
+   
     if(this.pedidoPago != true){
-      this.mensagem(isOpen);
+      const toast = await this.toastController.create({
+        message: 'Pague o pedido antes de confirma-lo!',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      toast.present();
     } else{
-      this.confirma(isOpen);
+      const toast = await this.toastController.create({
+        message: 'Pedido Completo!',
+        duration: 2000,
+        color: 'blue',
+        position: 'top'
+      });
+      toast.present();
       this.pedidoConfirmado = isOpen;
       this.aceitarPedido(foto, _nomeCliente, _emailCliente,
         _nomeBarbeiro, _emailBarbeiro,
@@ -117,13 +141,9 @@ export class PedidosPendentesPage implements OnInit {
   } 
 
 
-  mensagem(isOpen: boolean) {
-    this.isToastOpen = isOpen;
-  }
 
-  message(isOpen: boolean){
-    this.isToastOpen = isOpen;
-  }
+
+
   async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
     _nomeBarbeiro: string, _emailBarbeiro: string,
     _descricao: string, _local:string, preco:string, cpfBarbeiro: string, isOpen:boolean, id:string){
@@ -142,7 +162,7 @@ export class PedidosPendentesPage implements OnInit {
      cpfBarbeiro: cpfBarbeiro
    };
  
-   const document = doc(collection(this.firestore, 'pedidos_feitos'))
+   const document = doc(collection(this.firestore, 'pedidos_feitos', id))
  
    try{
      await setDoc(document, pedidos_feitos);
