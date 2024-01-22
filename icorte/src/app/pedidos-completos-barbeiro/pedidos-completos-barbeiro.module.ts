@@ -15,7 +15,7 @@ import { RatingModule } from '../rating/rating.module';
     FormsModule,
     IonicModule,
     PedidosCompletosBarbeiroPageRoutingModule,
-    
+    RatingModule
   ],
   declarations: [PedidosCompletosBarbeiroPage]
 })

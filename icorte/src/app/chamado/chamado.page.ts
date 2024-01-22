@@ -66,6 +66,8 @@ export class ChamadoPage implements OnInit {
       return;
     }
 
+
+
     const chamado = {
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
@@ -83,6 +85,14 @@ export class ChamadoPage implements OnInit {
     try {
       await setDoc(document, chamado);
       console.log('Chamado added successfully');
+      const toast = await this.toastController.create({
+        message: 'Chamado enviado para o barbeiro',
+        duration: 2000,
+        color: 'blue',
+        position: 'top'
+      });
+      toast.present();
+      return;
     } catch (error) {
       console.error('Error adding chamado:', error);
     }
