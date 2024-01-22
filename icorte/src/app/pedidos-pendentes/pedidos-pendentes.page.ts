@@ -162,7 +162,7 @@ export class PedidosPendentesPage implements OnInit {
      cpfBarbeiro: cpfBarbeiro
    };
  
-   const document = doc(collection(this.firestore, 'pedidos_feitos', id))
+   const document = doc(collection(this.firestore, 'pedidos_feitos'))
  
    try{
      await setDoc(document, pedidos_feitos);

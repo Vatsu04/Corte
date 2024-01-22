@@ -161,7 +161,8 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
     emailBarbeiro: _emailBarbeiro,
     descricao: _descricao,
     local: _local,
-    preco: credentials.preco
+    preco: credentials.preco,
+    cpfBarbeiro: cpfBarbeiro
   };
 
   const document = doc(collection(this.firestore, 'pedidos'))
