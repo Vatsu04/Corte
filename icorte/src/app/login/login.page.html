@@ -13,19 +13,19 @@
       <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
 
     </ion-item>
-
+    <br>
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
       <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
 
     </ion-item>
    
-    
+    <br>
 
     <ion-button class="button1" color="red" expand="full" color="red" [disabled]="!credentials.valid" type="submit">Login</ion-button> <!-- Caso os campos email e senha não estejam preenchidos, o botão não funciona -->
-    <br>   <u><h1> Não tem conta? </h1></u> <br>
-    <ion-button color="red" expand="full" color="red" routerLink="/cadastro">Cadastro Usuário</ion-button>
-    <ion-button color="red" expand="full" color="red" routerLink="/cadastro-barbeiro">Cadastro Barbeiro</ion-button>
+    <br>
+    <ion-button class="back" color="red" expand="full" color="red" routerLink="/">Voltar</ion-button>
+ 
 
 
 
