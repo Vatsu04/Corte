@@ -1,7 +1,3 @@
-.botoes{
-    text-align: center;
-}
-
 ion-button{
     color: #DEAD04;
     border-radius: 15px;
@@ -9,14 +5,18 @@ ion-button{
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
-  
-   margin-left: 13px;
+    width: 350px;
+   
 }
-
+.button1{
+    color: black;
+    background-color: #DEAD04;
+}
 .back{
     border: 2px #FF0000 solid;
     color: #ff0000 ;
 }
+
 h2{
     font-size: 17px;
     margin-left: 10px;
