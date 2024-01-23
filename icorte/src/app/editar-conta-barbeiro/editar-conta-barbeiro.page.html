@@ -27,6 +27,18 @@
 
 
   
+ 
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Local de Trabalho / Endereço" formControlName="local_trabalho"></ion-input>
+      <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
+
+    </ion-item>
     <h2>Especialidade para Tipo de Cabelo</h2>
     <ion-radio-group formControlName="especialidade_tipo_cabelo" class="radio-group-horizontal">
       <ion-row>
@@ -80,18 +92,6 @@
         Tamanho inválido!
       </ion-note>
     </ion-radio-group>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
-      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
-
-    </ion-item>
-
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="Local de Trabalho / Endereço" formControlName="local_trabalho"></ion-input>
-      <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
-
-    </ion-item>
-
  
       
       <ion-button color="red" expand="full" type="button" class="button1"  [disabled]="!credentials.valid">Editar conta</ion-button>
