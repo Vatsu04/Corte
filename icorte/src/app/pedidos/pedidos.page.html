@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Pedidos requisitados</ion-title>
+    <ion-title>Pedidos Requisitados</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-toast [isOpen]="isToastOpen" message="Pedido negado." [duration]="5000"
@@ -25,7 +25,7 @@
             <p>Descrição: {{ pedido.descricao }}</p>
             <p>Email do Cliente: {{ pedido.emailCliente }}</p>
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
-            <p>Id: {{ pedido.id}}</p>
+     
             <form [formGroup]="credentials">
 
               <ion-item fill="solid" class="ion-margin-bottom">

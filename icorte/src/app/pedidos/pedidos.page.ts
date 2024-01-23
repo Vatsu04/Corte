@@ -39,7 +39,7 @@ export class PedidosPage implements OnInit {
   
   async initializePage() {
     await this.listarBanco();
-    this.listarChamados();
+    await this.listarChamados();
     console.log(this.pedidos);
   }
 
@@ -67,37 +67,31 @@ export class PedidosPage implements OnInit {
     this.teste = []; // Clear the array before populating it
   
     querySnapshot.forEach((doc) => {
-      this.teste.push({ 
-        id: doc.id,
-        nomeCliente: doc.data()['nomeCliente'],
-        emailCliente: doc.data()['emailCliente'],
-        imageUrl: doc.data()['imageUrl'], 
-        local: doc.data()['local'],
-        descricao: doc.data()['descricao'],
-        nomeBarbeiro: doc.data()['nomeBarbeiro'],
-        emailBarbeiro: doc.data()['emailBarbeiro'],
-        cpfBarbeiro: doc.data()['cpfBarbeiro'],
-        horario: doc.data()['horario']
-      });
+      
+      this.teste = [...this.teste, { 
+      id: doc.id,
+      nomeCliente: doc.data()['nomeCliente'], 
+      emailCliente: doc.data()['emailCliente'],
+      cpfCliente: doc.data()['cpfCliente'],
+      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+      emailBarbeiro: doc.data()['emailBarbeiro'],
+      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      descricao: doc.data()['descricao'],
+      local: doc.data()['local'], 
+      preco: doc.data()['preco'],
+      imageUrl: doc.data()['imageUrl'] }]
     });
   
     this.pedidos = []; // Initialize pedidos as an empty array
    
     for (let i = 0; i < this.teste.length; i++) {
-      console.log(this.barbeiros[0].nome)
-      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
-      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
-      
-
-
-if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
-        console.log(this.teste[i].cpfBarbeiro)
-        console.log( this.barbeiros[0]?.cpf)
-        this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+      console.log(this.teste[i].cpfBarbeiro)
+      console.log(this.barbeiros[0].cpf)
+      if(this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf){
+        this.pedidos[i] = this.teste[i];
       }
     }
-    console.log(this.pedidos); // Log the result for verification
-  }
+    }
   
 
 get preco() {
