@@ -16,10 +16,10 @@ import { ToastController } from '@ionic/angular';
 
 export class PedidosPage implements OnInit {
   
-  pedidos: any[] = [];
+  pedidos: any = [];
   usuarios: any = [{email:'', nome:''}];
   barbeiros:any = [{nome:'',  email:'', especialidades:''}]
-  teste:any[] = [];
+  teste:any = [];
   isModalOpen = false;
   isToastOpen = false;
   credentials: FormGroup = this.fb.group({
@@ -85,16 +85,16 @@ export class PedidosPage implements OnInit {
    
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
-      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro;
-      const barbeiroCpf = this.barbeiros[0].cpf;
+      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
+      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
       
 
 
 if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
-        console.log(this.teste[i].nomeBarbeiro)
-        console.log( this.barbeiros[0]?.nome)
+        console.log(this.teste[i].cpfBarbeiro)
+        console.log( this.barbeiros[0]?.cpf)
         this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
-      } 
+      }
     }
     console.log(this.pedidos); // Log the result for verification
   }
