@@ -63,6 +63,7 @@ export class Tab3Page {
   async ngOnInit() {
     await this.listarBanco();
     console.log(this.barbeiros[0].nome)
+    this.listarPedidos();
   }
 
   async listarPedidos() {
@@ -79,7 +80,8 @@ export class Tab3Page {
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
-        cpfBarbeiro: doc.data()['cpfBarbeiro']
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        horario: doc.data()['horario']
       });
     });
   
@@ -152,14 +154,14 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
     
     
     // Wait for a short time to allow Firebase to process the deletion
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    this.pedidos = [];
-    await this.listarBanco();
+    setTimeout(() => {
+      this.pedidos=[]
+      this.listarBanco()
+     }, 2000);
   
     // Reload the current route to refresh the page
     this.router.navigateByUrl('/tab3', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/pedidos']);
+      this.router.navigate(['/tab3']);
     });
   }
   

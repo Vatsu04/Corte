@@ -1,4 +1,8 @@
+ion-content{
+    text-align: center;
+}
 ion-button{
+    
     color: #DEAD04;
     border-radius: 15px;
     border: 2px solid #DEAD04;
@@ -6,7 +10,8 @@ ion-button{
     font-family:fantasy ;
     font-size: 19px;
     width: 350px;
-    margin-left: 12px;
+    
+    
 }
 .button1{
     color: black;
@@ -28,4 +33,7 @@ u{
 img{
     height: 350px;
     margin-left: 18px;
+}
+.botoes{
+    text-align: center;
 }

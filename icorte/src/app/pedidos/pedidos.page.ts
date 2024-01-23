@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pedidos',
@@ -28,7 +29,8 @@ export class PedidosPage implements OnInit {
     private firestore: Firestore,
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -74,7 +76,8 @@ export class PedidosPage implements OnInit {
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
-        cpfBarbeiro: doc.data()['cpfBarbeiro']
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        horario: doc.data()['horario']
       });
     });
   
@@ -171,7 +174,13 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
     await setDoc(document, pedido);
     console.log('Pedido added succesfully');
     this.negarPedido(isOpen, id);
-    this.message(isOpen)
+    const toast = await this.toastController.create({
+      message: 'Pedido aceito.',
+      duration: 2000,
+      color: 'blue',
+      position: 'top'
+    });
+    toast.present();
   } catch(error) {
     console.log("Error adding pedido:" , error)
   }
