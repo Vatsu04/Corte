@@ -23,24 +23,24 @@
   
   </div>
 <div id="botoes">
-      <ion-button color="red" class="botao" (click)="logout()">
-        Log Out
-      </ion-button>
-
       <br>
-    
-      <ion-button color="red" class="botao" routerLink="/pedidos" routerDirection="forward">
-        Pedidos
-      </ion-button><br>
       <ion-button color="red" class="botao" routerLink="/editar-conta-barbeiro" routerDirection="forward">
         Editar Conta
+      </ion-button><br>
+      <ion-button color="red" class="botao" routerLink="/pedidos" routerDirection="forward">
+        Pedidos
       </ion-button>
       <br>
       <ion-button color="red" class="botao" routerLink="/pedidos-completos-barbeiro" routerDirection="forward">
         Avaliar Clientes
       </ion-button>
+
+      <ion-button color="red" class="botao" (click)="logout()">
+        Log Out
+      </ion-button>
+
     </div>
-  
+    
     <h2 style="text-align:center">PEDIDOS PENDENTES</h2>
     <ion-grid>
       <ion-row>
