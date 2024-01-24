@@ -30,7 +30,7 @@
            
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
 
-            <ion-button color="red" id="negar" *ngIf="pedido.id" (click)="cancelarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
+         
 
             <ion-button color="red" id="negar" (click)="pagarPedido(true)" >Pagar </ion-button>
 
@@ -38,14 +38,14 @@
              pedido.emailCliente, 
             pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local, pedido.preco, pedido.cpfBarbeiro,
             true, pedido.id)" >Confirmar Serviço Completo </ion-button>
-
+            <ion-button color="red" class="back" id="negar" *ngIf="pedido.id" (click)="cancelarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-<div id="botoes">
-  <ion-button color="red" id="retorno"    (click)="returnToMenu()">Voltar</ion-button> <br>
 
-  </div>
+  <ion-button color="red" id="retorno" class="back" (click)="returnToMenu()">Voltar</ion-button> <br>
+
+ 
 </ion-content>

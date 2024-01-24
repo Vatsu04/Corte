@@ -1,23 +1,34 @@
 #aceitar{
     background-color: #13087F;
-    color: #DEAD04;
-
+    color: white;
+    font-family:fantasy ;
+ font-size: 19px;
+ border-radius: 12px;
+ border: 2px solid white;
 }
 
 
 #negar{
     background-color: red;
-    color: #DEAD04;
+    color: white;
+    font-family:fantasy ;
+ font-size: 19px;
+ margin-left: 60px;
+ border-radius: 12px;
+ border: 2px solid white;
 }
 
 #botoes{
     text-align: center;
+    
 }
-ion-button{
-    color: #DEAD04;
-    border-radius: 15px;
-    box-shadow: 2px 2px 2px #DEAD04;
-    background-color: black;
-    font-family:fantasy ;
-    font-size: 19px;
+
+.back{
+    border: 2px #FF0000 solid;
+    color: #ff0000 ;
+  border-radius: 15px;
+ width: 340px;
+ margin-left: 12px;
+ font-family:fantasy ;
+ font-size: 19px;
 }
