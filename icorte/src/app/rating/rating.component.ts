@@ -24,6 +24,7 @@ export class RatingComponent {
   rate(index: number) {
     this.rating = index;
     this.ratingChange.emit(this.rating);
+    
   }
 
   getColor(index: number) {
