@@ -55,7 +55,22 @@ export class PedidosCompletosClientePage implements OnInit {
     }
   }
   }
+  get rapidez(){
+    return this.credentials.get('rapidez');
+  }
 
+  get organizao(){
+    return this.credentials.get('organizao');
+  }
+
+  get educacao(){
+    return this.credentials.get('educacao');
+  }
+
+
+  async avaliar(){
+    console.log(this.credentials.value.rapidez)
+  }
 
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();

@@ -25,6 +25,8 @@ export class ChamadoPage implements OnInit {
   });
  
   chamado:any =[];
+  pedidos_aceitos: any=[];
+  chamados_feitos: any =[];
   usuarios: any = [{email:'', nome:''}];
   foto: any;
   imageRef:any;
@@ -72,6 +74,17 @@ export class ChamadoPage implements OnInit {
       return;
     }
 
+    if(this.pedidos_aceitos.cpfCliente === this.usuarios.cpf || this.chamados_feitos.cpfCliente === this.usuarios.cpf){
+      const toast = await this.toastController.create({
+        message: 'Não é permitido o mesmo usuário fazer mais de um pedido de uma vez só',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      toast.present();
+      return;
+    }
+
 
 
     const chamado = {
@@ -96,7 +109,7 @@ export class ChamadoPage implements OnInit {
       const toast = await this.toastController.create({
         message: 'Chamado enviado para o barbeiro',
         duration: 2000,
-        color: 'green',
+        color: 'danger',
         position: 'top'
       });
       toast.present();
@@ -123,6 +136,58 @@ export class ChamadoPage implements OnInit {
     return this.credentials.get('hora');
   }
 
+
+  async listarChamados() {
+    const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
+    this.chamados_feitos = []; // Clear the array before populating it
+
+  
+    querySnapshot.forEach((doc) => {
+      
+      this.chamados_feitos = [...this.chamados_feitos, { 
+      id: doc.id,
+      corteAtual: doc.data()['corteAtual'],
+      nomeCliente: doc.data()['nomeCliente'], 
+      emailCliente: doc.data()['emailCliente'],
+      cpfCliente: doc.data()['cpfCliente'],
+      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+      emailBarbeiro: doc.data()['emailBarbeiro'],
+      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      descricao: doc.data()['descricao'],
+      hora: doc.data()['hora'],
+      data: doc.data()['data'],
+      local: doc.data()['local'], 
+      preco: doc.data()['preco'],
+      imageUrl: doc.data()['imageUrl'] }]
+    });
+
+    }
+
+    async listarPedidos() {
+      const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
+      this.pedidos_aceitos = []; // Clear the array before populating it
+  
+    
+      querySnapshot.forEach((doc) => {
+        
+        this.pedidos_aceitos = [...this.pedidos_aceitos, { 
+        id: doc.id,
+        corteAtual: doc.data()['corteAtual'],
+        nomeCliente: doc.data()['nomeCliente'], 
+        emailCliente: doc.data()['emailCliente'],
+        cpfCliente: doc.data()['cpfCliente'],
+        nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+        emailBarbeiro: doc.data()['emailBarbeiro'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        descricao: doc.data()['descricao'],
+        hora: doc.data()['hora'],
+        data: doc.data()['data'],
+        local: doc.data()['local'], 
+        preco: doc.data()['preco'],
+        imageUrl: doc.data()['imageUrl'] }]
+      });
+  
+      }
 
 
   async carregarFoto(e: any) {

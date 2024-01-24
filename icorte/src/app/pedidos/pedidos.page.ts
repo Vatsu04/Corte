@@ -65,6 +65,7 @@ export class PedidosPage implements OnInit {
   async listarChamados() {
     const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
     this.teste = []; // Clear the array before populating it
+
   
     querySnapshot.forEach((doc) => {
       

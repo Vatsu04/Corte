@@ -9,7 +9,7 @@ enum COLORS {
 
 @Component({
   selector: "rating",
-  template: './rating.component.html'
+  templateUrl: './rating.component.html'
   ,
   styleUrls: ["rating.component.scss"]
 })
