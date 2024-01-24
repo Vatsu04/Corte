@@ -16,7 +16,7 @@
         </ng-template>
       </ion-avatar>
      
-    </div>
+    </div><br>
     <div id="info">
     <ion-text>{{ barbeiros[0].nome }}  </ion-text> <br>
     <ion-text id="email">{{ barbeiros[0].email }}</ion-text><br>
@@ -24,18 +24,18 @@
   </div>
 <div id="botoes">
       <br>
-      <ion-button color="red" class="botao" routerLink="/editar-conta-barbeiro" routerDirection="forward">
+      <ion-button color="red"  routerLink="/editar-conta-barbeiro" routerDirection="forward">
         Editar Conta
       </ion-button><br>
-      <ion-button color="red" class="botao" routerLink="/pedidos" routerDirection="forward">
+      <ion-button color="red"  routerLink="/pedidos" routerDirection="forward">
         Pedidos
       </ion-button>
       <br>
-      <ion-button color="red" class="botao" routerLink="/pedidos-completos-barbeiro" routerDirection="forward">
+      <ion-button color="red"  routerLink="/pedidos-completos-barbeiro" routerDirection="forward">
         Avaliar Clientes
       </ion-button><br>
 
-      <ion-button color="red" class="botao" (click)="logout()">
+      <ion-button color="red" class="back" (click)="logout()">
         Log Out
       </ion-button>
 
@@ -61,9 +61,14 @@
             <ion-card-content>
               <p>Descrição: {{ pedido.descricao }}</p>
               <p>Email do Cliente: {{ pedido.emailCliente }}</p>
+
+              <p>Local: {{ pedido.local}}</p>
+              <p>Data: {{pedido.horario}}</p>
+
               <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
               <p>Data: {{pedido.data}}</p>
               <p>Horario: {{pedido.hora}}</p>
+
               <p>Preço: R$ {{ pedido.preco }}</p>
   
             
@@ -72,9 +77,9 @@
   
   
   
-  
-              <ion-button id="negar" *ngIf="pedido.id" (click)="negar(true, pedido.id)">Cancelar Pedido </ion-button>
-  
+                
+              <ion-button color="red" class="back" *ngIf="pedido.id" (click)="negar(true, pedido.id)">Cancelar Pedido </ion-button>
+            
   
   
             </ion-card-content>

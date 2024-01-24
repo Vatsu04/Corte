@@ -3,8 +3,8 @@ ion-avatar{
     height:128px;
 }
 *{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 6px;
+    margin-right: 6px;
     
 }
 
@@ -25,14 +25,6 @@ ion-avatar{
     align-items: center;
     font-weight:500;
 }
-ion-button{
-    color: #DEAD04;
-    border-radius: 15px;
-    box-shadow: 2px 2px 2px #DEAD04;
-    background-color: black;
-    font-family:fantasy ;
-    font-size: 19px;
-}
 .radio{
     color: black;
    
@@ -43,7 +35,7 @@ ion-radio {
     --inner-border-radius: 4px;
   
     --color: #ddd;
-    --color-checked: black;
+    --color-checked: #dead04;
   }
   
   ion-radio.ios::part(container) {
@@ -57,15 +49,16 @@ ion-radio {
   .radio-checked.ios::part(container) {
     border-color: #DEAD04;
   }
-  ion-button{
+
+ion-button{
     color: #DEAD04;
     border-radius: 15px;
     border: 2px solid #DEAD04;
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
-
-   
+    width: 335px;
+  margin-left: 7px;
 }
 .button1{
     color: black;
@@ -74,4 +67,5 @@ ion-radio {
 .back{
     border: 2px #FF0000 solid;
     color: #ff0000 ;
+    margin-top: 12px;
 }

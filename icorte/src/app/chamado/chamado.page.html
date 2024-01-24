@@ -58,11 +58,11 @@
       Horario inválido!
     </ion-note>
     <br>
-
+    <br>
 
     <!-- Use *ngIf to conditionally display the image -->
-    <ion-button color="red" fill="outline" expand="block" id="open-modal" (click)="hideShow()">
-Foto do corte de cabelo desejado
+    <ion-button color="red"  expand="full" id="open-modal" (click)="hideShow()">
+Foto do corte de cabelo
     </ion-button>
 
     <ion-button color="red" fill="outline" expand="block" id="open-modal_" (click)="hide_show()">
@@ -84,9 +84,9 @@ Foto do corte de cabelo desejado
   <ng-template>
     <ion-content>
       <div class="block">
-        <h3>Selecione a imagem do Corte desejado</h3>
-        <button color="red" (click)="hideShow()">Selecione a imagem</button>
-        <input id="cadImg" type="file" (change)="carregarFoto($event)" label="Imagem" label-placement="floating"
+        <h3>Selecione a imagem do produto</h3>
+        <button class="button1" color="red" (click)="hideShow()">Selecione a imagem</button>
+        <input class="button1" id="cadImg" type="file" (change)="carregarFoto($event)" label="Imagem" label-placement="floating"
           fill="solid" placeholder="Selecione a imagem do corte de Cabelo" />
 
         <div class="images">

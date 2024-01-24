@@ -5,7 +5,13 @@ ion-header {
   }
   
 #botoes{
+    margin-top: 208%;
+    width: 100%;
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
     text-align: center;
+
 }
 
 #retorno{
@@ -15,13 +21,13 @@ ion-header {
 
 ion-button{
     color: #DEAD04;
-    border-radius: 15px;
+    border-radius: 13px;
     border: 2px solid #DEAD04;
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
-    width: 350px;
-   
+    width: 338px;
+   margin-left: 12px;
 }
 .button1{
     color: black;
@@ -30,4 +36,11 @@ ion-button{
 .back{
     border: 2px #FF0000 solid;
     color: #ff0000 ;
+    width: 240px;
+}
+#chamar{
+    margin-left: -10px;
+    width: 300px;
+    margin-top: 5px;
+    font-size: 22px;
 }

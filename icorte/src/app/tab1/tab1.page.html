@@ -16,6 +16,7 @@
         </ng-template>
       </ion-avatar>  
     </div>
+    <br>
     <div id="info">
     <ion-text>{{ usuarios[0].nome }}  </ion-text> <br>
     <ion-text id="email">{{ usuarios[0].email }}</ion-text>
@@ -27,7 +28,7 @@
       <ion-button color="red"    routerLink="/pedidos-pendentes">Pedidos Pendentes</ion-button><br>
       <ion-button color="red" (click)="avaliarBarbeiros()">Avaliar Barbeiro</ion-button>
       <br>  
-      <ion-button  color="red" (click)="logout()">
+      <ion-button class="back" color="red" (click)="logout()">
         Log Out
       </ion-button>
     </div>
