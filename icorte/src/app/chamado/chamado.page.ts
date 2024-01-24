@@ -43,6 +43,7 @@ export class ChamadoPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
+    private storage_: Storage,
     private route: ActivatedRoute,
     private toastController: ToastController
   ) { }
@@ -148,12 +149,12 @@ export class ChamadoPage implements OnInit {
   async carregarFoto_(e: any) {
     this.foto_ = e.target.files[0];
     const newName = uuidv4(this.foto_.name);
-    this.imageRef_ = ref(this.storage, `path/to/${newName}`);
+    this.imageRef_ = ref(this.storage_, `path/to/${newName}`);
     
     try {
-      await uploadBytes(this.imageRef, this.foto);
-      this.imgSrc = await getDownloadURL(this.imageRef);
-      this.images.push(this.imgSrc); // Add the uploaded image to the array
+      await uploadBytes(this.imageRef_, this.foto_);
+      this.imgSrc_ = await getDownloadURL(this.imageRef_);
+      this.images_.push(this.imgSrc_); // Add the uploaded image to the array
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -189,6 +190,10 @@ export class ChamadoPage implements OnInit {
   }
   hideShow(){
     document.getElementById('cadImg')?.click()
+  }
+
+  hide_show(){
+    document.getElementById('cadImg_')?.click()
   }
 }
 
