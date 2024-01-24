@@ -21,13 +21,18 @@
             <p>Descrição: {{ pedido.descricao }}</p>
             <p>Email do Cliente: {{ pedido.emailBarbeiro}}</p>
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
-     
+     <br><br>
             <form [formGroup]="credentials">
-<ion-item>
-             <!--  <rating [(rating)]="selectedRating" (ratingChange)="onRatingChange($event)"></rating> -->
-              <!--  <rating [(rating)]="selectedRating" (ratingChange)="onRatingChange($event)"></rating> -->
-               <!--  <rating [(rating)]="selectedRating" (ratingChange)="onRatingChange($event)"></rating> -->
-            </ion-item>
+
+  <h1>Avalie sua experiencia!</h1><br>
+            <p>Rapidez:</p>
+            <rating formControlname="rapidez"></rating> <br>
+            <p>Organização: </p>
+            <rating formControlname="organizacao"></rating> <br>
+            <p>Educação: </p>
+            <rating formControlname="educacao"></rating><br> 
+             
+        
               
 
             </form>
@@ -36,8 +41,8 @@
         
             
               <div id="botoes">
-            <ion-button color="red">Avaliar</ion-button>
-            <ion-button (click)="returnToMenu()" color="red">Voltar</ion-button>
+            <ion-button color="red" (click)="avaliar()">Avaliar</ion-button>
+            
               </div>
           </ion-card-content>
         </ion-card>

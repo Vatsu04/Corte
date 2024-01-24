@@ -52,6 +52,8 @@ export class PedidosPendentesPage implements OnInit {
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
+      data: doc.data()['data'],
+      hora: doc.data()['hora'],
       imageUrl: doc.data()['imageUrl'] }]
     });
     
@@ -110,7 +112,7 @@ export class PedidosPendentesPage implements OnInit {
   }
 
   async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
-    _nomeBarbeiro: string, _emailBarbeiro: string,
+    _nomeBarbeiro: string, _emailBarbeiro: string, hora:string, data:string,
     _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){
    
     if(this.pedidoPago != true){
@@ -131,7 +133,7 @@ export class PedidosPendentesPage implements OnInit {
       toast.present();
       this.pedidoConfirmado = isOpen;
       this.aceitarPedido(foto, _nomeCliente, _emailCliente,
-        _nomeBarbeiro, _emailBarbeiro,
+        _nomeBarbeiro, _emailBarbeiro, hora, data,
         _descricao, _local, _preco, _cpfBarbeiro, isOpen, id );
 
       
@@ -144,13 +146,15 @@ export class PedidosPendentesPage implements OnInit {
 
 
 
-  async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
+  async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, hora:string, data:string,
     _nomeBarbeiro: string, _emailBarbeiro: string,
     _descricao: string, _local:string, preco:string, cpfBarbeiro: string, isOpen:boolean, id:string){
    
    
    const pedidos_feitos = {
      id: id,
+     hora: hora,
+     data: data,
      imageUrl: foto,
      nomeCliente: _nomeCliente,
      emailCliente: _emailCliente,

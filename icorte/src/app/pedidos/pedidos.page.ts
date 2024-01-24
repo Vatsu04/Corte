@@ -65,11 +65,13 @@ export class PedidosPage implements OnInit {
   async listarChamados() {
     const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
     this.teste = []; // Clear the array before populating it
+
   
     querySnapshot.forEach((doc) => {
       
       this.teste = [...this.teste, { 
       id: doc.id,
+      corteAtual: doc.data()['corteAtual'],
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
       cpfCliente: doc.data()['cpfCliente'],
@@ -77,6 +79,8 @@ export class PedidosPage implements OnInit {
       emailBarbeiro: doc.data()['emailBarbeiro'],
       cpfBarbeiro: doc.data()['cpfBarbeiro'],
       descricao: doc.data()['descricao'],
+      hora: doc.data()['hora'],
+      data: doc.data()['data'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
       imageUrl: doc.data()['imageUrl'] }]
@@ -151,12 +155,15 @@ async negar(isOpen:boolean, id:string){
   toast.present();
 }
 
-async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
-   _nomeBarbeiro: string, _emailBarbeiro: string,
+async aceitarPedido(foto: string, foto2: string, _nomeCliente: string, _emailCliente: string,
+   _nomeBarbeiro: string, _emailBarbeiro: string, hora: string, data: string,
    _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string){
   
   
   const pedido = {
+    hora: hora,
+    data: data,
+    corteAtual: foto2,
     imageUrl: foto,
     nomeCliente: _nomeCliente,
     emailCliente: _emailCliente,

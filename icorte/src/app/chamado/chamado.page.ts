@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogoPage } from '../catalogo/catalogo.page';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AvatarService } from '../services/avatar.service';
-import { AlertController, LoadingController } from '@ionic/angular';
+
 import { collection, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { Storage, uploadBytes, ref, listAll, getDownloadURL } from '@angular/fire/storage';
 import { Firestore } from '@angular/fire/firestore';
@@ -22,16 +21,23 @@ export class ChamadoPage implements OnInit {
     descricao: ['', [Validators.required, Validators.minLength(10)]],
     local: ['', [Validators.required]],
     data: ['', Validators.required ],
-    horario: ['', Validators.required]
+    hora: ['', Validators.required]
   });
  
   chamado:any =[];
+  pedidos_aceitos: any=[];
+  chamados_feitos: any =[];
   usuarios: any = [{email:'', nome:''}];
   foto: any;
   imageRef:any;
   imgSrc:any;
   isImg: boolean=false;
   images:any = [];
+  foto_: any;
+  imageRef_:any;
+  imgSrc_:any;
+  isImg_: boolean=false;
+  images_:any = [];
   barber: any = { nome: '', email: '', cpf:'' };
   constructor(
     private fb: FormBuilder,
@@ -39,6 +45,7 @@ export class ChamadoPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
+    private storage_: Storage,
     private route: ActivatedRoute,
     private toastController: ToastController
   ) { }
@@ -56,9 +63,20 @@ export class ChamadoPage implements OnInit {
   
   async chamarBabeiro() {
 
-    if (!this.imgSrc) {
+    if (!this.imgSrc || !this.imgSrc_) {
       const toast = await this.toastController.create({
-        message: 'Por favor carregue uma imagem exemplo do seu corte desejado',
+        message: 'Por favor carregue uma imagem exemplo do seu corte desejado e do seu corte atual',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      toast.present();
+      return;
+    }
+
+    if(this.pedidos_aceitos.cpfCliente === this.usuarios.cpf || this.chamados_feitos.cpfCliente === this.usuarios.cpf){
+      const toast = await this.toastController.create({
+        message: 'Não é permitido o mesmo usuário fazer mais de um pedido de uma vez só',
         duration: 2000,
         color: 'danger',
         position: 'top'
@@ -70,6 +88,7 @@ export class ChamadoPage implements OnInit {
 
 
     const chamado = {
+      corteAtual: this.imgSrc_,
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
       emailCliente: this.usuarios[0].email,
@@ -79,7 +98,8 @@ export class ChamadoPage implements OnInit {
       cpfBarbeiro: this.barber.cpf,
       descricao: this.descricao?.value,
       local: this.local?.value,
-      data: this.data?.value
+      data: this.data?.value,
+      hora: this.hora?.value
     };
 
     const document = doc(collection(this.firestore, 'chamados'));
@@ -89,7 +109,7 @@ export class ChamadoPage implements OnInit {
       const toast = await this.toastController.create({
         message: 'Chamado enviado para o barbeiro',
         duration: 2000,
-        color: 'green',
+        color: 'danger',
         position: 'top'
       });
       toast.present();
@@ -112,10 +132,62 @@ export class ChamadoPage implements OnInit {
     return this.credentials.get('data');
   }
 
-  get horario(){
-    return this.credentials.get('horario');
+  get hora(){
+    return this.credentials.get('hora');
   }
 
+
+  async listarChamados() {
+    const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
+    this.chamados_feitos = []; // Clear the array before populating it
+
+  
+    querySnapshot.forEach((doc) => {
+      
+      this.chamados_feitos = [...this.chamados_feitos, { 
+      id: doc.id,
+      corteAtual: doc.data()['corteAtual'],
+      nomeCliente: doc.data()['nomeCliente'], 
+      emailCliente: doc.data()['emailCliente'],
+      cpfCliente: doc.data()['cpfCliente'],
+      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+      emailBarbeiro: doc.data()['emailBarbeiro'],
+      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      descricao: doc.data()['descricao'],
+      hora: doc.data()['hora'],
+      data: doc.data()['data'],
+      local: doc.data()['local'], 
+      preco: doc.data()['preco'],
+      imageUrl: doc.data()['imageUrl'] }]
+    });
+
+    }
+
+    async listarPedidos() {
+      const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
+      this.pedidos_aceitos = []; // Clear the array before populating it
+  
+    
+      querySnapshot.forEach((doc) => {
+        
+        this.pedidos_aceitos = [...this.pedidos_aceitos, { 
+        id: doc.id,
+        corteAtual: doc.data()['corteAtual'],
+        nomeCliente: doc.data()['nomeCliente'], 
+        emailCliente: doc.data()['emailCliente'],
+        cpfCliente: doc.data()['cpfCliente'],
+        nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+        emailBarbeiro: doc.data()['emailBarbeiro'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        descricao: doc.data()['descricao'],
+        hora: doc.data()['hora'],
+        data: doc.data()['data'],
+        local: doc.data()['local'], 
+        preco: doc.data()['preco'],
+        imageUrl: doc.data()['imageUrl'] }]
+      });
+  
+      }
 
 
   async carregarFoto(e: any) {
@@ -137,6 +209,29 @@ export class ChamadoPage implements OnInit {
     this.isImg = true;
     modal.dismiss();
   }  
+
+  
+  async carregarFoto_(e: any) {
+    this.foto_ = e.target.files[0];
+    const newName = uuidv4(this.foto_.name);
+    this.imageRef_ = ref(this.storage_, `path/to/${newName}`);
+    
+    try {
+      await uploadBytes(this.imageRef_, this.foto_);
+      this.imgSrc_ = await getDownloadURL(this.imageRef_);
+      this.images_.push(this.imgSrc_); // Add the uploaded image to the array
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  }
+
+  selectImage_(img: any, modal: any){
+    this.imgSrc_ = img;
+    this.isImg_ = true;
+    modal.dismiss();
+  }  
+
+
 
 
   async listarBanco() {
@@ -160,6 +255,10 @@ export class ChamadoPage implements OnInit {
   }
   hideShow(){
     document.getElementById('cadImg')?.click()
+  }
+
+  hide_show(){
+    document.getElementById('cadImg_')?.click()
   }
 }
 

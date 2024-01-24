@@ -9,8 +9,10 @@
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let pedido of pedidos">
         <ion-card>
+          <h1>Corte Desejado</h1>
           <ion-img [src]="pedido.imageUrl" class="image-limit"></ion-img>
-
+          <h1>Corte Atual</h1>
+          <ion-img [src]="pedido.corteAtual" class="image-limit"></ion-img>
           <ion-card-header>
             <ion-card-title class="nome">Pedido de {{ pedido.nomeCliente }}</ion-card-title>
           </ion-card-header>
@@ -36,10 +38,10 @@
         
             
 
-            <ion-button color="red" id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.nomeCliente, 
-            pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, 
+            <ion-button color="red" id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.corteAtual, pedido.nomeCliente, 
+            pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.hora, pedido.data, pedido.descricao, 
             pedido.local, credentials.value, pedido.cpfBarbeiro, true, pedido.id)">Aceitar </ion-button>
-            <ion-button color="red" id="negar" (click)="negar(true, pedido.id)">Negar </ion-button>
+            <ion-button color="red" id="negar" (click)="negar(true, pedido.id)" [disabled]="!credentials.valid">Negar </ion-button>
 
           </ion-card-content>
         </ion-card>
