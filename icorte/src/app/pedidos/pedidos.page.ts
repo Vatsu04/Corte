@@ -155,11 +155,13 @@ async negar(isOpen:boolean, id:string){
 }
 
 async aceitarPedido(foto: string, foto2: string, _nomeCliente: string, _emailCliente: string,
-   _nomeBarbeiro: string, _emailBarbeiro: string,
+   _nomeBarbeiro: string, _emailBarbeiro: string, hora: string, data: string,
    _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string){
   
   
   const pedido = {
+    hora: hora,
+    data: data,
     corteAtual: foto2,
     imageUrl: foto,
     nomeCliente: _nomeCliente,

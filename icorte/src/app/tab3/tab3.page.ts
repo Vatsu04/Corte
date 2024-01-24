@@ -82,6 +82,7 @@ export class Tab3Page {
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
         cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        preco: doc.data()['preco'],
         hora: doc.data()['hora'],
         data: doc.data()['data']
       });

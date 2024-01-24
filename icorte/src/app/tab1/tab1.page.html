@@ -25,7 +25,7 @@
   <ion-button color="red"   routerLink="/editar-conta-usuario">Editar Conta</ion-button><br>
       <ion-button color="red"   routerLink="/catalogo">Catálogo de Barbeiros</ion-button><br>
       <ion-button color="red"    routerLink="/pedidos-pendentes">Pedidos Pendentes</ion-button><br>
-      <ion-button color="red"   routerLink="/pedidos-completos-clientes">Avaliar Barbeiro</ion-button>
+      <ion-button color="red" (click)="avaliarBarbeiros()">Avaliar Barbeiro</ion-button>
       <br>  
       <ion-button  color="red" (click)="logout()">
         Log Out

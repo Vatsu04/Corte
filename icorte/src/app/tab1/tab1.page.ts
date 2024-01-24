@@ -31,6 +31,9 @@ export class Tab1Page {
     });
   }
 
+  async avaliarBarbeiros(){
+    this.router.navigateByUrl('/pedidos-completos-cliente', { replaceUrl: true });
+  }
 
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();

@@ -26,7 +26,9 @@ export class PedidosCompletosClientePage implements OnInit {
 
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.listarBanco();
+    this.listarPedidos();
   }
   async listarPedidos() {
     

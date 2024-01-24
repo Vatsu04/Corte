@@ -39,7 +39,7 @@
             
 
             <ion-button color="red" id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.corteAtual, pedido.nomeCliente, 
-            pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, 
+            pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.hora, pedido.data, pedido.descricao, 
             pedido.local, credentials.value, pedido.cpfBarbeiro, true, pedido.id)">Aceitar </ion-button>
             <ion-button color="red" id="negar" (click)="negar(true, pedido.id)" [disabled]="!credentials.valid">Negar </ion-button>
 

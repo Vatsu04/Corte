@@ -9,16 +9,8 @@ enum COLORS {
 
 @Component({
   selector: "rating",
-  template: `
-    <div class="rating">
-      <span
-        class="star"
-        [ngStyle]="{ 'background-color': getColor(i) }"
-        *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
-        (click)="rate(i + 1)"
-      ></span>
-    </div>
-  `,
+  template: './rating.component.html'
+  ,
   styleUrls: ["rating.component.scss"]
 })
 export class RatingComponent {

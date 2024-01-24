@@ -112,7 +112,7 @@ export class PedidosPendentesPage implements OnInit {
   }
 
   async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
-    _nomeBarbeiro: string, _emailBarbeiro: string,
+    _nomeBarbeiro: string, _emailBarbeiro: string, hora:string, data:string,
     _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){
    
     if(this.pedidoPago != true){
