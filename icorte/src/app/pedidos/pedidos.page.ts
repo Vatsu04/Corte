@@ -160,6 +160,7 @@ async aceitarPedido(foto: string, foto2: string, _nomeCliente: string, _emailCli
   
   
   const pedido = {
+    corteAtual: foto2,
     imageUrl: foto,
     nomeCliente: _nomeCliente,
     emailCliente: _emailCliente,
