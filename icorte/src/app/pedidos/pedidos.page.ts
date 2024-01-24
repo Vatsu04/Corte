@@ -145,7 +145,7 @@ async negar(isOpen:boolean, id:string){
   const toast = await this.toastController.create({
     message: 'Pedido negado.',
     duration: 2000,
-    color: 'blue',
+    color: 'danger',
     position: 'top'
   });
   toast.present();
@@ -177,7 +177,7 @@ async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
     const toast = await this.toastController.create({
       message: 'Pedido aceito.',
       duration: 2000,
-      color: 'blue',
+      color: 'green',
       position: 'top'
     });
     toast.present();

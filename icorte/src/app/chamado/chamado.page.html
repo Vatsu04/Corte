@@ -35,19 +35,32 @@
     </ion-radio-group>
     <br>
     
-    <h2>Data e Horário:</h2>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label></ion-label>
-      <ion-datetime
-        formControlName="dataHora"
-        displayFormat="DD/MM HH:mm"
-        pickerFormat="DD MMMM HH:mm"
-        placeholder="Selecione a data e horário"
-      ></ion-datetime>
-      <ion-note slot="error" *ngIf="(dataHora?.dirty || dataHora?.touched) && dataHora?.errors">
-        Data e horário inválidos!
-      </ion-note>
-    </ion-item>
+    <h2>Data:</h2>
+    <ion-label position="floating"></ion-label>
+    <input
+      type="date"
+      formControlName="data"
+      placeholder="Selecione a data"
+      style="background-color: black; color: white;"
+    />
+    <ion-note slot="error" *ngIf="(data?.dirty || data?.touched) && data?.errors">
+      Data inválida!
+    </ion-note>
+    <br>
+    <h2>Horário:</h2>
+    <ion-label position="floating"></ion-label>
+    <input
+      type="time"
+      formControlName="horario"
+      placeholder="Selecione o horario"
+      style="background-color: black; color: white;"
+    />
+    <ion-note slot="error" *ngIf="(horario?.dirty || horario?.touched) && horario?.errors">
+      Data inválida!
+    </ion-note>
+    <br>
+
+
     <!-- Use *ngIf to conditionally display the image -->
     <ion-button color="red" fill="outline" expand="block" id="open-modal" (click)="hideShow()">
 Foto do corte de cabelo

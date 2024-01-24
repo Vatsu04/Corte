@@ -21,7 +21,8 @@ export class ChamadoPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     descricao: ['', [Validators.required, Validators.minLength(10)]],
     local: ['', [Validators.required]],
-    dataHora: ['', Validators.required ]
+    data: ['', Validators.required ],
+    horario: ['', Validators.required]
   });
  
   chamado:any =[];
@@ -78,7 +79,7 @@ export class ChamadoPage implements OnInit {
       cpfBarbeiro: this.barber.cpf,
       descricao: this.descricao?.value,
       local: this.local?.value,
-      horario: this.dataHora?.value
+      data: this.data?.value
     };
 
     const document = doc(collection(this.firestore, 'chamados'));
