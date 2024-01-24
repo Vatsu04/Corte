@@ -61,9 +61,9 @@ export class ChamadoPage implements OnInit {
   
   async chamarBabeiro() {
 
-    if (!this.imgSrc) {
+    if (!this.imgSrc || !this.imgSrc_) {
       const toast = await this.toastController.create({
-        message: 'Por favor carregue uma imagem exemplo do seu corte desejado',
+        message: 'Por favor carregue uma imagem exemplo do seu corte desejado e do seu corte atual',
         duration: 2000,
         color: 'danger',
         position: 'top'

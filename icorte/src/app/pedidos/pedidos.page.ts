@@ -70,6 +70,7 @@ export class PedidosPage implements OnInit {
       
       this.teste = [...this.teste, { 
       id: doc.id,
+      corteAtual: doc.data()['corteAtual'],
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
       cpfCliente: doc.data()['cpfCliente'],
@@ -153,7 +154,7 @@ async negar(isOpen:boolean, id:string){
   toast.present();
 }
 
-async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
+async aceitarPedido(foto: string, foto2: string, _nomeCliente: string, _emailCliente: string,
    _nomeBarbeiro: string, _emailBarbeiro: string,
    _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string){
   
