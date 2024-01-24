@@ -108,8 +108,12 @@ export class ChamadoPage implements OnInit {
     return this.credentials.get('local');
   }
 
-  get dataHora(){
-    return this.credentials.get('dataHora');
+  get data(){
+    return this.credentials.get('data');
+  }
+
+  get horario(){
+    return this.credentials.get('horario');
   }
 
 
