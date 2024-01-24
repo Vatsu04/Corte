@@ -88,7 +88,7 @@ export class ChamadoPage implements OnInit {
       const toast = await this.toastController.create({
         message: 'Chamado enviado para o barbeiro',
         duration: 2000,
-        color: 'blue',
+        color: 'green',
         position: 'top'
       });
       toast.present();

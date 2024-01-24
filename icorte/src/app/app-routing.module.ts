@@ -77,7 +77,27 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'cadastro-barbearia',
+    loadChildren: () => import('./cadastro-barbearia/cadastro-barbearia.module').then( m => m.CadastroBarbeariaPageModule)
+  },
+  {
+    path: 'menu-barbearia',
+    loadChildren: () => import('./menu-barbearia/menu-barbearia.module').then( m => m.MenuBarbeariaPageModule)
+  },
+  {
+    path: 'editar-barbearia',
+    loadChildren: () => import('./editar-barbearia/editar-barbearia.module').then( m => m.EditarBarbeariaPageModule)
+  },
+  {
+    path: 'avaliar-barbearia',
+    loadChildren: () => import('./avaliar-barbearia/avaliar-barbearia.module').then( m => m.AvaliarBarbeariaPageModule)
+  },
+  {
+    path: 'pedidos-barbearia',
+    loadChildren: () => import('./pedidos-barbearia/pedidos-barbearia.module').then( m => m.PedidosBarbeariaPageModule)
   }
+
 
 
      

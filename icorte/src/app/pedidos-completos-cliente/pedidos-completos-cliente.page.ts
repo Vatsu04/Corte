@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,12 @@ import { Router } from '@angular/router';
 export class PedidosCompletosClientePage implements OnInit {
   teste:any = [];
   pedidos:any = [];
-  usuarios:any = []
+  usuarios:any = [];
+  credentials: FormGroup = this.fb.group({
+    rapidez: ['', [Validators.required, ]],
+    organizacao: ['', [Validators.required, ]],
+    educacao: ['', [Validators.required, ]]
+  });
   constructor(
     private firestore: Firestore,
     private fb: FormBuilder,
