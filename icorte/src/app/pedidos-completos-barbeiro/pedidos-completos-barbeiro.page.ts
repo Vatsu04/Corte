@@ -42,6 +42,8 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
         emailCliente: doc.data()['emailCliente'],
         imageUrl: doc.data()['imageUrl'], 
         local: doc.data()['local'],
+        hora: doc.data()['hora'],
+        data: doc.data()['data'],
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],

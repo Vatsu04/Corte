@@ -51,7 +51,7 @@
     <ion-label position="floating"></ion-label>
     <input
       type="time"
-      formControlName="horario"
+      formControlName="hora"
       placeholder="Selecione o horario"
       style="background-color: black; color: white;"
     />
@@ -63,8 +63,13 @@
 
     <!-- Use *ngIf to conditionally display the image -->
     <ion-button color="red" fill="outline" expand="block" id="open-modal" (click)="hideShow()">
-Foto do corte de cabelo
+Foto do corte de cabelo desejado
     </ion-button>
+
+    <ion-button color="red" fill="outline" expand="block" id="open-modal" (click)="hide_show()">
+      Foto do corte de cabelo atual
+          </ion-button>
+    
     <img *ngIf="isImg"  alt="avatar" [src]="imgSrc" class="imgSrc">
 
     <ion-button color="red" expand="full" [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
@@ -80,7 +85,7 @@ Foto do corte de cabelo
   <ng-template>
     <ion-content>
       <div class="block">
-        <h3>Selecione a imagem do produto</h3>
+        <h3>Selecione a imagem do Corte</h3>
         <button color="red" (click)="hideShow()">Selecione a imagem</button>
         <input id="cadImg" type="file" (change)="carregarFoto($event)" label="Imagem" label-placement="floating"
           fill="solid" placeholder="Selecione a imagem do corte de Cabelo" />
@@ -91,6 +96,27 @@ Foto do corte de cabelo
           </ion-card>
         </div>
       </div>
+      
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ng-template>
+    <ion-content>
+      <div class="block">
+       
+        <button color="red" (click)="hide_show()">Selecione a imagem</button>
+        <input id="cadImg" type="file" (change)="carregarFoto($event)" label="Imagem" label-placement="floating"
+          fill="solid" placeholder="Selecione a imagem do corte de Cabelo" />
+
+        <div class="images">
+          <ion-card *ngFor="let img_ of images_" (click)="selectImage_(img_, modal_)">
+            <img [src]="img_" />
+          </ion-card>
+        </div>
+      </div>
+      
     </ion-content>
   </ng-template>
 </ion-modal>

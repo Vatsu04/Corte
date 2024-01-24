@@ -52,6 +52,8 @@ export class PedidosPendentesPage implements OnInit {
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
+      data: doc.data()['data'],
+      hora: doc.data()['hora'],
       imageUrl: doc.data()['imageUrl'] }]
     });
     

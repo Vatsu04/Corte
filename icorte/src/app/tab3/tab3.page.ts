@@ -77,11 +77,13 @@ export class Tab3Page {
         emailCliente: doc.data()['emailCliente'],
         imageUrl: doc.data()['imageUrl'], 
         local: doc.data()['local'],
+        
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
         cpfBarbeiro: doc.data()['cpfBarbeiro'],
-        horario: doc.data()['horario']
+        hora: doc.data()['hora'],
+        data: doc.data()['data']
       });
     });
   

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogoPage } from '../catalogo/catalogo.page';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AvatarService } from '../services/avatar.service';
-import { AlertController, LoadingController } from '@ionic/angular';
+
 import { collection, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { Storage, uploadBytes, ref, listAll, getDownloadURL } from '@angular/fire/storage';
 import { Firestore } from '@angular/fire/firestore';
@@ -22,7 +21,7 @@ export class ChamadoPage implements OnInit {
     descricao: ['', [Validators.required, Validators.minLength(10)]],
     local: ['', [Validators.required]],
     data: ['', Validators.required ],
-    horario: ['', Validators.required]
+    hora: ['', Validators.required]
   });
  
   chamado:any =[];
@@ -32,6 +31,11 @@ export class ChamadoPage implements OnInit {
   imgSrc:any;
   isImg: boolean=false;
   images:any = [];
+  foto_: any;
+  imageRef_:any;
+  imgSrc_:any;
+  isImg_: boolean=false;
+  images_:any = [];
   barber: any = { nome: '', email: '', cpf:'' };
   constructor(
     private fb: FormBuilder,
@@ -70,6 +74,7 @@ export class ChamadoPage implements OnInit {
 
 
     const chamado = {
+      corteAtual: this.imgSrc_,
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
       emailCliente: this.usuarios[0].email,
@@ -79,7 +84,8 @@ export class ChamadoPage implements OnInit {
       cpfBarbeiro: this.barber.cpf,
       descricao: this.descricao?.value,
       local: this.local?.value,
-      data: this.data?.value
+      data: this.data?.value,
+      hora: this.hora?.value
     };
 
     const document = doc(collection(this.firestore, 'chamados'));
@@ -112,8 +118,8 @@ export class ChamadoPage implements OnInit {
     return this.credentials.get('data');
   }
 
-  get horario(){
-    return this.credentials.get('horario');
+  get hora(){
+    return this.credentials.get('hora');
   }
 
 
@@ -137,6 +143,29 @@ export class ChamadoPage implements OnInit {
     this.isImg = true;
     modal.dismiss();
   }  
+
+  
+  async carregarFoto_(e: any) {
+    this.foto_ = e.target.files[0];
+    const newName = uuidv4(this.foto_.name);
+    this.imageRef_ = ref(this.storage, `path/to/${newName}`);
+    
+    try {
+      await uploadBytes(this.imageRef, this.foto);
+      this.imgSrc = await getDownloadURL(this.imageRef);
+      this.images.push(this.imgSrc); // Add the uploaded image to the array
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  }
+
+  selectImage_(img: any, modal: any){
+    this.imgSrc_ = img;
+    this.isImg_ = true;
+    modal.dismiss();
+  }  
+
+
 
 
   async listarBanco() {

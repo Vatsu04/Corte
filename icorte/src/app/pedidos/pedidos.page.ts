@@ -77,6 +77,8 @@ export class PedidosPage implements OnInit {
       emailBarbeiro: doc.data()['emailBarbeiro'],
       cpfBarbeiro: doc.data()['cpfBarbeiro'],
       descricao: doc.data()['descricao'],
+      hora: doc.data()['hora'],
+      data: doc.data()['data'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
       imageUrl: doc.data()['imageUrl'] }]
