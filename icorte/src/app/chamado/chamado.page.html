@@ -65,15 +65,15 @@
 Foto do corte de cabelo
     </ion-button>
 
-    <ion-button color="red" fill="outline" expand="block" id="open-modal_" (click)="hide_show()">
+    <ion-button color="red"  expand="block" id="open-modal_" (click)="hide_show()">
       Foto do corte de cabelo atual
           </ion-button>
     
     <img *ngIf="isImg"  alt="avatar" [src]="imgSrc" class="imgSrc">
 
-    <ion-button color="red" expand="full" [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
+    <ion-button color="red" class="button1"  [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
     
-    <ion-button color="red" expand="full" class="back" routerLink="/tab1" >Voltar</ion-button>
+    <ion-button color="red" expand="full" class="back" routerLink="/catalogo" >Voltar</ion-button>
 
 
   </form>
@@ -105,8 +105,8 @@ Foto do corte de cabelo
     <ion-content>
       <div class="block">
         <h3>Selecione a imagem do seu cabelo atual</h3>
-        <button color="red" (click)="hide_show()">Selecione a imagem</button>
-        <input id="cadImg_" type="file" (change)="carregarFoto_($event)" label="Imagem" label-placement="floating"
+        <button class="button1" color="red" (click)="hide_show()">Selecione a imagem</button>
+        <input class="button1" id="cadImg_" type="file" (change)="carregarFoto_($event)" label="Imagem" label-placement="floating"
           fill="solid" placeholder="Selecione a imagem do corte de Cabelo" />
 
         <div class="images">
