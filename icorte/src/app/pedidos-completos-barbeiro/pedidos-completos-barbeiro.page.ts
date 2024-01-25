@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -43,6 +43,44 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
 
   ngOnInit() {
   }
+
+  async rate(index: number, id: string) {
+    this.rating = index;
+    this.ratingChange.emit(this.rating);
+    try {
+      await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacao: this.rating });
+      console.log('Avaliacao updated successfully!');
+    } catch (error) {
+      console.error('Error updating avaliacao:', error);
+    }
+    
+  }
+
+  getColor(index: number) {
+    if (this.isAboveRating(index)) {
+      return COLORS.GREY;
+    }
+
+    switch (this.rating) {
+      case 1:
+      case 2:
+        return COLORS.RED;
+      case 3:
+        return COLORS.YELLOW;
+      case 4:
+      case 5:
+        return COLORS.GREEN;
+      default:
+        return COLORS.GREY;
+    }
+  }
+
+  isAboveRating(index: number): boolean {
+    return index > this.rating;
+  }
+
+
+
   async listarPedidos() {
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
     this.teste = []; // Clear the array before populating it

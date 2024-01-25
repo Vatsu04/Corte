@@ -17,6 +17,8 @@ export class Tab1Page {
   profile: null | DocumentData | undefined = null;
   userProfile: { nome: string; cpf: string; email: string; endereco: string } | null = null;
   usuarios: any = [{email:'', nome:''}];
+  teste:any = [];
+  pedidos_feitos: any = [];
   constructor(
     private avatarService: AvatarService,
     private authService: AuthService,
@@ -107,5 +109,55 @@ export class Tab1Page {
       });
       await alert.present();
     }
+  }
+
+
+  async listarPedidosFeitos(){
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
+    this.teste = []; // Clear the array before populating it
+  
+    querySnapshot.forEach((doc) => {
+      this.teste.push({ 
+        id: doc.id,
+        avaliacao: doc.data()['avaliacao'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+     
+      });
+    });
+  
+    this.pedidos_feitos = []; // Initialize pedidos as an empty array
+   
+    for (let i = 0; i < this.teste.length; i++) {
+      console.log(this.usuarios[0].nome)
+      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
+      const barbeiroCpf = this.usuarios[0].cpf.toLowerCase();
+      
+
+
+if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        console.log(this.teste[i].nomeBarbeiro)
+        console.log( this.usuarios[0]?.nome)
+        this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+      }
+    }
+   
+  }
+
+  calculateAverageAvaliacao() {
+    let sum = 0;
+    let count = 0;
+  
+    for (const pedido of this.pedidos_feitos) {
+      if (pedido.avaliacao) {
+        sum += pedido.avaliacao;
+        count++;
+      } else{
+        return "Sem avaliação";
+      }
+    }
+  
+    const average = count > 0 ? sum / count : 0;
+    return average;
+
   }
 }

@@ -210,7 +210,7 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
     console.log(this.pedidos); // Log the result for verification
   }
 
-  async calculateAverageAvaliacao() {
+  calculateAverageAvaliacao() {
     let sum = 0;
     let count = 0;
   
@@ -218,6 +218,8 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
       if (pedido.avaliacao) {
         sum += pedido.avaliacao;
         count++;
+      } else{
+        return "Sem avaliação"
       }
     }
   
