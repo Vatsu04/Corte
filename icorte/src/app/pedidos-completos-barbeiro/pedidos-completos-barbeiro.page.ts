@@ -1,8 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+enum COLORS {
+  GREY = "#E0E0E0",
+  GREEN = "#76FF03",
+  YELLOW = "#FFCA28",
+  RED = "#DD2C00"
+}
+
 
 @Component({
   selector: 'app-pedidos-completos-barbeiro',
@@ -14,20 +22,24 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
   teste:any = [];
   barbeiros:any = [];
   selectedRating: number = 0;
+  @Input() rating: number;
+  @Output() ratingChange: EventEmitter<number> = new EventEmitter();
 
   onRatingChange(rating: number) {
     console.log('Selected rating:', rating);
     // Do something with the selected rating
   }
   credentials: FormGroup = this.fb.group({
-    nota: ['', [Validators.required, ]],
+    avaliacao: ['', [Validators.required, ]],
   });
   constructor(
     private firestore: Firestore,
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.rating = 0;
+   }
 
   ngOnInit() {
   }

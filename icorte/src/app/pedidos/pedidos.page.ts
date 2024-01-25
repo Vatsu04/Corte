@@ -22,6 +22,7 @@ export class PedidosPage implements OnInit {
   teste:any = [];
   isModalOpen = false;
   isToastOpen = false;
+
   credentials: FormGroup = this.fb.group({
     preco: ['', [Validators.required, Validators.minLength(2), this.isValidFloat]],
   });
@@ -192,6 +193,7 @@ async aceitarPedido(foto: string, foto2: string, _nomeCliente: string, _emailCli
     console.log("Error adding pedido:" , error)
   }
 }
+
 
 async returnToMenu(){
   this.router.navigateByUrl('/tab3', { replaceUrl: true });

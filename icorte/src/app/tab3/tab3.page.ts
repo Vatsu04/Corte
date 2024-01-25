@@ -16,6 +16,7 @@ export class Tab3Page {
   barbeiros:any[] = [{nome:'', data_nascimento:'', especialidade_tamanho_cabelo:'', especialidade_tipo_cabelo:'', email:'',  local_trabalho:'', cpf:'', foto:'', uid:''}];
   teste:any = [];
   pedidos:any = [];
+  pedidos_feitos: any = [];
   isToastOpen:boolean = false;
   isModalOpen:boolean = false;
   constructor(
@@ -63,7 +64,9 @@ export class Tab3Page {
   async ngOnInit() {
     await this.listarBanco();
     console.log(this.barbeiros[0].nome)
-    this.listarPedidos();
+    
+    await this.listarPedidos();
+    await this.listarPedidosFeitos();
   }
 
   async listarPedidos() {
@@ -174,6 +177,53 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
   }
   mensagem(isOpen: boolean) {
     this.isToastOpen = isOpen;
+  }
+
+  async listarPedidosFeitos(){
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
+    this.teste = []; // Clear the array before populating it
+  
+    querySnapshot.forEach((doc) => {
+      this.teste.push({ 
+        id: doc.id,
+        avaliacao: doc.data()['avaliacao'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+     
+      });
+    });
+  
+    this.pedidos = []; // Initialize pedidos as an empty array
+   
+    for (let i = 0; i < this.teste.length; i++) {
+      console.log(this.barbeiros[0].nome)
+      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
+      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
+      
+
+
+if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        console.log(this.teste[i].nomeBarbeiro)
+        console.log( this.barbeiros[0]?.nome)
+        this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+      }
+    }
+    console.log(this.pedidos); // Log the result for verification
+  }
+
+  async calculateAverageAvaliacao() {
+    let sum = 0;
+    let count = 0;
+  
+    for (const pedido of this.pedidos_feitos) {
+      if (pedido.avaliacao) {
+        sum += pedido.avaliacao;
+        count++;
+      }
+    }
+  
+    const average = count > 0 ? sum / count : 0;
+    return average;
+
   }
 }
 
