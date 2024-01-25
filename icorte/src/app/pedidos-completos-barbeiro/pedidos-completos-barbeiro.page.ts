@@ -29,9 +29,7 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
     console.log('Selected rating:', rating);
     // Do something with the selected rating
   }
-  credentials: FormGroup = this.fb.group({
-    avaliacaoCliente: ['', [Validators.required, ]],
-  });
+ 
   constructor(
     private firestore: Firestore,
     private router: Router,
@@ -41,7 +39,10 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
     this.rating = 0;
    }
 
-  ngOnInit() {
+   async ngOnInit() {
+     await this.listarBanco();
+     this.listarPedidos();
+
   }
 
   async rate(index: number, id: string) {

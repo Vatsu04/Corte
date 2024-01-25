@@ -31,10 +31,11 @@ export class CatalogoPage {
     });
   }
 
-  ngOnInit() {
+  async  ngOnInit() {
     this.barber = history.state.barber || { nome: '', email: '', cpf: '' };
 
-    this.listarBanco();
+    await this.listarBanco();
+    this.listarPedidosFeitos();
   }
 
   async returnToMenu() {
@@ -86,40 +87,43 @@ export class CatalogoPage {
 
   async listarPedidosFeitos(){
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
-    this.teste = []; // Clear the array before populating it
+
   
     querySnapshot.forEach((doc) => {
-      this.teste.push({ 
+      this.pedidos_feitos.push({ 
         id: doc.id,
-        avaliacao: doc.data()['avaliacao'],
+        avaliacao: doc.data()['avaliacaoBarbeiro'],
         cpfBarbeiro: doc.data()['cpfBarbeiro'],
      
       });
     });
   
-
+console.log(this.pedidos_feitos)
 
    
   }
 
 
     calculateAverageAvaliacao(cpfBarbeiro: string) {
+    
     let sum = 0;
     let count = 0;
-   console.log(this.pedidos_feitos.length);
+   
     if(this.pedidos_feitos.length === 0){
+;
       return "Sem avaliação";
+      
     } else{
     for (const pedido of this.pedidos_feitos) {
       
 
-      if (pedido.avaliacao && this.pedidos_feitos[pedido].cpfBarbeiro === cpfBarbeiro) {
+      if (pedido.avaliacao && pedido.cpfBarbeiro === cpfBarbeiro) {
         sum += pedido.avaliacao;
         count++;
 
         let average:any = count > 0 ? sum / count : 0;
   
-        return "3123";
+        return average;
 
 
       } 

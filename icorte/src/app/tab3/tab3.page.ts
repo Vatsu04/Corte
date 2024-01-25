@@ -91,8 +91,6 @@ export class Tab3Page {
       });
     });
   
-    this.pedidos = []; // Initialize pedidos as an empty array
-   
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
       const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
@@ -101,8 +99,8 @@ export class Tab3Page {
 
 
 if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
-        console.log(this.teste[i].nomeBarbeiro)
-        console.log( this.barbeiros[0]?.nome)
+        console.log(this.teste[i].cpfBarbeiro)
+        console.log( this.barbeiros[0]?.cpf)
         this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
@@ -186,13 +184,13 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
     querySnapshot.forEach((doc) => {
       this.teste.push({ 
         id: doc.id,
-        avaliacao: doc.data()['avaliacao'],
+        avaliacao: doc.data()['avaliacaoBarbeiro'],
         cpfBarbeiro: doc.data()['cpfBarbeiro'],
      
       });
     });
   
-    this.pedidos = []; // Initialize pedidos as an empty array
+   
    
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
@@ -202,8 +200,8 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
 
 
 if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
-        console.log(this.teste[i].nomeBarbeiro)
-        console.log( this.barbeiros[0]?.nome)
+        console.log(testeCpfBarbeiro);
+        console.log(barbeiroCpf);
         this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
