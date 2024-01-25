@@ -112,9 +112,16 @@ export class PedidosPendentesPage implements OnInit {
   }
 
   async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
-    _nomeBarbeiro: string, _emailBarbeiro: string, hora:string, data:string,
+    _nomeBarbeiro: string, cpfCliente: string, _emailBarbeiro: string, hora:string, data:string,
     _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){
    
+/*
+    <ion-button color="red" id="negar" (click)="confirmarPedido(pedido.imageUrl, pedido.nomeCliente,
+             pedido.emailCliente, pedido.cpfCliente,
+            pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.hora, pedido.data, pedido.descricao, pedido.local, pedido.preco, pedido.cpfBarbeiro,
+            true, pedido.id)" >Confirmar Serviço Completo </ion-button>
+*/
+
     if(this.pedidoPago != true){
       const toast = await this.toastController.create({
         message: 'Pague o pedido antes de confirma-lo!',
@@ -127,12 +134,12 @@ export class PedidosPendentesPage implements OnInit {
       const toast = await this.toastController.create({
         message: 'Pedido Completo!',
         duration: 2000,
-        color: 'blue',
+        color: 'green',
         position: 'top'
       });
       toast.present();
       this.pedidoConfirmado = isOpen;
-      this.aceitarPedido(foto, _nomeCliente, _emailCliente,
+      this.aceitarPedido(foto, _nomeCliente, _emailCliente, cpfCliente,
         _nomeBarbeiro, _emailBarbeiro, hora, data,
         _descricao, _local, _preco, _cpfBarbeiro, isOpen, id );
 
@@ -146,8 +153,8 @@ export class PedidosPendentesPage implements OnInit {
 
 
 
-  async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, hora:string, data:string,
-    _nomeBarbeiro: string, _emailBarbeiro: string,
+  async aceitarPedido(foto: string, _nomeCliente: string, _emailCliente: string, cpfCliente:string, 
+    _nomeBarbeiro: string, _emailBarbeiro: string,hora:string, data:string,
     _descricao: string, _local:string, preco:string, cpfBarbeiro: string, isOpen:boolean, id:string){
    
    
@@ -158,6 +165,7 @@ export class PedidosPendentesPage implements OnInit {
      imageUrl: foto,
      nomeCliente: _nomeCliente,
      emailCliente: _emailCliente,
+     cpfCliente: cpfCliente,
      nomeBarbeiro: _nomeBarbeiro,
      emailBarbeiro: _emailBarbeiro,
      descricao: _descricao,

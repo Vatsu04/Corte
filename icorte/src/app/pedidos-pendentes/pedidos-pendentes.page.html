@@ -35,8 +35,8 @@
             <ion-button color="red" id="negar" (click)="pagarPedido(true)" >Pagar </ion-button>
 
             <ion-button color="red" id="negar" (click)="confirmarPedido(pedido.imageUrl, pedido.nomeCliente,
-             pedido.emailCliente, pedido.hora, pedido.data,
-            pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.descricao, pedido.local, pedido.preco, pedido.cpfBarbeiro,
+             pedido.emailCliente, pedido.cpfCliente,
+            pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.hora, pedido.data, pedido.descricao, pedido.local, pedido.preco, pedido.cpfBarbeiro,
             true, pedido.id)" >Confirmar Serviço Completo </ion-button>
             <ion-button color="red" class="back" id="negar" *ngIf="pedido.id" (click)="cancelarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
           </ion-card-content>

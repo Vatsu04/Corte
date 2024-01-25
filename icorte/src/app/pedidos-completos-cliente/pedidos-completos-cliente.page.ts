@@ -23,7 +23,7 @@ export class PedidosCompletosClientePage implements OnInit {
   @Input() rating: number;
   @Output() ratingChange: EventEmitter<number> = new EventEmitter();
   credentials: FormGroup = this.fb.group({
-    avaliacao: ['', [Validators.required, ]],
+    avaliacaoBarbeiro: ['', [Validators.required, ]],
 
   });
   constructor(
@@ -46,7 +46,7 @@ export class PedidosCompletosClientePage implements OnInit {
     this.rating = index;
     this.ratingChange.emit(this.rating);
     try {
-      await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacao: this.rating });
+      await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacaoBarbeiro: this.rating });
       console.log('Avaliacao updated successfully!');
     } catch (error) {
       console.error('Error updating avaliacao:', error);
@@ -75,6 +75,8 @@ export class PedidosCompletosClientePage implements OnInit {
   isAboveRating(index: number): boolean {
     return index > this.rating;
   }
+
+
   async listarPedidos() {
     
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
@@ -95,21 +97,17 @@ export class PedidosCompletosClientePage implements OnInit {
     });
     
     for (let i = 0; i < this.teste.length; i++) {
-    if(this.teste[i].cpfCliente === this.usuarios.cpf){
+      console.log(this.teste[i].cpfCliente);
+      console.log(this.usuarios[0].cpf);
+    if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
       this.pedidos[i] = this.teste[i];
     }
   }
   }
+
+
   get avaliacao(){
     return this.credentials.get('avaliacao');
-  }
-
-  get organizao(){
-    return this.credentials.get('organizao');
-  }
-
-  get educacao(){
-    return this.credentials.get('educacao');
   }
 
 

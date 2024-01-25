@@ -30,7 +30,7 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
     // Do something with the selected rating
   }
   credentials: FormGroup = this.fb.group({
-    avaliacao: ['', [Validators.required, ]],
+    avaliacaoCliente: ['', [Validators.required, ]],
   });
   constructor(
     private firestore: Firestore,
@@ -48,7 +48,7 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
     this.rating = index;
     this.ratingChange.emit(this.rating);
     try {
-      await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacao: this.rating });
+      await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacaoCliente: this.rating });
       console.log('Avaliacao updated successfully!');
     } catch (error) {
       console.error('Error updating avaliacao:', error);
@@ -104,13 +104,12 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
     this.pedidos = []; // Initialize pedidos as an empty array
    
     for (let i = 0; i < this.teste.length; i++) {
-      console.log(this.barbeiros[0].nome)
-      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
-      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
+      console.log(this.teste[i].cpfBarbeiro)
+      console.log(this.barbeiros[0].cpf)
       
 
 
-if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+if (this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste[i].nomeBarbeiro)
         console.log( this.barbeiros[0]?.nome)
         this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
