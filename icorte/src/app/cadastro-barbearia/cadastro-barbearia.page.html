@@ -20,6 +20,24 @@
 
     </ion-item>
 
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="cep" placeholder="CEP" formControlName="cep"></ion-input>
+      <ion-note slot="error" *ngIf="(cep?.dirty || cep?.touched) && cep?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Endereco" formControlName="endereco"></ion-input>
+      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
+
+    </ion-item>
+
 
   
     

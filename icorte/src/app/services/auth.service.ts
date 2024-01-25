@@ -54,6 +54,31 @@ export class AuthService {
     }
   }
 
+  async registerBarbearia(credentials: any) {
+    try {
+      const userCredential = await this.auth.createUserWithEmailAndPassword(
+        credentials.email,
+        credentials.password
+      );
+
+      const userDocRef = this.firestore.doc(`barbers/${userCredential.user?.uid}`);
+      await userDocRef.set({
+        email: credentials.email,
+        cep: credentials.cep,
+      
+        nome: credentials.nome,
+        endereco: credentials.endereco,
+        data_nascimento: credentials.data_nascimento
+        
+      });
+
+      return userCredential.user;
+    } catch (error) {
+      console.error('Error registering user with profile:', error);
+      return null;
+    }
+  }
+
   async registerWithProfile(credentials: any) {
     try {
       const userCredential = await this.auth.createUserWithEmailAndPassword(
