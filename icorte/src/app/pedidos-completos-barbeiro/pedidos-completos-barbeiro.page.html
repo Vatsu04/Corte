@@ -23,9 +23,14 @@
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
      
             <form [formGroup]="credentials">
-<ion-item>
-             <!--  <rating [(rating)]="selectedRating" (ratingChange)="onRatingChange($event)"></rating> -->
-            </ion-item>
+
+
+      <div>
+              
+              <ion-icon name="star" formControlName="avaliacao" *ngFor="let num of [1,2,3,4,5]"
+                (click)="rate(num, pedido.id)" [ngStyle]="{'color': getColor(num)}">
+              </ion-icon>
+            </div>
               
 
             </form>

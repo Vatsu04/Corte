@@ -25,8 +25,9 @@
             <form [formGroup]="credentials">
 
   <h1>Avalie sua experiencia!</h1><br>
-            <p>Rapidez:</p>
+            
             <div>
+              
               <ion-icon name="star" formControlName="avaliacao" *ngFor="let num of [1,2,3,4,5]"
                 (click)="rate(num, pedido.id)" [ngStyle]="{'color': getColor(num)}">
               </ion-icon>
