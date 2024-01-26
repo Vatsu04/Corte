@@ -79,7 +79,7 @@ export class CadastroBarbeariaPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const user = await this.authService.registerBarber(this.credentials.value);
+    const user = await this.authService.registerBarbearia(this.credentials.value);
     await loading.dismiss();
 
     if (user) {
@@ -91,8 +91,11 @@ export class CadastroBarbeariaPage implements OnInit {
   ngOnInit() {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
+<<<<<<< Updated upstream
     
    
+=======
+>>>>>>> Stashed changes
       endereco: ['', [Validators.required, Validators.minLength(6)]],
       nome: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
