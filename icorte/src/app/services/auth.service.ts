@@ -160,10 +160,13 @@ export class AuthService {
     return this.auth.authState;
   }
 
+
+
   async editUserProfile(uid: string, updatedProfile: any): Promise<boolean> {
     try {
       const userDocRef = this.firestore.doc(`users/${uid}`); // Editar os dados na base de dados
       await userDocRef.update(updatedProfile);
+      
   
       return true;
     } catch (error) {

@@ -3,6 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth, getAuth, onAuthStateChanged, updateEmail, updatePassword } from '@angular/fire/auth';
 
 
 @Component({
@@ -25,11 +26,15 @@ export class EditarContaUsuarioPage implements OnInit {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
+    
+    private auth: Auth,
     private toastController: ToastController,
     private router:Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+   
+  }
 
   get email() {
     return this.credentials.get('email');
@@ -69,7 +74,7 @@ export class EditarContaUsuarioPage implements OnInit {
       this.presentToast('Failed to update user profile');
     }
 
-    this.editUserPassword(perfilAtualizado);
+
   }
 
   async editUserProfile(updatedProfile: any): Promise<boolean> {
@@ -77,7 +82,8 @@ export class EditarContaUsuarioPage implements OnInit {
 
     if (uid) {
       const userProfile = {
-        
+        tamanho_cabelo: updatedProfile.tamanho_cabelo,
+        tipo_cabelo: updatedProfile.tipo_cabelo,
         endereco: updatedProfile.endereco,
         nome: updatedProfile.nome,
         email: updatedProfile.email,
@@ -94,14 +100,25 @@ export class EditarContaUsuarioPage implements OnInit {
     const oldPassword = updatedProfile.oldPassword;
     const newPassword = updatedProfile.newPassword;
 
-    const success = await this.authService.changeUserPassword(email, oldPassword, newPassword);
+  
 
-    if (success) {
-      this.presentToast('Password changed successfully');
-      this.router.navigateByUrl('/tab1', { replaceUrl: true });
-    } else {
-      this.presentToast('Failed to change password');
-    }
+const user:any = this.auth.currentUser;
+
+
+    updatePassword(user, newPassword).then(() => {
+      // Update successful.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
+ 
+updateEmail(user, email).then(() => {
+  // Email updated!
+  // ...
+}).catch((error) => {
+  // An error occurred
+  // ...
+});
   }
 
   async presentToast(message: string) {
