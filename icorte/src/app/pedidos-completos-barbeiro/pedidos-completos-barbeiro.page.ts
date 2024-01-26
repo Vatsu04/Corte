@@ -134,18 +134,25 @@ if (this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf) { // pedidos recebe os 
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
         this.barbeiros = [{ nome: userDoc.data()['nome'],
          email: userDoc.data()['emaiL'], 
-         especialidades: userDoc.data()['especialidades'],
+        
          cpf: userDoc.data()['cpf']  }];
        
       } else {
-        console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
-        this.router.navigateByUrl('/login-barbeiro', { replaceUrl: true }); // Provavelmente vou mudar as duas páginas de login para uma página de login universal, mas ainda vou testar
+        const userDoc2 = await getDoc(doc(this.firestore, "barberShops", userUID));
+        if (userDoc2.exists()) {
+          console.log(`${userDoc.id} => ${userDoc2.data()['nome']}`);
+          this.barbeiros = [{ nome: userDoc2.data()['nome'],
+           email: userDoc2.data()['email'], 
+      
+           cep: userDoc2.data()['cep']  }];
       }
-    } else {
-      console.error('User UID not available');
-    }
-    return Promise.resolve(); // Resolve the promise when the function completes
+    } 
+   
     
+  }else {
+    console.error('User UID not available');
   }
+  return Promise.resolve(); // Resolve the promise when the function completes
 
+}
 }

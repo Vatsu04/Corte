@@ -22,10 +22,7 @@ const routes: Routes = [
     path: 'cadastro',
     loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
   },
-  {
-    path: 'login-barbeiro',
-    loadChildren: () => import('./login-barbeiro/login-barbeiro.module').then( m => m.LoginBarbeiroPageModule)
-  },
+ 
   {
     path: 'cadastro-barbeiro',
     loadChildren: () => import('./cadastro-barbeiro/cadastro-barbeiro.module').then( m => m.CadastroBarbeiroPageModule)
@@ -62,10 +59,7 @@ const routes: Routes = [
     path: 'editar-conta-barbeiro',
     loadChildren: () => import('./editar-conta-barbeiro/editar-conta-barbeiro.module').then( m => m.EditarContaBarbeiroPageModule)
   },
-  {
-    path: 'pedido-pendente-barbeiro',
-    loadChildren: () => import('./pedido-pendente-barbeiro/pedido-pendente-barbeiro.module').then( m => m.PedidoPendenteBarbeiroPageModule)
-  },
+
   {
     path: 'pedidos-completos-cliente',
     loadChildren: () => import('./pedidos-completos-cliente/pedidos-completos-cliente.module').then( m => m.PedidosCompletosClientePageModule)
@@ -77,7 +71,8 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'cadastro-barbearia',
     loadChildren: () => import('./cadastro-barbearia/cadastro-barbearia.module').then( m => m.CadastroBarbeariaPageModule)
   },

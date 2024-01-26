@@ -61,14 +61,15 @@ export class AuthService {
         credentials.password
       );
 
-      const userDocRef = this.firestore.doc(`barbers/${userCredential.user?.uid}`);
+      const userDocRef = this.firestore.doc(`barberShops/${userCredential.user?.uid}`);
       await userDocRef.set({
         email: credentials.email,
         cep: credentials.cep,
-      
+        especialidade_tamanho_cabelo: credentials.especialidade_tamanho_cabelo,
+        especialidade_tipo_cabelo: credentials.especialidade_tipo_cabelo,
         nome: credentials.nome,
         endereco: credentials.endereco,
-        data_nascimento: credentials.data_nascimento
+
         
       });
 

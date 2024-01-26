@@ -109,6 +109,57 @@ export class AvatarService {
       return null;
     }
   }
+
+
+  getBarbeariaProfile(){
+    const barber = this.auth.currentUser;
+    const barberDocRef = doc(this.firestore, `barberShop/${barber?.uid}`);
+    return docData(barberDocRef);
+  }
+
+  async uploadBarberShopImage(cameraFile: Photo) {
+    const barber = this.auth.currentUser;
+  
+    if (!barber) {
+      console.error('User not logged in');
+      return null;
+    }
+  
+    const path = `uploads/${barber.uid}/profile.png`;
+    const storageRef = ref(this.storage, path);
+  
+    try {
+      // Upload the image to storage
+      await uploadString(storageRef, cameraFile.base64String ?? '', 'base64');
+  
+      // Get the download URL of the uploaded image
+      const imageUrl = await getDownloadURL(storageRef);
+  
+      // Retrieve the existing user data
+      const barberDocRef = doc(this.firestore, 'barberShop', barber.uid);
+      const barberDoc = await getDoc(barberDocRef);
+  
+      if (barberDoc.exists()) {
+        // Get the existing user fields
+        const { nome, cep, email, endereco,  especialidade_tamanho_cabelo, especialidade_tipo_cabelo } = barberDoc.data();
+  
+        // Update only the imageUrl field and maintain other fields
+        await updateDoc(barberDocRef, { imageUrl, nome, cep, email, endereco,  especialidade_tamanho_cabelo, especialidade_tipo_cabelo });
+  
+        return true;
+      } else {
+        console.error('User document not found');
+        return null;
+      }
+    } catch (e) {
+      console.error('Error uploading image:', e);
+      return null;
+    }
+  }
+
+
+
+
   
 
   async uploadChamadoImage(cameraFile: Photo) {

@@ -38,8 +38,59 @@
 
     </ion-item>
 
-
-  
+    <h2>Especialidade para Tipo de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tipo_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Crespo"></ion-radio>
+            <ion-label>Crespo</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Ondulado"></ion-radio>
+            <ion-label>Ondulado</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Liso"></ion-radio>
+            <ion-label>Liso</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tipo_cabelo?.dirty || especialidade_tipo_cabelo?.touched) && especialidade_tipo_cabelo?.errors">
+        Tipo inválido!
+      </ion-note>
+    </ion-radio-group>
+    
+    <h2>Especialidade para Tamanho de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tamanho_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Curto"></ion-radio>
+            <ion-label>Curto</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Médio"></ion-radio>
+            <ion-label>Médio</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Longo"></ion-radio>
+            <ion-label>Longo</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tamanho_cabelo?.dirty || especialidade_tamanho_cabelo?.touched) && especialidade_tamanho_cabelo?.errors">
+        Tamanho inválido!
+      </ion-note>
+    </ion-radio-group>
     
 
 

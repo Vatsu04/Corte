@@ -33,5 +33,53 @@
         Log Out
       </ion-button>
     </div>
+
+    <h2 style="text-align:center">CHAMADO FEITO</h2>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let chamado of chamados">
+          <ion-card>
+            <h1>Corte Desejado</h1>
+            <ion-img [src]="chamado.imageUrl" class="image-limit"></ion-img>
+            <h2>Corte Atual</h2>
+            <ion-img [src]="chamado.corteAtual" class="image-limit"></ion-img>
+  
+
+            <ion-card-header>
+              <ion-card-title class="nome">Cliente: {{ chamado.nomeCliente }}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+  
+          <ion-card>
+            <ion-card-content>
+              <p>Descrição: {{ chamado.descricao }}</p>
+              <p>Email do Cliente: {{ chamado.emailCliente }}</p>
+
+              <p>Local: {{ chamado.local}}</p>
+              <p>Data: {{chamado.horario}}</p>
+
+              <p>Local de Atendimento requisitado: {{ chamado.local}}</p>
+              <p>Data: {{chamado.data}}</p>
+              <p>Horario: {{chamado.hora}}</p>
+
+              <p>Preço: R$ {{ chamado.preco }}</p>
+  
+            
+          
+              
+  
+  
+  
+                
+              <ion-button color="red" class="back" *ngIf="chamado.id" (click)="negar(true, chamado.id)">Cancelar Chamado </ion-button>
+            
+  
+  
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </ion-content>
 </ion-content>

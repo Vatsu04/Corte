@@ -1,13 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>menu_barbearia</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">menu_barbearia</ion-title>
+      
     </ion-toolbar>
+    <ion-title size="large">Menu Barbearia</ion-title>
   </ion-header>
-</ion-content>
+  <ion-content class="ion-padding">
+    <div class="preview">
+      <ion-avatar (click)="changeImage()">
+        <img alt="avatar" *ngIf="profile?.['imageUrl']; else placeholder_avatar;" [src]="profile?.['imageUrl'] ?? ''"/>
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <p>Select avatar</p>
+          </div>
+        </ng-template>
+      </ion-avatar>
+     
+    </div><br>
+    <div id="info">
+    <ion-text>{{ barbearias[0].nome }}  </ion-text> <br>
+    <ion-text id="email">{{ barbearias[0].email }}</ion-text><br>
+    <ion-text id="email">Nota: {{  calculateAverageAvaliacao() }}</ion-text><br>
+  
+  </div>
+<div id="botoes">
+      <br>
+      <ion-button color="red"  routerLink="/editar-barbearia" routerDirection="forward">
+        Editar Conta
+      </ion-button><br>
+      <ion-button color="red"  routerLink="/pedidos" routerDirection="forward">
+        Pedidos
+      </ion-button>
+      <br>
+      <ion-button color="red"  routerLink="/pedidos-completos-barbeiro" routerDirection="forward">
+        Avaliar Clientes
+      </ion-button><br>
+
+      <ion-button color="red" class="back" (click)="logout()">
+        Log Out
+      </ion-button>
+
+    </div>

@@ -3,7 +3,7 @@ import { AvatarService } from '../services/avatar.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { DocumentData, Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import { DocumentData, Firestore, collection, deleteDoc, doc, getDoc, getDocs } from '@angular/fire/firestore';
 import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
 
 @Component({
@@ -19,6 +19,8 @@ export class Tab1Page {
   usuarios: any = [{email:'', nome:''}];
   teste:any = [];
   pedidos_feitos: any = [];
+  chamados:any =[];
+  isToastOpen:boolean = false;
   constructor(
     private avatarService: AvatarService,
     private authService: AuthService,
@@ -147,6 +149,66 @@ if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os va
     }
    
   }
+
+  async listarChamados() {
+    const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
+    this.teste = []; // Clear the array before populating it
+
+  
+    querySnapshot.forEach((doc) => {
+      
+      this.teste = [...this.teste, { 
+      id: doc.id,
+      corteAtual: doc.data()['corteAtual'],
+      nomeCliente: doc.data()['nomeCliente'], 
+      emailCliente: doc.data()['emailCliente'],
+      cpfCliente: doc.data()['cpfCliente'],
+      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+      emailBarbeiro: doc.data()['emailBarbeiro'],
+      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      descricao: doc.data()['descricao'],
+      hora: doc.data()['hora'],
+      data: doc.data()['data'],
+      local: doc.data()['local'], 
+      preco: doc.data()['preco'],
+      imageUrl: doc.data()['imageUrl'] }]
+    });
+  
+
+   
+    for (let i = 0; i < this.teste.length; i++) {
+
+      if(this.teste[i].cpfBarbeiro === this.usuarios[0].cpf){
+        this.chamados[i] = this.teste[i];
+      }
+    }
+    }
+
+    async negarPedido(isOpen:boolean, id:string){
+      await deleteDoc(doc(this.firestore, "chamados", id));
+      
+      
+      // Wait for a short time to allow Firebase to process the deletion
+      setTimeout(() => {
+        this.chamados=[]
+        this.listarBanco()
+       }, 2000);
+    
+      // Reload the current route to refresh the page
+      this.router.navigateByUrl('/tab3', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/tab3']);
+      });
+    }
+    
+    async negar(isOpen:boolean, id:string){
+      this.negarPedido(isOpen, id);
+      this.mensagem(isOpen);
+    }
+    mensagem(isOpen: boolean) {
+      this.isToastOpen = isOpen;
+    }
+  
+
 
   calculateAverageAvaliacao() {
     let sum = 0;

@@ -15,8 +15,8 @@ import { AuthService } from '../services/auth.service';
 export class CadastroBarbeariaPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    
-   
+    especialidade_tipo_cabelo: ['', [Validators.required]],
+    especialidade_tamanho_cabelo: ['', [Validators.required]],
     endereco: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -30,6 +30,18 @@ export class CadastroBarbeariaPage implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
+
+  get especialidade_tipo_cabelo(){
+    return this.credentials.get('especialidade_tipo_cabelo');
+  }
+
+ get especialidade_tamanho_cabelo() {
+  return this.credentials.get('especialidade_tamanho_cabelo');
+}
+  
+  get servicos(){
+    return this.credentials.get('servicos');
+  }
 
   get email() {
     return this.credentials.get('email');
@@ -71,7 +83,7 @@ export class CadastroBarbeariaPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('/tab3', { replaceUrl: true });
+      this.router.navigateByUrl('/menu-barbearia', { replaceUrl: true });
     } else {
       this.showAlert('Registration failed', 'Please try again!');
     }
