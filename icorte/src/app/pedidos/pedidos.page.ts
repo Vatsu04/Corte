@@ -119,7 +119,8 @@ async listarBanco() {
      
     } else {
       console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
-      this.router.navigateByUrl('/login-barbeiro', { replaceUrl: true }); // Provavelmente vou mudar as duas páginas de login para uma página de login universal, mas ainda vou testar
+      this.router.navigateByUrl('/', { replaceUrl: true }); // Provavelmente vou mudar as duas páginas de login para uma página de login universal, mas ainda vou testar
+    // const userDoc2 = await getDoc(doc(this.firestore, "barberShops", userUID));
     }
   } else {
     console.error('User UID not available');
