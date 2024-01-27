@@ -17,8 +17,11 @@
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="password" placeholder="Senha" formControlName="oldPassword"></ion-input>
       <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
-
-
+    </ion-item>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="cpf" placeholder="CPF" formControlName="cpf" maxLength="14" appCpfMask></ion-input>
+        <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF inválido!</ion-note>
+      </ion-item>
 
 
   
@@ -91,7 +94,8 @@
 
 
       <ion-button class="button1" color="red" expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar Barbeiro</ion-button>
-  <br><hr>
+  <br>
+  <ion-button class="back" color="red" expand="full" routerLink="/">Voltar</ion-button>
   
 
 
