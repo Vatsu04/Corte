@@ -21,9 +21,8 @@
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cep" placeholder="CEP" formControlName="cep"></ion-input>
-      <ion-note slot="error" *ngIf="(cep?.dirty || cep?.touched) && cep?.errors">Senha invalido!</ion-note>
-
+      <ion-input type="cpf" placeholder="CPF" formControlName="cpf" maxLength="14" appCpfMask></ion-input>
+      <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF inválido!</ion-note>
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">

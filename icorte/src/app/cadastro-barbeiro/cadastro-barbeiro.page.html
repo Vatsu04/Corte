@@ -15,31 +15,78 @@
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+      <ion-input type="password" placeholder="Senha" formControlName="oldPassword"></ion-input>
       <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
 
-    </ion-item>
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cep" placeholder="CEP" formControlName="cep"></ion-input>
-      <ion-note slot="error" *ngIf="(cep?.dirty || cep?.touched) && cep?.errors">Senha invalido!</ion-note>
-
-    </ion-item>
-
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="Endereco" formControlName="endereco"></ion-input>
-      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Senha invalido!</ion-note>
-
-    </ion-item>
-
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
-      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
-
-    </ion-item>
 
 
   
+ 
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Local de Trabalho / Endereço" formControlName="local_trabalho"></ion-input>
+      <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
+
+    </ion-item>
+    <h2>Especialidade para Tipo de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tipo_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Crespo"></ion-radio>
+            <ion-label>Crespo</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Ondulado"></ion-radio>
+            <ion-label>Ondulado</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Liso"></ion-radio>
+            <ion-label>Liso</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tipo_cabelo?.dirty || especialidade_tipo_cabelo?.touched) && especialidade_tipo_cabelo?.errors">
+        Tipo inválido!
+      </ion-note>
+    </ion-radio-group>
+    
+    <h2>Especialidade para Tamanho de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tamanho_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Curto"></ion-radio>
+            <ion-label>Curto</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Médio"></ion-radio>
+            <ion-label>Médio</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Longo"></ion-radio>
+            <ion-label >Longo</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tamanho_cabelo?.dirty || especialidade_tamanho_cabelo?.touched) && especialidade_tamanho_cabelo?.errors">
+        Tamanho inválido!
+      </ion-note>
+    </ion-radio-group>
     
 
 
