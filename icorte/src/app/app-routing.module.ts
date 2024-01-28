@@ -91,7 +91,11 @@ const routes: Routes = [
   {
     path: 'pedidos-barbearia',
     loadChildren: () => import('./pedidos-barbearia/pedidos-barbearia.module').then( m => m.PedidosBarbeariaPageModule)
+  },  {
+    path: 'chamar-barbearia',
+    loadChildren: () => import('./chamar-barbearia/chamar-barbearia.module').then( m => m.ChamarBarbeariaPageModule)
   }
+
 
 
 

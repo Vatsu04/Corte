@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth, updatePassword } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-editar-conta-barbeiro',
@@ -12,7 +13,7 @@ export class EditarContaBarbeiroPage implements OnInit {
 
   editedUser: any = [];
   credentials: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+  
     oldPassword: ['', [Validators.required, Validators.minLength(6)]],
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
@@ -25,7 +26,8 @@ export class EditarContaBarbeiroPage implements OnInit {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private auth:Auth
   ) {}
 
   ngOnInit() {}
@@ -105,14 +107,16 @@ export class EditarContaBarbeiroPage implements OnInit {
     const oldPassword = updatedProfile.oldPassword;
     const newPassword = updatedProfile.newPassword;
 
-    const success = await this.authService.changeUserPassword(email, oldPassword, newPassword);
+   
+const user:any = this.auth.currentUser;
 
-    if (success) {
-      console.log('Password changed successfully');
-      this.router.navigateByUrl('/tab3', { replaceUrl: true });
-    } else {
-      console.error('Failed to change password');
-    }
+
+updatePassword(user, newPassword).then(() => {
+  // Update successful.
+}).catch((error) => {
+  // An error ocurred
+  // ...
+});
   }
 
   

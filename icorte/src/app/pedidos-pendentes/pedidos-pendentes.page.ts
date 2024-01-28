@@ -64,6 +64,35 @@ export class PedidosPendentesPage implements OnInit {
   }
   }
 
+  async listarPedidosBarbearia() {
+    
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
+    querySnapshot.forEach((doc) => {
+      
+      this.teste = [...this.teste, { 
+      id: doc.id,
+      nomeCliente: doc.data()['nomeCliente'], 
+      emailCliente: doc.data()['emailCliente'],
+      cpfCliente: doc.data()['cpfCliente'],
+      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+      emailBarbeiro: doc.data()['emailBarbeiro'],
+      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      descricao: doc.data()['descricao'],
+      local: doc.data()['local'], 
+      preco: doc.data()['preco'],
+      data: doc.data()['data'],
+      hora: doc.data()['hora'],
+      imageUrl: doc.data()['imageUrl'] }]
+    });
+    
+    for (let i = 0; i < this.teste.length; i++) {
+    if(this.teste[i].cpfCliente === this.usuarios.cpf){
+      this.pedidos[i] = this.teste[i];
+    }
+  }
+  }
+
+
 
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();
@@ -115,12 +144,6 @@ export class PedidosPendentesPage implements OnInit {
     _nomeBarbeiro: string, cpfCliente: string, _emailBarbeiro: string, hora:string, data:string,
     _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){
    
-/*
-    <ion-button color="red" id="negar" (click)="confirmarPedido(pedido.imageUrl, pedido.nomeCliente,
-             pedido.emailCliente, pedido.cpfCliente,
-            pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.hora, pedido.data, pedido.descricao, pedido.local, pedido.preco, pedido.cpfBarbeiro,
-            true, pedido.id)" >Confirmar Serviço Completo </ion-button>
-*/
 
     if(this.pedidoPago != true){
       const toast = await this.toastController.create({

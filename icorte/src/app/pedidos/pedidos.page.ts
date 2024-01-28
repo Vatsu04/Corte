@@ -115,6 +115,7 @@ async listarBanco() {
       this.barbeiros = [{ nome: userDoc.data()['nome'],
        email: userDoc.data()['emaiL'], 
        especialidades: userDoc.data()['especialidades'],
+       endereco: userDoc.data()['endereco'],
        cpf: userDoc.data()['cpf']  }];
      
     } else {
@@ -157,15 +158,24 @@ async negar(isOpen:boolean, id:string){
   toast.present();
 }
 
+/*
 async aceitarPedido(foto: string, foto2: string, _nomeCliente: string, _emailCliente: string,
    _nomeBarbeiro: string, _emailBarbeiro: string, hora: string, data: string,
-   _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string){
+   _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string, cpf:string){
+*/
+
+async aceitarPedido(foto: string, foto2: string, _nomeCliente: string, _emailCliente: string,
+   _nomeBarbeiro: string, _emailBarbeiro: string, hora: string, data: string,
+   _descricao: string, _local:string, credentials: any, cpfBarbeiro:string, isOpen:boolean, id:string, cpf:string){
   
-  
+  if(_local === "Local de Trabalho"){
+    _local = this.barbeiros[0].endereco
+  } 
   const pedido = {
     hora: hora,
     data: data,
     corteAtual: foto2,
+    cpfCliente: cpf,
     imageUrl: foto,
     nomeCliente: _nomeCliente,
     emailCliente: _emailCliente,

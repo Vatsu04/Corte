@@ -205,7 +205,7 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
         this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
-    console.log(this.pedidos); // Log the result for verification
+
   }
 
   calculateAverageAvaliacao() {

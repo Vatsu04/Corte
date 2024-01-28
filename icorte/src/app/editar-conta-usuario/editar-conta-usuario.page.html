@@ -7,11 +7,18 @@
 <ion-content [fullscreen]="true">
   <form [formGroup]="credentials">
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email inválido!</ion-note>
-    </ion-item>
 
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="password" placeholder="Senha Antiga" formControlName="oldPassword"></ion-input>
+      <ion-note slot="error" *ngIf="(oldPassword?.dirty || oldPassword?.touched) && oldPassword?.errors">Senha invalido!</ion-note>
+
+</ion-item>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="password" placeholder="Senha Nova" formControlName="newPassword"></ion-input>
+        <ion-note slot="error" *ngIf="(newPassword?.dirty || newPassword?.touched) && newPassword?.errors">Senha invalido!</ion-note>
+
+
+    </ion-item>
 
   
     <h2>Tipo de Cabelo</h2>

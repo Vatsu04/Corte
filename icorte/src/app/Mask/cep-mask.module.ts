@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
-import { DataMaskDirective } from './data-mask.directive';
+import { CepMaskDirective } from './cep-mask.directive';
 
 @NgModule({
     imports: [CommonModule, FormsModule, IonicModule],
-    declarations: [DataMaskDirective],
-    exports: [DataMaskDirective]
+    declarations: [CepMaskDirective],
+    exports: [CepMaskDirective]
 })
-export class DataMaskModule{
+export class CepMaskModule{
     
 }

@@ -7,11 +7,7 @@
   <form [formGroup]="credentials">
 
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
-
-    </ion-item>
+   
 
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="password" placeholder="Senha Antiga" formControlName="oldPassword"></ion-input>

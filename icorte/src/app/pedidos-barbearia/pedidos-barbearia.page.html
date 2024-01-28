@@ -1,13 +1,55 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>pedidos_barbearia</ion-title>
+    <ion-title>Pedidos Requisitados</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">pedidos_barbearia</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let pedido of pedidos">
+        <ion-card>
+          <h1>Corte Desejado</h1>
+          <ion-img [src]="pedido.imageUrl" class="image-limit"></ion-img>
+          <h1>Corte Atual</h1>
+          <ion-img [src]="pedido.corteAtual" class="image-limit"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="nome">Pedido de {{ pedido.nomeCliente }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <p>Descrição: {{ pedido.descricao }}</p>
+            <p>Email do Cliente: {{ pedido.emailCliente }}</p>
+            <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
+     
+            <form [formGroup]="credentials">
+
+              <ion-item fill="solid" class="ion-margin-bottom">
+                <ion-input type="number" placeholder="Preço" formControlName="preco"></ion-input>
+                <ion-note slot="error" *ngIf="(preco?.dirty || preco?.touched) && preco?.errors">Senha invalido!</ion-note>
+          
+              </ion-item>
+
+            </form>
+
+          
+        
+            
+
+            <ion-button color="red" id="aceitar" (click)="aceitarPedido(pedido.imageUrl, pedido.corteAtual, pedido.nomeCliente, 
+            pedido.emailCliente, pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.hora, pedido.data, pedido.descricao, 
+            pedido.local, credentials.value, pedido.cpfBarbeiro, true, pedido.id, pedido.cpfCliente)" [disabled]="!credentials.valid">Aceitar </ion-button>
+            <ion-button color="red" id="negar" (click)="negar(true, pedido.id)" >Negar </ion-button>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div id="botoes">
+  <ion-button color="red" class="back" id="retorno" expand="full"  (click)="returnToMenu()">Voltar</ion-button> 
+
+</div>
 </ion-content>

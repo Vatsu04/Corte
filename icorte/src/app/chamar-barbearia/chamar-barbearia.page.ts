@@ -16,7 +16,7 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './chamado.page.html',
   styleUrls: ['./chamado.page.scss'],
 })
-export class ChamadoPage implements OnInit {
+export class ChamarBarbeariaPage implements OnInit {
   credentials: FormGroup = this.fb.group({
     descricao: ['', [Validators.required, Validators.minLength(10)]],
     local: ['', [Validators.required]],
@@ -38,7 +38,7 @@ export class ChamadoPage implements OnInit {
   imgSrc_:any;
   isImg_: boolean=false;
   images_:any = [];
-  barber: any = { nome: '', email: '', cpf:'' };
+  barbearia: any = { nome: '', email: '', cep:'' };
   constructor(
     private fb: FormBuilder,
     private firestore: Firestore,
@@ -51,17 +51,17 @@ export class ChamadoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.barber = history.state.barber || { nome: '', email: '', cpf:'' };
-    console.log(this.barber.nome);
-    console.log(this.barber.email);
-    console.log(this.barber.cpf);
+    this.barbearia = history.state.barbearia || {nome:'', email:'', cep:''};
+    console.log(this.barbearia.nome);
+    console.log(this.barbearia.email);
+    console.log(this.barbearia.cep);
     this.listarBanco();
   }
 
   
 
   
-  async chamarBabeiro() {
+  async chamarBabearia() {
 
     if (!this.imgSrc || !this.imgSrc_) {
       const toast = await this.toastController.create({
@@ -87,7 +87,8 @@ export class ChamadoPage implements OnInit {
       toast.present();
       return;
     }
-  }for(let i=0;i<this.pedidos_aceitos.length;i++){
+  }
+  for(let i=0;i<this.pedidos_aceitos.length;i++){
    if( this.chamados_feitos[i].cpfCliente === this.usuarios[0].cpf){
     const toast = await this.toastController.create({
       message: 'Não é permitido o mesmo usuário fazer mais de um pedido de uma vez só',
@@ -100,19 +101,16 @@ export class ChamadoPage implements OnInit {
 
   }
   }
-
-  if(this.local?.value === "Moradia do Cliente"){
-      
-  
+  if(this.local?.value === "Moradia do Cliente"){   
     const chamado = {
       corteAtual: this.imgSrc_,
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
       emailCliente: this.usuarios[0].email,
       cpfCliente: this.usuarios[0].cpf,
-      nomeBarbeiro: this.barber.nome,
-      emailBarbeiro: this.barber.email,
-      cpfBarbeiro: this.barber.cpf,
+      nomeBarbearia: this.barbearia.nome,
+      emailBarbearia: this.barbearia.email,
+      cep: this.barbearia.cep,
       descricao: this.descricao?.value,
       local: this.usuarios[0].endereco,
       data: this.data?.value,
@@ -134,16 +132,16 @@ export class ChamadoPage implements OnInit {
     } catch (error) {
       console.error('Error adding chamado:', error);
     }
-  }  else{
+  } else{
     const chamado = {
       corteAtual: this.imgSrc_,
       imageUrl: this.imgSrc,
       nomeCliente: this.usuarios[0].nome,
       emailCliente: this.usuarios[0].email,
       cpfCliente: this.usuarios[0].cpf,
-      nomeBarbeiro: this.barber.nome,
-      emailBarbeiro: this.barber.email,
-      cpfBarbeiro: this.barber.cpf,
+      nomeBarbearia: this.barbearia.nome,
+      emailBarbearia: this.barbearia.email,
+      cep: this.barbearia.cpf,
       descricao: this.descricao?.value,
       local: this.local?.value,
       data: this.data?.value,
@@ -200,9 +198,9 @@ export class ChamadoPage implements OnInit {
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
       cpfCliente: doc.data()['cpfCliente'],
-      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
-      emailBarbeiro: doc.data()['emailBarbeiro'],
-      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      nomeBarbeiro: doc.data()['nomeBarbearia'], 
+      emailBarbeiro: doc.data()['emailBarbearia'],
+      cep: doc.data()['cep'],
       descricao: doc.data()['descricao'],
       hora: doc.data()['hora'],
       data: doc.data()['data'],
@@ -307,8 +305,11 @@ export class ChamadoPage implements OnInit {
 
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
-        this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'], 
-        cpf: userDoc.data()['cpf'], endereco: userDoc.data()['endereco'] }];
+        this.usuarios = [{
+           nome: userDoc.data()['nome'],
+         email: userDoc.data()['email'],
+         cpf: userDoc.data()['cpf'],
+        endereco: userDoc.data()['endereco'] }];
         console.log(this.usuarios[0]?.nome);
     console.log(this.usuarios[0]?.email);
       } else {

@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { AvatarService } from '../services/avatar.service';
 import { AuthService } from '../services/auth.service';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { DocumentData, Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { DocumentData, Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -14,7 +14,9 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 export class MenuBarbeariaPage implements OnInit {
   profile: null | DocumentData | undefined = null;
   barbearias:any[] = [{nome:'', endereco:'', especialidade_tamanho_cabelo:'', especialidade_tipo_cabelo:'', email:'',   cep:'', foto:'', uid:''}];
-  pedidos_feitos:any = [];
+  pedidos_feitos:any = []; // Usado apenas para calcular nota
+  pedidos:any = []; // usado para listar os pedidos que foram aceitos  
+  teste:any = []; 
   constructor(
     private avatarService: AvatarService,
     private authService: AuthService,
@@ -25,7 +27,9 @@ export class MenuBarbeariaPage implements OnInit {
     private el: ElementRef
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.listarBanco();
+    console.log(this.barbearias[0].nome)
   }
 
 
@@ -63,6 +67,73 @@ export class MenuBarbeariaPage implements OnInit {
     return Promise.resolve(); // Resolve the promise when the function completes
   }
 
+
+  async listarPedidosFeitos(){
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
+    this.teste = []; // Clear the array before populating it
+  
+    querySnapshot.forEach((doc) => {
+      this.teste.push({ 
+        id: doc.id,
+        avaliacao: doc.data()['avaliacaoBarbeiro'],
+        cep: doc.data()['cep'],
+     
+      });
+    });
+  
+   
+   
+    for (let i = 0; i < this.teste.length; i++) {
+      
+
+      
+
+
+if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        console.log(this.teste.cep);
+        console.log(this.barbearias[0].cep);
+        this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+      }
+    }
+
+  }
+
+  async listarPedidos() {
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
+    this.teste = []; // Clear the array before populating it
+  
+    querySnapshot.forEach((doc) => {
+      this.teste.push({ 
+        id: doc.id,
+        nomeCliente: doc.data()['nomeCliente'],
+        emailCliente: doc.data()['emailCliente'],
+        imageUrl: doc.data()['imageUrl'], 
+        local: doc.data()['local'],
+        corteAtual: doc.data()['corteAtual'],
+        descricao: doc.data()['descricao'],
+        nomeBarbeiro: doc.data()['nomeBarbeiro'],
+        emailBarbeiro: doc.data()['emailBarbeiro'],
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        preco: doc.data()['preco'],
+        hora: doc.data()['hora'],
+        data: doc.data()['data']
+      });
+    });
+  
+    for (let i = 0; i < this.teste.length; i++) {
+      
+
+      
+
+
+      if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+              console.log(this.teste.cep);
+              console.log(this.barbearias[0].cep);
+              this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+            }
+          }
+
+  }
 
 
   

@@ -14,7 +14,7 @@ import { Auth, getAuth, onAuthStateChanged, updateEmail, updatePassword } from '
 export class EditarContaUsuarioPage implements OnInit {
   editedUser: any = [];
   credentials: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+
     oldPassword: ['', [Validators.required, Validators.minLength(6)]],
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
     endereco: ['', [Validators.required, Validators.minLength(10)]],
@@ -66,6 +66,7 @@ export class EditarContaUsuarioPage implements OnInit {
 
   async editarPerfil(perfilAtualizado: any) {
     const success = await this.editUserProfile(perfilAtualizado);
+    this.editUserPassword(perfilAtualizado);
 
     if (success) {
       this.presentToast('User profile updated successfully');
@@ -119,6 +120,9 @@ updateEmail(user, email).then(() => {
   // An error occurred
   // ...
 });
+
+
+
   }
 
   async presentToast(message: string) {
