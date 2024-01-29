@@ -34,7 +34,7 @@
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-input type="text" placeholder="Nome da Barbearia" formControlName="nome"></ion-input>
       <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Senha invalido!</ion-note>
 
     </ion-item>
@@ -94,13 +94,13 @@
     </ion-radio-group>
     
 
-
-      <ion-button class="button1" color="red" expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar Barbeiro</ion-button>
+  </form>
+    <br>
+      <ion-button class="button1" color="red" expand="full"  type="button" (click)="register()"  [disabled]="!credentials.valid">Cadastrar Barbearia</ion-button>
   <br>
 
   <ion-button class="back" color="red" expand="full" routerLink="/">Voltar</ion-button>
   
 
 
-  </form>
 </ion-content>
