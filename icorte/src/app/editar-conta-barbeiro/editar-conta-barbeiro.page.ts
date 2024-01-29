@@ -34,16 +34,7 @@ export class EditarContaBarbeiroPage implements OnInit {
 
   ngOnInit() {}
 
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 3000,
-      position: 'bottom',
-      color: 'dark', // You can change the color based on your preference
-    });
 
-    toast.present();
-  }
 
 
   get email() {
@@ -65,7 +56,6 @@ export class EditarContaBarbeiroPage implements OnInit {
   get especialidade_tamanho_cabelo(){
     return this.credentials.get('especialidade_tipo_cabelo');
   }
-  
   
   get nome() {
     return this.credentials.get('nome');
@@ -105,7 +95,7 @@ export class EditarContaBarbeiroPage implements OnInit {
         nome: updatedProfile.nome,
         email: updatedProfile.email,
         especialidades: updatedProfile.especialidades,
-        data_nascimento: updatedProfile.data_nascimento
+        
       };
 
       const success = await this.authService.editBarberProfile(uid, userProfile);
@@ -125,19 +115,38 @@ export class EditarContaBarbeiroPage implements OnInit {
     const newPassword = updatedProfile.newPassword;
 
    
-const user:any = this.auth.currentUser;
+    const user:any = this.auth.currentUser;
 
 
-updatePassword(user, newPassword).then(() => {
-  // Update successful.
-}).catch((error) => {
-  // An error ocurred
-  // ...
-});
+    updatePassword(user, newPassword).then(() => {
+      // Update successful.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
+
+    updateEmail(user, email).then(() => {
+      // Update successful.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
   }
 
-  
-async returnToMenu(){
-  this.router.navigateByUrl('/tab3', { replaceUrl: true });
-}
+    
+  async returnToMenu(){
+    this.router.navigateByUrl('/tab3', { replaceUrl: true });
+  }
+
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'dark', // You can change the color based on your preference
+    });
+
+    toast.present();
+  }
 }

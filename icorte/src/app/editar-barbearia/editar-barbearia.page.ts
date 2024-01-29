@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
+import { Auth, updateEmail, updatePassword } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editar-barbearia',
@@ -22,7 +25,10 @@ export class EditarBarbeariaPage implements OnInit {
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastController: ToastController,
+    private auth: Auth,
+    private router: Router
 
   ) { }
 
@@ -30,6 +36,10 @@ export class EditarBarbeariaPage implements OnInit {
   }
 
 
+  async returnToMenu(){
+    this.router.navigateByUrl('/menu-barbearia', { replaceUrl: true });
+  }
+ 
   get email() {
     return this.credentials.get('email');
   }
@@ -58,7 +68,7 @@ export class EditarBarbeariaPage implements OnInit {
     return this.credentials.get('nome');
   }
 
-  async editUserProfile(updatedProfile: any) {
+  async editBarberShopProfile(updatedProfile: any) {
     const uid = await this.authService.getCurrentUserUID();
 
     if (uid) {
@@ -81,4 +91,42 @@ export class EditarBarbeariaPage implements OnInit {
       }
     }
   }
+
+
+  async editBarberPassword(updatedProfile: any) {
+    const email = updatedProfile.email;
+    const oldPassword = updatedProfile.oldPassword;
+    const newPassword = updatedProfile.newPassword;
+
+   
+    const user:any = this.auth.currentUser;
+
+
+    updatePassword(user, newPassword).then(() => {
+      // Update successful.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
+
+    updateEmail(user, email).then(() => {
+      // Update successful.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
+  }
+
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'dark', // You can change the color based on your preference
+    });
+
+    toast.present();
+  }
+
 }
