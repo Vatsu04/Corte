@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -14,6 +14,9 @@ export class PedidosBarbeariaPage implements OnInit {
   barbearias:any = [];
   pedidos: any = [];
   teste:any = [];
+  credentials: FormGroup = this.fb.group({
+    preco: ['', [Validators.required, Validators.minLength(2), this.isValidFloat]],
+  });
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
@@ -24,6 +27,22 @@ export class PedidosBarbeariaPage implements OnInit {
 
   ngOnInit() {
   }
+
+  get preco() {
+    return this.credentials.get('preco');
+  }
+
+
+  isValidFloat(control: AbstractControl): { [key: string]: any } | null {
+    const floatValue = parseFloat(control.value);
+  
+    if (isNaN(floatValue)) {
+      return { 'invalidFloat': true };
+    }
+  
+    return null;
+  }
+
 
   async listarChamados() {
     const querySnapshot = await getDocs(collection(this.firestore, "chamados"));

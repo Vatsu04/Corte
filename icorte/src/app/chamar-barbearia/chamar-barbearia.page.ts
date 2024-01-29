@@ -12,9 +12,9 @@ import { NgModel } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-chamado',
-  templateUrl: './chamado.page.html',
-  styleUrls: ['./chamado.page.scss'],
+  selector: 'app-chamar-barbearia',
+  templateUrl: './chamar-barbearia.page.html',
+  styleUrls: ['./chamar-barbearia.page.scss'],
 })
 export class ChamarBarbeariaPage implements OnInit {
   credentials: FormGroup = this.fb.group({
