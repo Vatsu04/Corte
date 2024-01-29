@@ -45,6 +45,39 @@
     </ion-row>
   </ion-grid>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let pedidoBarberia of pedidosBarbearia">
+        <ion-card>
+          <ion-img [src]="pedidoBarbearia.imageUrl" class="image-limit"></ion-img>
+
+          <ion-card-header>
+            <ion-card-title class="nome">Barbeiro: {{ pedidoBarbearia.nomeBarbeiro }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <p>Descrição: {{ pedidoBarbearia.descricao }}</p>
+            <p>Preço: R${{ pedidoBarbearia.preco * 1.3}}</p>
+            <p>Local de Atendimento requisitado: {{ pedidoBarbearia.local}}</p>
+
+         
+
+            <ion-button color="red" id="negar" (click)="pagarPedidoBarbearia(true)" >Pagar </ion-button>
+
+            <ion-button color="red" id="negar" (click)="confirmarPedidoBarbearia(pedidoBarbearia.imageUrl, pedidoBarbearia.nomeCliente,
+             pedidoBarbearia.emailCliente, pedidoBarbearia.cpfCliente,
+            pedidoBarbearia.nomeBarbearia, pedidoBarbearia.emailBarbearia, pedidoBarbearia.hora, pedidoBarbearia.data, pedidoBarbearia.descricao, pedidoBarbearia.local,
+             pedidoBarbearia.preco, pedidoBarbearia.cep,
+            true, pedidoBarbearia.id)" >Confirmar Serviço Completo </ion-button>
+            <ion-button color="red" class="back" id="negar" *ngIf="pedidoBarbearia.id" (click)="cancelarpedidoBarbearia(true, pedidoBarbearia.id)">Cancelar pedidoBarbearia </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-button color="red" id="retorno" class="back" (click)="returnToMenu()">Voltar</ion-button> <br>
 
  

@@ -12,10 +12,12 @@ import { ToastController } from '@ionic/angular';
 export class PedidosPendentesPage implements OnInit {
   teste:any = [];
   pedidos:any = [];
+  pedidosBarbearia:any = [];
   isToastOpen:boolean = false;
   isModalOpen:boolean = false;
   usuarios: any = [{email:'', nome:'', cpf: ''}];
   pedidoPago:boolean = false;
+  pedidoPagoBarbearia:boolean = false;
   pedidoConfirmado:boolean = false;
   pedidoCompleto:boolean = true;
   constructor(
@@ -74,9 +76,9 @@ export class PedidosPendentesPage implements OnInit {
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
       cpfCliente: doc.data()['cpfCliente'],
-      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
-      emailBarbeiro: doc.data()['emailBarbeiro'],
-      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      nomeBarbearia: doc.data()['nomeBarbearia'], 
+      emailBarbearia: doc.data()['emailBarbearia'],
+      cep: doc.data()['cep'],
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
@@ -87,7 +89,7 @@ export class PedidosPendentesPage implements OnInit {
     
     for (let i = 0; i < this.teste.length; i++) {
     if(this.teste[i].cpfCliente === this.usuarios.cpf){
-      this.pedidos[i] = this.teste[i];
+      this.pedidosBarbearia[i] = this.teste[i];
     }
   }
   }
@@ -138,6 +140,18 @@ export class PedidosPendentesPage implements OnInit {
     toast.present();
     
     this.pedidoPago = isOpen;
+  }
+  async pagarPedidoBarbearia(isOpen: boolean){
+    
+    const toast = await this.toastController.create({
+      message: 'Pedido Pago',
+      duration: 2000,
+      color: 'blue',
+      position: 'top'
+    });
+    toast.present();
+    
+    this.pedidoPagoBarbearia = isOpen;
   }
 
   async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
@@ -208,6 +222,80 @@ export class PedidosPendentesPage implements OnInit {
      console.log("Error adding pedido:" , error)
    }
  }
+
+
+
+
+
+
+
+ async confirmarPedidoBarbearia(foto: string, _nomeCliente: string, _emailCliente: string, cpfCliente:string, 
+  nomeBarbearia:string, emailBarbearia:string,
+  hora:string, data:string,
+  _descricao: string, _local:string, preco:string, cep: string, isOpen:boolean, id:string){
+  
+    if(this.pedidoPago != true){
+      const toast = await this.toastController.create({
+        message: 'Pague o pedido antes de confirma-lo!',
+        duration: 2000,
+        color: 'danger',
+        position: 'top'
+      });
+      toast.present();
+    } else{
+      const toast = await this.toastController.create({
+        message: 'Pedido Completo!',
+        duration: 2000,
+        color: 'green',
+        position: 'top'
+      });
+      toast.present();
+      this.pedidoConfirmado = isOpen;
+      this.aceitarPedido(foto, _nomeCliente, _emailCliente, cpfCliente,
+        nomeBarbearia, emailBarbearia, hora, data,
+        _descricao, _local, preco, cep, isOpen, id );
+
+      
+      this.cancelarPedido(isOpen, id)
+    }
+  }
+
+
+
+ async aceitarPedidoBarbearia(foto: string, _nomeCliente: string, _emailCliente: string, cpfCliente:string, 
+  nomeBarbearia:string, emailBarbearia:string,
+  hora:string, data:string,
+  _descricao: string, _local:string, preco:string, cep: string, isOpen:boolean, id:string){
+ 
+ 
+ const pedidos_feitos = {
+   id: id,
+   hora: hora,
+   data: data,
+   imageUrl: foto,
+   nomeCliente: _nomeCliente,
+   emailCliente: _emailCliente,
+   cpfCliente: cpfCliente,
+   cep: cep,
+   nomeBarbearia: nomeBarbearia,
+   emailBarbearia: emailBarbearia,
+   descricao: _descricao,
+   local: _local,
+   preco: preco,
+   
+ };
+
+ const document = doc(collection(this.firestore, 'pedidos_feitos'))
+
+ try{
+   await setDoc(document, pedidos_feitos);
+   console.log('Pedido added succesfully');
+ 
+  
+ } catch(error) {
+   console.log("Error adding pedido:" , error)
+ }
+}
  
 
 
