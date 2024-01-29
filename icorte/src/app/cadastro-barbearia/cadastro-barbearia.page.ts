@@ -95,6 +95,8 @@ export class CadastroBarbeariaPage implements OnInit {
       nome: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       cep: ['', [Validators.required]],
+      especialidade_tamanho_cabelo: ['', [Validators.required]],
+      especialidade_tipo_cabelo: ['', [Validators.required]]
     });
   }
   async showAlert(header: string, message: string) {
