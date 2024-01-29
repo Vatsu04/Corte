@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -31,7 +31,10 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
     this.rating = 0;
    }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    await this.listarBanco();
+    this.listarPedidos();
   }
 
 
@@ -89,6 +92,42 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
     }
     return Promise.resolve(); // Resolve the promise when the function completes
     
+  }
+
+  async listarPedidos() {
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
+    this.teste = []; // Clear the array before populating it
+  
+    querySnapshot.forEach((doc) => {
+      this.teste.push({ 
+        id: doc.id,
+        nomeCliente: doc.data()['nomeCliente'],
+        emailCliente: doc.data()['emailCliente'],
+        imageUrl: doc.data()['imageUrl'], 
+        local: doc.data()['local'],
+        hora: doc.data()['hora'],
+        data: doc.data()['data'],
+        descricao: doc.data()['descricao'],
+        nomeBarbearia: doc.data()['nomeBarbearia'],
+        emailBarbearia: doc.data()['emailBarbearia'],
+        cep: doc.data()['cep']
+      });
+    });
+  
+    this.pedidos = []; // Initialize pedidos as an empty array
+   
+    for (let i = 0; i < this.teste.length; i++) {
+      console.log(this.teste[i].cep)
+      console.log(this.barbearias[0].cep)
+      
+
+
+if (this.teste[i].cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+       
+        this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+      }
+    }
+    console.log(this.pedidos); // Log the result for verification
   }
 
   isAboveRating(index: number): boolean {
