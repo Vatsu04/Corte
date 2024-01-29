@@ -42,17 +42,22 @@ ion-avatar{
 }
 ion-button{
     color: #DEAD04;
-    border-radius: 15px;
+    border-radius: 13px;
     border: 2px solid #DEAD04;
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
-    width: 250px;
- 
+    width: 70vw;
+   margin-left: 4%;
+   margin-right: 3%;
 }
-
+.button1{
+    color: black;
+    background-color: #DEAD04;
+}
 .back{
     border: 2px #FF0000 solid;
     color: #ff0000 ;
-  
+    width: 70vw;
+
 }

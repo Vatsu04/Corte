@@ -82,7 +82,8 @@
       <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome inválido!</ion-note>
     </ion-item>
  
-    <ion-button color="red" expand="full" type="button" (click)="editarPerfil(credentials.value)" [disabled]="!credentials.valid">Editar Perfil</ion-button>   
+    <ion-button color="red" class="button1" expand="full" type="button" (click)="editarPerfil(credentials.value)" [disabled]="!credentials.valid">Editar Perfil</ion-button>   
+    <br>
     <ion-button color="red" class="back" expand="full"routerLink="/tab1">Voltar</ion-button>
   </form>
 </ion-content>
