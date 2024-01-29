@@ -84,14 +84,12 @@ const routes: Routes = [
     path: 'editar-barbearia',
     loadChildren: () => import('./editar-barbearia/editar-barbearia.module').then( m => m.EditarBarbeariaPageModule)
   },
-  {
-    path: 'avaliar-barbearia',
-    loadChildren: () => import('./avaliar-barbearia/avaliar-barbearia.module').then( m => m.AvaliarBarbeariaPageModule)
-  },
+
   {
     path: 'pedidos-barbearia',
     loadChildren: () => import('./pedidos-barbearia/pedidos-barbearia.module').then( m => m.PedidosBarbeariaPageModule)
-  },  {
+  },
+  {
     path: 'chamar-barbearia',
     loadChildren: () => import('./chamar-barbearia/chamar-barbearia.module').then( m => m.ChamarBarbeariaPageModule)
   },
