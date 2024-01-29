@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CadastroBarbeariaPageRoutingModule } from './cadastro-barbearia-routing.module';
 
 import { CadastroBarbeariaPage } from './cadastro-barbearia.page';
+import { CepMaskModule } from '../Mask/cep-mask.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { CadastroBarbeariaPage } from './cadastro-barbearia.page';
     FormsModule,
     IonicModule,
     CadastroBarbeariaPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CepMaskModule
   ],
   declarations: [CadastroBarbeariaPage]
 })
