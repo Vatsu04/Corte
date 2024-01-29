@@ -89,7 +89,7 @@ export class CatalogoPage {
   chamarBarbearia(email: string, nome: string, cep:string) {
     this.router.navigateByUrl('/chamar-barbearia', {
       replaceUrl: true,
-      state: { barber: { nome, email, cep } }
+      state: { barbearia: { nome, email, cep } }
     });
   }
 

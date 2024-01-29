@@ -53,9 +53,6 @@ export class EditarContaBarbeiroPage implements OnInit {
     return this.credentials.get('especialidade_tipo_cabelo');
   }
   
-  get endereco() {
-    return this.credentials.get('endereco');
-  }
   
   get nome() {
     return this.credentials.get('nome');

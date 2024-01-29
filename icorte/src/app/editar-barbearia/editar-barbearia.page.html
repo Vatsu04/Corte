@@ -1,13 +1,100 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>editar_barbearia</ion-title>
+    <ion-title>Editar Barbeiro</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editar_barbearia</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <form [formGroup]="credentials">
+
+
+   
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="password" placeholder="Senha Antiga" formControlName="oldPassword"></ion-input>
+      <ion-note slot="error" *ngIf="(oldPassword?.dirty || oldPassword?.touched) && oldPassword?.errors">Senha invalido!</ion-note>
+
+</ion-item>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="password" placeholder="Senha Nova" formControlName="newPassword"></ion-input>
+        <ion-note slot="error" *ngIf="(newPassword?.dirty || newPassword?.touched) && newPassword?.errors">Senha invalido!</ion-note>
+
+
+    </ion-item>
+
+
+  
+ 
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome invalido!</ion-note>
+
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="text" placeholder="Local de Trabalho / Endereço" formControlName="endereco"></ion-input>
+      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Endereco invalido!</ion-note>
+
+    </ion-item>
+    <h2>Especialidade para Tipo de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tipo_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Crespo"></ion-radio>
+            <ion-label>Crespo</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Ondulado"></ion-radio>
+            <ion-label>Ondulado</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Liso"></ion-radio>
+            <ion-label>Liso</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tipo_cabelo?.dirty || especialidade_tipo_cabelo?.touched) && especialidade_tipo_cabelo?.errors">
+        Tipo inválido!
+      </ion-note>
+    </ion-radio-group>
+    
+    <h2>Especialidade para Tamanho de Cabelo</h2>
+    <ion-radio-group formControlName="especialidade_tamanho_cabelo" class="radio-group-horizontal">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Curto"></ion-radio>
+            <ion-label>Curto</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Médio"></ion-radio>
+            <ion-label>Médio</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-item lines="none">
+            <ion-radio value="Longo"></ion-radio>
+            <ion-label >Longo</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-note slot="error" *ngIf="(especialidade_tamanho_cabelo?.dirty || especialidade_tamanho_cabelo?.touched) && especialidade_tamanho_cabelo?.errors">
+        Tamanho inválido!
+      </ion-note>
+    </ion-radio-group>
+ 
+      
+      <ion-button color="red" expand="full" type="button" class="button1"  [disabled]="!credentials.valid">Editar conta</ion-button>
+      <br>
+      <ion-button color="red" class="back" expand="full" routerLink="/menu-barbearia">Voltar</ion-button>
+      
+  
+  
+    </form>
+  </ion-content>

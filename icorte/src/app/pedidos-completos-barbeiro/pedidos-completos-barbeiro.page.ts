@@ -155,4 +155,7 @@ if (this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf) { // pedidos recebe os 
   return Promise.resolve(); // Resolve the promise when the function completes
 
 }
+
+
+
 }

@@ -188,6 +188,18 @@ export class AuthService {
     }
   }
 
+  async editBarberShopProfile(uid: string, updatedProfile: any): Promise<boolean> {
+    try {
+      const userDocRef = this.firestore.doc(`barberShops/${uid}`); // Editar os dados na base de Dados
+      await userDocRef.update(updatedProfile);
+  
+      return true;
+    } catch (error) {
+      console.error('Error editing user profile:', error);
+      return false;
+    }
+  }
+
   async changeUserPassword(email: string, oldPassword: string, newPassword: string): Promise<boolean> {
     try {
       const user = await this.auth.signInWithEmailAndPassword(email, oldPassword);

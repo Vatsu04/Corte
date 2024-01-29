@@ -94,6 +94,10 @@ const routes: Routes = [
   },  {
     path: 'chamar-barbearia',
     loadChildren: () => import('./chamar-barbearia/chamar-barbearia.module').then( m => m.ChamarBarbeariaPageModule)
+  },
+  {
+    path: 'pedidos-completos-barbearia',
+    loadChildren: () => import('./pedidos-completos-barbearia/pedidos-completos-barbearia.module').then( m => m.PedidosCompletosBarbeariaPageModule)
   }
 
 
