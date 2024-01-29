@@ -50,15 +50,16 @@ ion-radio {
     border-color: #DEAD04;
   }
 
-ion-button{
+  ion-button{
     color: #DEAD04;
     border-radius: 13px;
     border: 2px solid #DEAD04;
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
-    width: 335px;
-  margin-left: 7px;
+    width: 93%;
+   margin-left: 4%;
+   margin-right: 3%;
 }
 .button1{
     color: black;
@@ -67,5 +68,8 @@ ion-button{
 .back{
     border: 2px #FF0000 solid;
     color: #ff0000 ;
-    margin-top: 12px;
+    width: 60vw;
+    margin-top: 8vh;
+    margin-left: 20%;
+
 }

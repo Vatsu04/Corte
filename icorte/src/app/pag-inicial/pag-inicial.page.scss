@@ -2,21 +2,20 @@ ion-content{
     text-align: center;
 }
 ion-button{
-    
     color: #DEAD04;
-    border-radius: 15px;
+    border-radius: 13px;
     border: 2px solid #DEAD04;
     background-color: black;
     font-family:fantasy ;
     font-size: 19px;
-    width: 350px;
-    
-    
+    width: 92%;
+   margin-left: 2%;
 }
 .button1{
     color: black;
     background-color: #DEAD04;
 }
+
 h1{
     display: flex;
     flex-direction: column;
