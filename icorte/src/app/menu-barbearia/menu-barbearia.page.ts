@@ -30,6 +30,7 @@ export class MenuBarbeariaPage implements OnInit {
   async ngOnInit() {
     await this.listarBanco();
     console.log(this.barbearias[0].nome)
+    console.log(this.barbearias[0].email)
   }
 
 
@@ -50,7 +51,7 @@ export class MenuBarbeariaPage implements OnInit {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
         this.barbearias = [{ 
           nome: userDoc.data()['nome'], 
-          email: userDoc.data()['emaiL'],
+          email: userDoc.data()['email'],
           especialidade_tamanho_cabelo: userDoc.data()['especialidade_tamanho_cabelo'],
           especialidade_tipo_cabelo: userDoc.data()['especialidade_tipo_cabelo'],
           endereco: userDoc.data()['endereco'],
