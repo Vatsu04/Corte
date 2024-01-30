@@ -125,12 +125,7 @@ export class EditarContaBarbeiroPage implements OnInit {
       // ...
     });
 
-    updateEmail(user, email).then(() => {
-      // Update successful.
-    }).catch((error) => {
-      // An error ocurred
-      // ...
-    });
+  
   }
 
     

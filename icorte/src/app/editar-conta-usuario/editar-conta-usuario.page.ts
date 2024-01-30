@@ -113,13 +113,7 @@ const user:any = this.auth.currentUser;
       // ...
     });
  
-    updateEmail(user, email).then(() => {
-      // Email updated!
-      // ...
-    }).catch((error) => {
-      // An error occurred
-      // ...
-    });
+
 
 
 
