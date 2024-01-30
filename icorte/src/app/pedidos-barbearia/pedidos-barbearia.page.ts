@@ -25,7 +25,9 @@ export class PedidosBarbeariaPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.listarBanco();
+    this.listarChamados();
   }
 
   get preco() {
@@ -62,7 +64,8 @@ export class PedidosBarbeariaPage implements OnInit {
       hora: doc.data()['hora'],
       data: doc.data()['data'],
       local: doc.data()['local'], 
-      preco: doc.data()['preco'],
+      nomeBarbearia: doc.data()['nomeBarbearia'],
+      emailBarbearia: doc.data()['nomeBarbearia'],
       imageUrl: doc.data()['imageUrl'] }]
     });
   
@@ -71,7 +74,10 @@ export class PedidosBarbeariaPage implements OnInit {
     for (let i = 0; i < this.teste.length; i++) {
 
       if(this.teste[i].cep === this.barbearias[0].cep){
+        console.log(this.barbearias[0].cep)
+        console.log(this.teste[i].cep)
         this.pedidos[i] = this.teste[i];
+        console.log(this.pedidos[i])
       }
     }
     }
@@ -86,9 +92,9 @@ export class PedidosBarbeariaPage implements OnInit {
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
         this.barbearias = [{ nome: userDoc.data()['nome'],
-         email: userDoc.data()['emaiL'], 
+         email: userDoc.data()['email'], 
          
-         cep: userDoc.data()['cpf']  }];
+         cep: userDoc.data()['cep']  }];
        
       } else {
         console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');

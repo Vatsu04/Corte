@@ -104,7 +104,7 @@ export class ChamarBarbeariaPage implements OnInit {
 
   }
   }
-  
+
   if(this.local?.value === "Moradia do Cliente"){   
     const chamado = {
       corteAtual: this.imgSrc_,
@@ -126,7 +126,7 @@ export class ChamarBarbeariaPage implements OnInit {
       await setDoc(document, chamado);
       console.log('Chamado added successfully');
       const toast = await this.toastController.create({
-        message: 'Chamado enviado para o barbeiro',
+        message: 'Chamado enviado para a barbearia',
         duration: 2000,
         color: 'danger',
         position: 'top'

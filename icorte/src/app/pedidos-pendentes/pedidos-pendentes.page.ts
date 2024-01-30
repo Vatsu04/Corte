@@ -108,7 +108,7 @@ export class PedidosPendentesPage implements OnInit {
         console.log(this.usuarios[0]?.nome);
       console.log(this.usuarios[0]?.email);
       } else {
-        this.router.navigateByUrl('/tab3', {replaceUrl:true});
+        this.router.navigateByUrl('/', {replaceUrl:true});
       }
     } else {
       console.error('User UID not available');

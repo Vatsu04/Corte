@@ -44,9 +44,6 @@ export class EditarBarbeariaPage implements OnInit {
     return this.credentials.get('email');
   }
   
-  get oldPassword() {
-    return this.credentials.get('oldPassword');
-  }
   
   get newPassword() {
     return this.credentials.get('newPassword');
