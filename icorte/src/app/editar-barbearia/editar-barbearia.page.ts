@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class EditarBarbeariaPage implements OnInit {
   credentials: FormGroup = this.fb.group({
   
-    oldPassword: ['', [Validators.required, Validators.minLength(6)]],
+
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
     especialidade_tipo_cabelo: ['', [Validators.required]],
@@ -68,20 +68,38 @@ export class EditarBarbeariaPage implements OnInit {
     return this.credentials.get('nome');
   }
 
+
+
+  async editarPerfil(perfilAtualizado: any) {
+    this.editBarberShopProfile(perfilAtualizado);
+    this.editBarberShopPassword(perfilAtualizado);
+
+   /*  if (success) {
+      this.presentToast('User profile updated successfully');
+
+    } else {
+      this.presentToast('Failed to update user profile');
+    } */
+
+    this.presentToast("Perfil editado");
+
+    this.returnToMenu();
+  }
+
   async editBarberShopProfile(updatedProfile: any) {
     const uid = await this.authService.getCurrentUserUID();
 
     if (uid) {
       const userProfile = {
       
-        local_trabalho: updatedProfile.local_trabalho,
+        endereco: updatedProfile.endereco,
         nome: updatedProfile.nome,
-        email: updatedProfile.email,
-        especialidades: updatedProfile.especialidades,
-        data_nascimento: updatedProfile.data_nascimento
+       
+        especialidade_tamanho_cabelo:  updatedProfile.especialidade_tamanho_cabelo,
+        especialidade_tipo_cabelo: updatedProfile.especialidade_tipo_cabelo,
       };
 
-      const success = await this.authService.editBarberProfile(uid, userProfile);
+      const success = await this.authService.editBarberShopProfile(uid, userProfile);
 
       if (success) {
         console.log('User profile updated successfully');
@@ -93,11 +111,11 @@ export class EditarBarbeariaPage implements OnInit {
   }
 
 
-  async editBarberPassword(updatedProfile: any) {
+  async editBarberShopPassword(updatedProfile: any) {
     const email = updatedProfile.email;
     const oldPassword = updatedProfile.oldPassword;
     const newPassword = updatedProfile.newPassword;
-
+  
    
     const user:any = this.auth.currentUser;
 

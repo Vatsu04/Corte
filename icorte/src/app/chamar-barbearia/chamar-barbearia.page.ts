@@ -39,6 +39,9 @@ export class ChamarBarbeariaPage implements OnInit {
   isImg_: boolean=false;
   images_:any = [];
   barbearia: any = { nome: '', email: '', cep:'' };
+
+
+
   constructor(
     private fb: FormBuilder,
     private firestore: Firestore,
@@ -101,6 +104,7 @@ export class ChamarBarbeariaPage implements OnInit {
 
   }
   }
+  
   if(this.local?.value === "Moradia do Cliente"){   
     const chamado = {
       corteAtual: this.imgSrc_,
@@ -320,6 +324,7 @@ export class ChamarBarbeariaPage implements OnInit {
       console.error('User UID not available');
     }
   }
+
   hideShow(){
     document.getElementById('cadImg')?.click()
   }

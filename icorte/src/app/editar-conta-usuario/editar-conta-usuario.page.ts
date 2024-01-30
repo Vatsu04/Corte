@@ -15,7 +15,7 @@ export class EditarContaUsuarioPage implements OnInit {
   editedUser: any = [];
   credentials: FormGroup = this.fb.group({
 
-    oldPassword: ['', [Validators.required, Validators.minLength(6)]],
+
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
     endereco: ['', [Validators.required, Validators.minLength(10)]],
     tipo_cabelo:  ['', Validators.required],
@@ -87,7 +87,7 @@ export class EditarContaUsuarioPage implements OnInit {
         tipo_cabelo: updatedProfile.tipo_cabelo,
         endereco: updatedProfile.endereco,
         nome: updatedProfile.nome,
-        email: updatedProfile.email,
+     
       };
 
       return this.authService.editUserProfile(uid, userProfile);

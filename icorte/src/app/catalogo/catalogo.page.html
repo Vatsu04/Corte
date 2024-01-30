@@ -69,8 +69,8 @@
           <ion-card-content>
             <p>Email: {{ barbearia.email }}</p>
             <p>Especialidade Tamanho de Cabelo: {{ barbearia.especialidade_tamanho_cabelo }}<br> Especialidade Tipo de Cabelo: {{barbearia.especialidade_tipo_cabelo}}</p>
-            <p>Local de Trabalho: {{ barbearia.local_trabalho }}</p>
-            <p >Avaliação: {{  calculateAverageAvaliacao(barbearia.cpf)  }}</p>
+            <p>Local de Trabalho: {{ barbearia.endereco }}</p>
+            <p >Avaliação: {{  calculateAverageAvaliacaoBarbeiria(barbearia.cep)  }}</p>
 
             <ion-button id="chamar" color="red" (click)="chamarBarbearia(barbearia.email, barbearia.nome, barbearia.cep)">Chamar</ion-button>
           </ion-card-content>

@@ -14,8 +14,7 @@ export class EditarContaBarbeiroPage implements OnInit {
 
   editedUser: any = [];
   credentials: FormGroup = this.fb.group({
-  
-    oldPassword: ['', [Validators.required, Validators.minLength(6)]],
+
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
     especialidade_tipo_cabelo: ['', [Validators.required]],
@@ -93,8 +92,8 @@ export class EditarContaBarbeiroPage implements OnInit {
       
         local_trabalho: updatedProfile.local_trabalho,
         nome: updatedProfile.nome,
-        email: updatedProfile.email,
-        especialidades: updatedProfile.especialidades,
+        especialidade_tamanho_cabelo:  updatedProfile.especialidade_tamanho_cabelo,
+        especialidade_tipo_cabelo: updatedProfile.especialidade_tipo_cabelo,
         
       };
 

@@ -38,6 +38,7 @@ export class CatalogoPage {
     this.barber = history.state.barber || { nome: '', email: '', cpf: '' };
     this.barbearia = history.state.barbearia || {nome:'', email:'', cep:''};
     await this.listarBanco();
+    await this.listarBarbearias();
     this.listarPedidosFeitos();
   }
 
@@ -61,7 +62,7 @@ export class CatalogoPage {
   }
 
   async listarBarbearias() {
-    const querySnapshot = await getDocs(collection(this.firestore, 'barbers'));
+    const querySnapshot = await getDocs(collection(this.firestore, 'barberShops'));
     this.originalBarbearias = querySnapshot.docs.map((doc) => ({
       nome: doc.data()['nome'],
       email: doc.data()['email'],
