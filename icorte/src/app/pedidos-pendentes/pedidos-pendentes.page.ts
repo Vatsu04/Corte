@@ -89,7 +89,7 @@ export class PedidosPendentesPage implements OnInit {
     
     for (let i = 0; i < this.teste.length; i++) {
     if(this.teste[i].cpfCliente === this.usuarios.cpf){
-      this.pedidosBarbearia[i] = this.teste[i];
+      this.pedidosBarbearia.push(this.teste[i]);
     }
   }
   }

@@ -93,7 +93,7 @@ export class PedidosPage implements OnInit {
       console.log(this.teste[i].cpfBarbeiro)
       console.log(this.barbeiros[0].cpf)
       if(this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf){
-        this.pedidos[i] = this.teste[i];
+        this.pedidos.push(this.teste[i]);
       }
     }
     }

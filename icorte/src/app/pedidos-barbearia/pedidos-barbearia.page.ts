@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -25,9 +26,14 @@ export class PedidosBarbeariaPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.initializePage();
+    
+  }
+
+  async initializePage(){
     await this.listarBanco();
-    this.listarChamados();
+    await this.listarChamados();
   }
 
   get preco() {
@@ -47,7 +53,7 @@ export class PedidosBarbeariaPage implements OnInit {
 
 
   async listarChamados() {
-    const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
+    const querySnapshot = await getDocs(collection(this.firestore, "chamados_barbearia"));
     this.teste = []; // Clear the array before populating it
 
   
@@ -75,9 +81,10 @@ export class PedidosBarbeariaPage implements OnInit {
 
       if(this.teste[i].cep === this.barbearias[0].cep){
         console.log(this.barbearias[0].cep)
-        console.log(this.teste[i].cep)
-        this.pedidos[i] = this.teste[i];
+        console.log(this.teste[i].imageUrl)
         
+        this.pedidos.push(this.teste[i]);
+        console.log(this.teste[i].imageUrl)
       }
     }
     }

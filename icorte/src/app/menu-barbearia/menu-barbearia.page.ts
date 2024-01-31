@@ -130,7 +130,7 @@ if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do
       if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
               console.log(this.teste.cep);
               console.log(this.barbearias[0].cep);
-              this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+              this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
             }
           }
 

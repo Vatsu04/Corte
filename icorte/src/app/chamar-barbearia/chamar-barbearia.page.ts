@@ -217,7 +217,7 @@ export class ChamarBarbeariaPage implements OnInit {
     });
     for(i;i< this.teste.length;i++){
       if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
-        this.chamados_feitos[i] = this.teste[i]
+        this.chamados_feitos.push(this.teste[i]);
       }
     }
     
