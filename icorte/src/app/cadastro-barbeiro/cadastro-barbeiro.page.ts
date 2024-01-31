@@ -88,9 +88,18 @@ export class CadastroBarbeiroPage implements OnInit {
     }
   }
 
-
+  
   ngOnInit() {
-
+    this.credentials = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    data_nascimento: ['', [Validators.required, Validators.minLength(6)]],
+    especialidade_tipo_cabelo: ['', [Validators.required]],
+    especialidade_tamanho_cabelo: ['', [Validators.required]],
+    local_trabalho: ['', [Validators.required, Validators.minLength(6)]],
+    nome: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    cpf: ['', [Validators.required, Validators.minLength(11)]],
+    });
   }
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({

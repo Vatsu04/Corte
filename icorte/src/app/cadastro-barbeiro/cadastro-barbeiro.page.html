@@ -5,20 +5,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="credentials">
+  <form [formGroup]="credentials" >
 
 
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
       <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email invalido!</ion-note>
+
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Senha" formControlName="Password"></ion-input>
+      <ion-input type="password" placeholder="Senha" formControlName="oldPassword"></ion-input>
       <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
     </ion-item>
-
-
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input type="cpf" placeholder="CPF" formControlName="cpf" maxLength="14" appCpfMask></ion-input>
         <ion-note slot="error" *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors">CPF inválido!</ion-note>
@@ -38,7 +37,6 @@
       <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
 
     </ion-item>
-    
     <h2>Especialidade para Tipo de Cabelo</h2>
     <ion-radio-group formControlName="especialidade_tipo_cabelo" class="radio-group-horizontal">
       <ion-row>
