@@ -38,7 +38,7 @@ export class ChamadoPage implements OnInit {
   imgSrc_:any;
   isImg_: boolean=false;
   images_:any = [];
-  barber: any = { nome: '', email: '', cpf:'' };
+  barber: any = { nome: '', email: '', cpf:'', endereco:'' };
   constructor(
     private fb: FormBuilder,
     private firestore: Firestore,
@@ -51,7 +51,7 @@ export class ChamadoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.barber = history.state.barber || { nome: '', email: '', cpf:'' };
+    this.barber = history.state.barber || { nome: '', email: '', cpf:'' , endereco:''};
     console.log(this.barber.nome);
     console.log(this.barber.email);
     console.log(this.barber.cpf);
@@ -130,6 +130,7 @@ export class ChamadoPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);
@@ -145,7 +146,7 @@ export class ChamadoPage implements OnInit {
       emailBarbeiro: this.barber.email,
       cpfBarbeiro: this.barber.cpf,
       descricao: this.descricao?.value,
-      local: this.local?.value,
+      local: this.barber.endereco,
       data: this.data?.value,
       hora: this.hora?.value
     };
@@ -161,6 +162,7 @@ export class ChamadoPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);
@@ -248,7 +250,7 @@ export class ChamadoPage implements OnInit {
 
       for(i;i< this.teste.length;i++){
         if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
-          this.pedidos_aceitos[i] = this.teste[i]
+          this.pedidos_aceitos.push(this.teste[i]);
         }
       }
 

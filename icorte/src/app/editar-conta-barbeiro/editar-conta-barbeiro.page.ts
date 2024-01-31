@@ -14,8 +14,7 @@ export class EditarContaBarbeiroPage implements OnInit {
 
   editedUser: any = [];
   credentials: FormGroup = this.fb.group({
-  
-    oldPassword: ['', [Validators.required, Validators.minLength(6)]],
+
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
     nome: ['', [Validators.required, Validators.minLength(10)]],
     especialidade_tipo_cabelo: ['', [Validators.required]],
@@ -41,9 +40,8 @@ export class EditarContaBarbeiroPage implements OnInit {
     return this.credentials.get('email');
   }
   
-  get oldPassword() {
-    return this.credentials.get('oldPassword');
-  }
+
+  
   
   get newPassword() {
     return this.credentials.get('newPassword');
@@ -93,8 +91,8 @@ export class EditarContaBarbeiroPage implements OnInit {
       
         local_trabalho: updatedProfile.local_trabalho,
         nome: updatedProfile.nome,
-        email: updatedProfile.email,
-        especialidades: updatedProfile.especialidades,
+        especialidade_tamanho_cabelo:  updatedProfile.especialidade_tamanho_cabelo,
+        especialidade_tipo_cabelo: updatedProfile.especialidade_tipo_cabelo,
         
       };
 
@@ -125,12 +123,7 @@ export class EditarContaBarbeiroPage implements OnInit {
       // ...
     });
 
-    updateEmail(user, email).then(() => {
-      // Update successful.
-    }).catch((error) => {
-      // An error ocurred
-      // ...
-    });
+  
   }
 
     
@@ -144,7 +137,7 @@ export class EditarContaBarbeiroPage implements OnInit {
       message,
       duration: 3000,
       position: 'bottom',
-      color: 'dark', // You can change the color based on your preference
+      color: 'danger', // You can change the color based on your preference
     });
 
     toast.present();

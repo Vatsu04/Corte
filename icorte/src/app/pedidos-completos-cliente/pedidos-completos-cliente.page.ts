@@ -100,7 +100,7 @@ export class PedidosCompletosClientePage implements OnInit {
       console.log(this.teste[i].cpfCliente);
       console.log(this.usuarios[0].cpf);
     if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
-      this.pedidos[i] = this.teste[i];
+      this.pedidos.push(this.teste[i]);
     }
   }
   }

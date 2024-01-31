@@ -42,7 +42,7 @@ export class PedidosPendentesPage implements OnInit {
     
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
     querySnapshot.forEach((doc) => {
-      
+      this.teste = [];
       this.teste = [...this.teste, { 
       id: doc.id,
       nomeCliente: doc.data()['nomeCliente'], 
@@ -58,10 +58,13 @@ export class PedidosPendentesPage implements OnInit {
       hora: doc.data()['hora'],
       imageUrl: doc.data()['imageUrl'] }]
     });
+    console.log(this.teste.length)
     
     for (let i = 0; i < this.teste.length; i++) {
-    if(this.teste[i].cpfCliente === this.usuarios.cpf){
-      this.pedidos[i] = this.teste[i];
+      console.log(this.teste[i].cpfCliente);
+      console.log(this.usuarios[0].cpf)
+    if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
+      this.pedidos.push(this.teste[i]);
     }
   }
   }
@@ -89,7 +92,7 @@ export class PedidosPendentesPage implements OnInit {
     
     for (let i = 0; i < this.teste.length; i++) {
     if(this.teste[i].cpfCliente === this.usuarios.cpf){
-      this.pedidosBarbearia[i] = this.teste[i];
+      this.pedidosBarbearia.push(this.teste[i]);
     }
   }
   }
@@ -108,7 +111,7 @@ export class PedidosPendentesPage implements OnInit {
         console.log(this.usuarios[0]?.nome);
       console.log(this.usuarios[0]?.email);
       } else {
-        this.router.navigateByUrl('/tab3', {replaceUrl:true});
+        this.router.navigateByUrl('/', {replaceUrl:true});
       }
     } else {
       console.error('User UID not available');
@@ -171,7 +174,7 @@ export class PedidosPendentesPage implements OnInit {
       const toast = await this.toastController.create({
         message: 'Pedido Completo!',
         duration: 2000,
-        color: 'green',
+        color: 'danger',
         position: 'top'
       });
       toast.present();
@@ -182,6 +185,7 @@ export class PedidosPendentesPage implements OnInit {
 
       
       this.cancelarPedido(isOpen, id)
+      this.router.navigateByUrl('/', {replaceUrl:true});
     }
     
   } 
@@ -246,7 +250,7 @@ export class PedidosPendentesPage implements OnInit {
       const toast = await this.toastController.create({
         message: 'Pedido Completo!',
         duration: 2000,
-        color: 'green',
+        color: 'danger',
         position: 'top'
       });
       toast.present();
@@ -257,6 +261,7 @@ export class PedidosPendentesPage implements OnInit {
 
       
       this.cancelarPedido(isOpen, id)
+      this.router.navigateByUrl('/', {replaceUrl:true});
     }
   }
 

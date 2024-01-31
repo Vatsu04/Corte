@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,6 +27,13 @@ export class PedidosBarbeariaPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initializePage();
+    
+  }
+
+  async initializePage(){
+    await this.listarBanco();
+    await this.listarChamados();
   }
 
   get preco() {
@@ -62,7 +70,8 @@ export class PedidosBarbeariaPage implements OnInit {
       hora: doc.data()['hora'],
       data: doc.data()['data'],
       local: doc.data()['local'], 
-      preco: doc.data()['preco'],
+      nomeBarbearia: doc.data()['nomeBarbearia'],
+      emailBarbearia: doc.data()['nomeBarbearia'],
       imageUrl: doc.data()['imageUrl'] }]
     });
   
@@ -71,7 +80,11 @@ export class PedidosBarbeariaPage implements OnInit {
     for (let i = 0; i < this.teste.length; i++) {
 
       if(this.teste[i].cep === this.barbearias[0].cep){
-        this.pedidos[i] = this.teste[i];
+        console.log(this.barbearias[0].cep)
+        console.log(this.teste[i].imageUrl)
+        
+        this.pedidos.push(this.teste[i]);
+        console.log(this.teste[i].imageUrl)
       }
     }
     }
@@ -86,9 +99,9 @@ export class PedidosBarbeariaPage implements OnInit {
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
         this.barbearias = [{ nome: userDoc.data()['nome'],
-         email: userDoc.data()['emaiL'], 
+         email: userDoc.data()['email'], 
          
-         cep: userDoc.data()['cpf']  }];
+         cep: userDoc.data()['cep']  }];
        
       } else {
         console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
@@ -113,8 +126,8 @@ export class PedidosBarbeariaPage implements OnInit {
     await this.listarBanco();
   
     // Reload the current route to refresh the page
-    this.router.navigateByUrl('/tab3', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/pedidos']);
+    this.router.navigateByUrl('/menu-barbearia', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/pedidos-barbearia']);
     });
   }
   
@@ -157,13 +170,14 @@ export class PedidosBarbeariaPage implements OnInit {
      data: data,
      corteAtual: foto2,
      imageUrl: foto,
-     cepBarbearia: cep,
+     cep: cep,
      nomeBarbearia: _nomeBarbearia,
      emailBarbearia: _emailBarbearia,
      nomeCliente: _nomeCliente,
      emailCliente: _emailCliente,
      cpfCliente: cpf,
      local: _local,
+     preco: credentials.preco
 
    };
  
@@ -176,7 +190,7 @@ export class PedidosBarbeariaPage implements OnInit {
      const toast = await this.toastController.create({
        message: 'Pedido aceito.',
        duration: 2000,
-       color: 'green',
+       color: 'danger',
        position: 'top'
      });
      toast.present();

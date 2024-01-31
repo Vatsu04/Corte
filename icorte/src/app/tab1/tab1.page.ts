@@ -144,7 +144,7 @@ export class Tab1Page {
 
 if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
        
-        this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+     this.pedidos_feitos.push(this.teste[i]);; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
    
@@ -174,12 +174,12 @@ if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os va
       imageUrl: doc.data()['imageUrl'] }]
     });
   
-
+    
    
     for (let i = 0; i < this.teste.length; i++) {
 
       if(this.teste[i].cpfBarbeiro === this.usuarios[0].cpf){
-        this.chamados[i] = this.teste[i];
+        this.chamados.push(this.teste[i]);
       }
     }
     }

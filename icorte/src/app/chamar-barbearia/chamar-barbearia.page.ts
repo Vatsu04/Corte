@@ -38,7 +38,10 @@ export class ChamarBarbeariaPage implements OnInit {
   imgSrc_:any;
   isImg_: boolean=false;
   images_:any = [];
-  barbearia: any = { nome: '', email: '', cep:'' };
+  barbearia: any = { nome: '', email: '', cep:'', endereco:'' };
+
+
+
   constructor(
     private fb: FormBuilder,
     private firestore: Firestore,
@@ -51,10 +54,11 @@ export class ChamarBarbeariaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.barbearia = history.state.barbearia || {nome:'', email:'', cep:''};
+    this.barbearia = history.state.barbearia || {nome:'', email:'', cep:'', endereco: ''};
     console.log(this.barbearia.nome);
     console.log(this.barbearia.email);
     console.log(this.barbearia.cep);
+    console.log(this.barbearia.endereco);
     this.listarBanco();
   }
 
@@ -101,6 +105,7 @@ export class ChamarBarbeariaPage implements OnInit {
 
   }
   }
+
   if(this.local?.value === "Moradia do Cliente"){   
     const chamado = {
       corteAtual: this.imgSrc_,
@@ -122,12 +127,13 @@ export class ChamarBarbeariaPage implements OnInit {
       await setDoc(document, chamado);
       console.log('Chamado added successfully');
       const toast = await this.toastController.create({
-        message: 'Chamado enviado para o barbeiro',
+        message: 'Chamado enviado para a barbearia',
         duration: 2000,
         color: 'danger',
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);
@@ -141,9 +147,9 @@ export class ChamarBarbeariaPage implements OnInit {
       cpfCliente: this.usuarios[0].cpf,
       nomeBarbearia: this.barbearia.nome,
       emailBarbearia: this.barbearia.email,
-      cep: this.barbearia.cpf,
+      cep: this.barbearia.cep,
       descricao: this.descricao?.value,
-      local: this.local?.value,
+      local: this.barbearia.endereco,
       data: this.data?.value,
       hora: this.hora?.value
     };
@@ -159,6 +165,7 @@ export class ChamarBarbeariaPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);
@@ -210,7 +217,7 @@ export class ChamarBarbeariaPage implements OnInit {
     });
     for(i;i< this.teste.length;i++){
       if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
-        this.chamados_feitos[i] = this.teste[i]
+        this.chamados_feitos.push(this.teste[i]);
       }
     }
     
@@ -320,6 +327,7 @@ export class ChamarBarbeariaPage implements OnInit {
       console.error('User UID not available');
     }
   }
+
   hideShow(){
     document.getElementById('cadImg')?.click()
   }

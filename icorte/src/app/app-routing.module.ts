@@ -31,10 +31,7 @@ const routes: Routes = [
     path: 'pedidos',
     loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
   },
-  {
-    path: 'tab2',
-    loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
-  },
+
   {
     path: 'tab3',
     loadChildren: () => import('./tab3/tab3.module').then( m => m.Tab3PageModule)
@@ -84,14 +81,12 @@ const routes: Routes = [
     path: 'editar-barbearia',
     loadChildren: () => import('./editar-barbearia/editar-barbearia.module').then( m => m.EditarBarbeariaPageModule)
   },
-  {
-    path: 'avaliar-barbearia',
-    loadChildren: () => import('./avaliar-barbearia/avaliar-barbearia.module').then( m => m.AvaliarBarbeariaPageModule)
-  },
+
   {
     path: 'pedidos-barbearia',
     loadChildren: () => import('./pedidos-barbearia/pedidos-barbearia.module').then( m => m.PedidosBarbeariaPageModule)
-  },  {
+  },
+  {
     path: 'chamar-barbearia',
     loadChildren: () => import('./chamar-barbearia/chamar-barbearia.module').then( m => m.ChamarBarbeariaPageModule)
   },

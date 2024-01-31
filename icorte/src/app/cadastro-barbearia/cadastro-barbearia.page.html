@@ -21,7 +21,7 @@
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="cep" placeholder="CEP" formControlName="cep"></ion-input>
+      <ion-input type="cep" placeholder="CEP" formControlName="cep" maxLength="9" appCepMask></ion-input>
       <ion-note slot="error" *ngIf="(cep?.dirty || cep?.touched) && cep?.errors" appCepMask>Senha invalido!</ion-note>
 
     </ion-item>

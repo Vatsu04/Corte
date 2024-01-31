@@ -108,4 +108,11 @@ export class CadastroBarbeiroPage implements OnInit {
     
 }
 
+
+
+  async returnTo(){
+    this.router.navigateByUrl('/', { replaceUrl: true });
+  }
+
+
 }

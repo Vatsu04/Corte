@@ -16,8 +16,8 @@ export class CatalogoPage {
   originalBarbearias: any[] = [];
   barbearias: any[] = [];
   usuarios: any = [{email:'', nome:'', foto:'', endereco:''}];
-  barber: any = { nome: '', email: '', cpf:'' };
-  barbearia: any = {nome: '', email: '', cep:''};
+  barber: any = { nome: '', email: '', cpf:'' , endereco:''};
+  barbearia: any = {nome: '', email: '', cep:'', endereco:''};
   teste:any = [];
   pedidos_feitos: any = [];
   filterForm: FormGroup;
@@ -36,8 +36,9 @@ export class CatalogoPage {
 
   async  ngOnInit() {
     this.barber = history.state.barber || { nome: '', email: '', cpf: '' };
-    this.barbearia = history.state.barbearia || {nome:'', email:'', cep:''};
+    this.barbearia = history.state.barbearia || {nome:'', email:'', cep:'', endereco:''};
     await this.listarBanco();
+    await this.listarBarbearias();
     this.listarPedidosFeitos();
   }
 
@@ -61,7 +62,7 @@ export class CatalogoPage {
   }
 
   async listarBarbearias() {
-    const querySnapshot = await getDocs(collection(this.firestore, 'barbers'));
+    const querySnapshot = await getDocs(collection(this.firestore, 'barberShops'));
     this.originalBarbearias = querySnapshot.docs.map((doc) => ({
       nome: doc.data()['nome'],
       email: doc.data()['email'],
@@ -79,17 +80,17 @@ export class CatalogoPage {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
-  chamarBarbeiro(email: string, nome: string, cpf:string) {
+  chamarBarbeiro(email: string, nome: string, cpf:string, endereco: string) {
     this.router.navigateByUrl('/chamado', {
       replaceUrl: true,
-      state: { barber: { nome, email, cpf } }
+      state: { barber: { nome, email, cpf, endereco } }
     });
   }
 
-  chamarBarbearia(email: string, nome: string, cep:string) {
+  chamarBarbearia(email: string, nome: string, cep:string, endereco: string) {
     this.router.navigateByUrl('/chamar-barbearia', {
       replaceUrl: true,
-      state: { barbearia: { nome, email, cep } }
+      state: { barbearia: { nome, email, cep, endereco } }
     });
   }
 
@@ -106,6 +107,7 @@ export class CatalogoPage {
       }
       return true;
     });
+    this.filterBarberShops();
   }
 
 
@@ -142,13 +144,11 @@ export class CatalogoPage {
       });
     });
   
-console.log(this.pedidos_feitos)
-
-   
+    console.log(this.pedidos_feitos)
   }
 
 
-    calculateAverageAvaliacao(cpfBarbeiro: string) {
+  calculateAverageAvaliacao(cpfBarbeiro: string) {
     
     let sum = 0;
     let count = 0;
