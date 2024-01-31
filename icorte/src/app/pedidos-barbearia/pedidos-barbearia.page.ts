@@ -77,7 +77,7 @@ export class PedidosBarbeariaPage implements OnInit {
         console.log(this.barbearias[0].cep)
         console.log(this.teste[i].cep)
         this.pedidos[i] = this.teste[i];
-        console.log(this.pedidos[i])
+        
       }
     }
     }
@@ -163,7 +163,7 @@ export class PedidosBarbeariaPage implements OnInit {
      data: data,
      corteAtual: foto2,
      imageUrl: foto,
-     cepBarbearia: cep,
+     cep: cep,
      nomeBarbearia: _nomeBarbearia,
      emailBarbearia: _emailBarbearia,
      nomeCliente: _nomeCliente,

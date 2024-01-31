@@ -38,7 +38,7 @@ export class ChamadoPage implements OnInit {
   imgSrc_:any;
   isImg_: boolean=false;
   images_:any = [];
-  barber: any = { nome: '', email: '', cpf:'' };
+  barber: any = { nome: '', email: '', cpf:'', endereco:'' };
   constructor(
     private fb: FormBuilder,
     private firestore: Firestore,
@@ -130,6 +130,7 @@ export class ChamadoPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);
@@ -161,6 +162,7 @@ export class ChamadoPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);

@@ -38,7 +38,7 @@ export class ChamarBarbeariaPage implements OnInit {
   imgSrc_:any;
   isImg_: boolean=false;
   images_:any = [];
-  barbearia: any = { nome: '', email: '', cep:'' };
+  barbearia: any = { nome: '', email: '', cep:'', endereco:'' };
 
 
 
@@ -58,6 +58,7 @@ export class ChamarBarbeariaPage implements OnInit {
     console.log(this.barbearia.nome);
     console.log(this.barbearia.email);
     console.log(this.barbearia.cep);
+    console.log(this.barbearia.endereco);
     this.listarBanco();
   }
 
@@ -132,6 +133,7 @@ export class ChamarBarbeariaPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);
@@ -163,6 +165,7 @@ export class ChamarBarbeariaPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      this.router.navigate(['/tab1']);
       return;
     } catch (error) {
       console.error('Error adding chamado:', error);
