@@ -36,8 +36,9 @@ export class PedidosPendentesPage implements OnInit {
     await this.listarBanco();
     await this.listarPedidos();
     console.log(this.pedidos);
-    await this.listarPedidosBarbearia();
+    this.listarPedidosBarbearia();
     console.log(this.pedidos.id);
+    console.log(this.pedidoPago)
   }
 
   async listarPedidos() {
@@ -71,8 +72,9 @@ export class PedidosPendentesPage implements OnInit {
       console.log(this.teste[i].cpfCliente);
       console.log(this.usuarios[0].cpf)
     if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
-      
+      if(this.teste[i].nomeBarbeiro != null){
       this.pedidos.push(this.teste[i]);
+      }
     }
   }
   }
@@ -99,12 +101,14 @@ export class PedidosPendentesPage implements OnInit {
       imageUrl: doc.data()['imageUrl'] 
     });
   });
-    this.pedidos = [];
+   
     
-    for (let i = 0; i < this.teste.length; i++) {
+    for (let i = 0; i < this.testeBarbearia.length; i++) {
     if(this.testeBarbearia[i].cpfCliente === this.usuarios[0].cpf){
+      if(this.testeBarbearia[i].nomeBarbearia != null){
       this.pedidosBarbearia.push(this.testeBarbearia[i]);
     }
+  }
   }
   }
 
@@ -143,37 +147,44 @@ export class PedidosPendentesPage implements OnInit {
   }
 
 
-  async pagarPedido(isOpen: boolean){
+  async pagarPedido(){
     
     const toast = await this.toastController.create({
       message: 'Pedido Pago',
       duration: 2000,
-      color: 'blue',
+      color: 'danger',
       position: 'top'
     });
     toast.present();
     
-    this.pedidoPago = isOpen;
-  }
-  async pagarPedidoBarbearia(isOpen: boolean){
-    
-    const toast = await this.toastController.create({
-      message: 'Pedido Pago',
-      duration: 2000,
-      color: 'blue',
-      position: 'top'
-    });
-    toast.present();
-    
-    this.pedidoPagoBarbearia = isOpen;
+    this.pedidoPago = true;
+
+    console.log(this.pedidoPago)
   }
 
-  async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string,
-    _nomeBarbeiro: string, cpfCliente: string, _emailBarbeiro: string, hora:string, data:string,
+
+
+  async pagarPedidoBarbearia(){
+    
+    const toast = await this.toastController.create({
+      message: 'Pedido Pago',
+      duration: 2000,
+      color: 'danger',
+      position: 'top'
+    });
+    toast.present();
+    
+    this.pedidoPagoBarbearia = true;
+
+    console.log(this.pedidoPagoBarbearia)
+  }
+
+  async confirmarPedido(foto: string, _nomeCliente: string, _emailCliente: string, cpfCliente: string, 
+    _nomeBarbeiro: string, _emailBarbeiro: string, hora:string, data:string,
     _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){
    
-
-    if(this.pedidoPago != true){
+   console.log(this.pedidoPago)
+    if(!this.pedidoPago){
       const toast = await this.toastController.create({
         message: 'Pague o pedido antes de confirma-lo!',
         duration: 2000,
@@ -181,6 +192,7 @@ export class PedidosPendentesPage implements OnInit {
         position: 'top'
       });
       toast.present();
+      
     } else{
       const toast = await this.toastController.create({
         message: 'Pedido Completo!',

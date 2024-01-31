@@ -80,9 +80,10 @@ export class PedidosCompletosClientePage implements OnInit {
   async listarPedidos() {
     
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
+    this.teste = [];
     querySnapshot.forEach((doc) => {
       
-      this.teste = [...this.teste, { 
+      this.teste.push({ 
       id: doc.id,
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
@@ -93,9 +94,10 @@ export class PedidosCompletosClientePage implements OnInit {
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
-      imageUrl: doc.data()['imageUrl'] }]
+      imageUrl: doc.data()['imageUrl'] 
     });
-    
+  });
+    this.pedidos = []
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.teste[i].cpfCliente);
       console.log(this.usuarios[0].cpf);
@@ -104,6 +106,9 @@ export class PedidosCompletosClientePage implements OnInit {
     }
   }
   }
+
+
+  // FAZER AS FUNÇÕES PARA BARBEARIA
 
 
   get avaliacao(){
@@ -127,7 +132,7 @@ export class PedidosCompletosClientePage implements OnInit {
         console.log(this.usuarios[0]?.nome);
       console.log(this.usuarios[0]?.email);
       } else {
-        this.router.navigateByUrl('/tab3', {replaceUrl:true});
+        this.router.navigateByUrl('/', {replaceUrl:true});
       }
     } else {
       console.error('User UID not available');

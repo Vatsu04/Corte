@@ -70,7 +70,7 @@ export class PedidosPage implements OnInit {
   
     querySnapshot.forEach((doc) => {
       
-      this.teste = [...this.teste, { 
+      this.teste.push({ 
       id: doc.id,
       corteAtual: doc.data()['corteAtual'],
       nomeCliente: doc.data()['nomeCliente'], 
@@ -84,8 +84,9 @@ export class PedidosPage implements OnInit {
       data: doc.data()['data'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
-      imageUrl: doc.data()['imageUrl'] }]
+      imageUrl: doc.data()['imageUrl']
     });
+  });
   
     this.pedidos = []; // Initialize pedidos as an empty array
    
