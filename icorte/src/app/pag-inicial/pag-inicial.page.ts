@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pag-inicial',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagInicialPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    // private router: Router
+  ) {
+   
+   }
 
   ngOnInit() {
   }
 
+  /* async cadastroBarbeiro(){
+    this.router.navigateByUrl('/cadastro-barbeiro', { replaceUrl: true });
+  } */
 }

@@ -87,6 +87,8 @@ export class CadastroBarbeiroPage implements OnInit {
       this.showAlert('Registration failed', 'Please try again!');
     }
   }
+
+  
   ngOnInit() {
     this.credentials = this.fb.group({
     email: ['', [Validators.required, Validators.email]],

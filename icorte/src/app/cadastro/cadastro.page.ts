@@ -87,9 +87,9 @@ export class CadastroPage implements OnInit {
   }
  
 
-  async cadastroBarbeiro(){
+/*   async cadastroBarbeiro(){
     this.router.navigateByUrl('/cadastro-barbeiro', { replaceUrl: true });
-  }
+  } */
 
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({

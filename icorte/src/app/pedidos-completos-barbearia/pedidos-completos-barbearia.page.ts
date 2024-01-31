@@ -135,7 +135,7 @@ if (this.teste[i].cep === this.barbearias[0].cep) { // pedidos recebe os valores
   }
 
   async returnToMenu(){
-    this.router.navigateByUrl('/tab3', { replaceUrl: true });
+    this.router.navigateByUrl('/menu-barbearia', { replaceUrl: true });
   }
 
 }
