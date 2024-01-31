@@ -11,6 +11,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class PedidosPendentesPage implements OnInit {
   teste:any = [];
+  testeBarbearia:any = [];
   pedidos:any = [];
   pedidosBarbearia:any = [];
   isToastOpen:boolean = false;
@@ -35,15 +36,19 @@ export class PedidosPendentesPage implements OnInit {
     await this.listarBanco();
     await this.listarPedidos();
     console.log(this.pedidos);
+    await this.listarPedidosBarbearia();
     console.log(this.pedidos.id);
   }
 
   async listarPedidos() {
     
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
+    this.teste = []
     querySnapshot.forEach((doc) => {
-      this.teste = [];
-      this.teste = [...this.teste, { 
+        
+
+
+      this.teste.push({ 
       id: doc.id,
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
@@ -56,14 +61,17 @@ export class PedidosPendentesPage implements OnInit {
       preco: doc.data()['preco'],
       data: doc.data()['data'],
       hora: doc.data()['hora'],
-      imageUrl: doc.data()['imageUrl'] }]
+      imageUrl: doc.data()['imageUrl'] 
     });
+  });
     console.log(this.teste.length)
     
+    this.pedidos = [];
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.teste[i].cpfCliente);
       console.log(this.usuarios[0].cpf)
     if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
+      
       this.pedidos.push(this.teste[i]);
     }
   }
@@ -72,9 +80,10 @@ export class PedidosPendentesPage implements OnInit {
   async listarPedidosBarbearia() {
     
     const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
+    this.testeBarbearia = [];
     querySnapshot.forEach((doc) => {
       
-      this.teste = [...this.teste, { 
+      this.testeBarbearia.push({ 
       id: doc.id,
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
@@ -87,12 +96,14 @@ export class PedidosPendentesPage implements OnInit {
       preco: doc.data()['preco'],
       data: doc.data()['data'],
       hora: doc.data()['hora'],
-      imageUrl: doc.data()['imageUrl'] }]
+      imageUrl: doc.data()['imageUrl'] 
     });
+  });
+    this.pedidos = [];
     
     for (let i = 0; i < this.teste.length; i++) {
-    if(this.teste[i].cpfCliente === this.usuarios.cpf){
-      this.pedidosBarbearia.push(this.teste[i]);
+    if(this.testeBarbearia[i].cpfCliente === this.usuarios[0].cpf){
+      this.pedidosBarbearia.push(this.testeBarbearia[i]);
     }
   }
   }
