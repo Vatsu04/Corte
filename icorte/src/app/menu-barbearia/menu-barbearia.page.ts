@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { AvatarService } from '../services/avatar.service';
 import { AuthService } from '../services/auth.service';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { DocumentData, Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import { DocumentData, Firestore, collection, deleteDoc, doc, getDoc, getDocs } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -31,6 +31,8 @@ export class MenuBarbeariaPage implements OnInit {
     await this.listarBanco();
     console.log(this.barbearias[0].nome)
     console.log(this.barbearias[0].email)
+    this.listarPedidos()
+    this.listarPedidosFeitos();
   }
 
 
@@ -39,7 +41,30 @@ export class MenuBarbeariaPage implements OnInit {
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
-
+  async negarPedido(isOpen:boolean, id:string){
+    await deleteDoc(doc(this.firestore, "pedidos", id));
+    
+    
+    // Wait for a short time to allow Firebase to process the deletion
+    setTimeout(() => {
+      this.pedidos=[]
+      this.listarBanco()
+     }, 2000);
+  
+    // Reload the current route to refresh the page
+    this.router.navigateByUrl('/menu-barbearia', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/menu-barbearia']);
+    });
+  }
+  
+  async negar(isOpen:boolean, id:string){
+    this.negarPedido(isOpen, id);
+    const alert = await this.alertController.create({
+      header: 'Pedido cancelado',
+      message: '',
+      buttons: ['OK'],
+    });
+  }
 
   async listarBanco() {
     const userUID = await this.authService.getCurrentUserUID();
@@ -112,25 +137,25 @@ if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do
         local: doc.data()['local'],
         corteAtual: doc.data()['corteAtual'],
         descricao: doc.data()['descricao'],
-        nomeBarbeiro: doc.data()['nomeBarbeiro'],
-        emailBarbeiro: doc.data()['emailBarbeiro'],
-        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        nomeBarbearia: doc.data()['nomeBarbearia'],
+        emailBarbearia: doc.data()['emailBarbearia'],
+        cep: doc.data()['cep'],
         preco: doc.data()['preco'],
         hora: doc.data()['hora'],
         data: doc.data()['data']
       });
     });
-  
+    
     for (let i = 0; i < this.teste.length; i++) {
       
+      console.log(this.teste.length)
+      console.log(this.teste[i].cep);
+      console.log(this.barbearias[0].cep);
 
-      
-
-
-      if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
-              console.log(this.teste.cep);
-              console.log(this.barbearias[0].cep);
+      if (this.teste[i].cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        
               this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+              console.log(this.pedidos)
             }
           }
 

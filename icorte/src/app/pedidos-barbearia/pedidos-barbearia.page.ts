@@ -53,7 +53,7 @@ export class PedidosBarbeariaPage implements OnInit {
 
 
   async listarChamados() {
-    const querySnapshot = await getDocs(collection(this.firestore, "chamados_barbearia"));
+    const querySnapshot = await getDocs(collection(this.firestore, "chamados"));
     this.teste = []; // Clear the array before populating it
 
   
@@ -126,8 +126,8 @@ export class PedidosBarbeariaPage implements OnInit {
     await this.listarBanco();
   
     // Reload the current route to refresh the page
-    this.router.navigateByUrl('/tab3', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/pedidos']);
+    this.router.navigateByUrl('/menu-barbearia', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/pedidos-barbearia']);
     });
   }
   
@@ -177,6 +177,7 @@ export class PedidosBarbeariaPage implements OnInit {
      emailCliente: _emailCliente,
      cpfCliente: cpf,
      local: _local,
+     preco: credentials.preco
 
    };
  
@@ -189,7 +190,7 @@ export class PedidosBarbeariaPage implements OnInit {
      const toast = await this.toastController.create({
        message: 'Pedido aceito.',
        duration: 2000,
-       color: 'green',
+       color: 'danger',
        position: 'top'
      });
      toast.present();

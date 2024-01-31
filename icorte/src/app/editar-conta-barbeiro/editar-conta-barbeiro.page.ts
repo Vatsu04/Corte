@@ -137,7 +137,7 @@ export class EditarContaBarbeiroPage implements OnInit {
       message,
       duration: 3000,
       position: 'bottom',
-      color: 'dark', // You can change the color based on your preference
+      color: 'danger', // You can change the color based on your preference
     });
 
     toast.present();

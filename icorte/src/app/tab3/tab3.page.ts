@@ -93,15 +93,12 @@ export class Tab3Page {
   
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.barbeiros[0].nome)
-      const testeCpfBarbeiro = this.teste[i].cpfBarbeiro.toLowerCase();
-      const barbeiroCpf = this.barbeiros[0].cpf.toLowerCase();
-      
 
 
-if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+if (this.teste[i].cpfBarbeiro ===  this.barbeiros[0].cpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste[i].cpfBarbeiro)
         console.log( this.barbeiros[0]?.cpf)
-        this.pedidos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
     console.log(this.pedidos); // Log the result for verification
@@ -154,7 +151,7 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
   }
 
   async negarPedido(isOpen:boolean, id:string){
-    await deleteDoc(doc(this.firestore, "chamados", id));
+    await deleteDoc(doc(this.firestore, "pedidos", id));
     
     
     // Wait for a short time to allow Firebase to process the deletion
@@ -171,7 +168,11 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
   
   async negar(isOpen:boolean, id:string){
     this.negarPedido(isOpen, id);
-    this.mensagem(isOpen);
+    const alert = await this.alertController.create({
+      header: 'Pedido cancelado',
+      message: '',
+      buttons: ['OK'],
+    });
   }
   mensagem(isOpen: boolean) {
     this.isToastOpen = isOpen;
@@ -202,7 +203,7 @@ if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste ca
 if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(testeCpfBarbeiro);
         console.log(barbeiroCpf);
-        this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        this.pedidos_feitos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
 
