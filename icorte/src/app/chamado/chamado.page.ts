@@ -51,7 +51,7 @@ export class ChamadoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.barber = history.state.barber || { nome: '', email: '', cpf:'' };
+    this.barber = history.state.barber || { nome: '', email: '', cpf:'' , endereco:''};
     console.log(this.barber.nome);
     console.log(this.barber.email);
     console.log(this.barber.cpf);
@@ -145,7 +145,7 @@ export class ChamadoPage implements OnInit {
       emailBarbeiro: this.barber.email,
       cpfBarbeiro: this.barber.cpf,
       descricao: this.descricao?.value,
-      local: this.local?.value,
+      local: this.barber.endereco,
       data: this.data?.value,
       hora: this.hora?.value
     };

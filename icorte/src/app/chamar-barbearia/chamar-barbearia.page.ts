@@ -54,7 +54,7 @@ export class ChamarBarbeariaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.barbearia = history.state.barbearia || {nome:'', email:'', cep:''};
+    this.barbearia = history.state.barbearia || {nome:'', email:'', cep:'', endereco: ''};
     console.log(this.barbearia.nome);
     console.log(this.barbearia.email);
     console.log(this.barbearia.cep);
@@ -145,9 +145,9 @@ export class ChamarBarbeariaPage implements OnInit {
       cpfCliente: this.usuarios[0].cpf,
       nomeBarbearia: this.barbearia.nome,
       emailBarbearia: this.barbearia.email,
-      cep: this.barbearia.cpf,
+      cep: this.barbearia.cep,
       descricao: this.descricao?.value,
-      local: this.local?.value,
+      local: this.barbearia.endereco,
       data: this.data?.value,
       hora: this.hora?.value
     };
