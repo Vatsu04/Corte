@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  usuarios:any = [];
   credentials: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -22,7 +24,8 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private alertController: AlertController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private firestore: Firestore
   ) {}
 
   get email() {
@@ -62,12 +65,33 @@ export class LoginPage implements OnInit {
   async login() {
     const loading = await this.loadingController.create();
     await loading.present();
-
-    const user = await this.authService.login(this.credentials.value); 
+  
+    const user = await this.authService.login(this.credentials.value);
     await loading.dismiss();
-
+  
     if (user) {
-      this.router.navigateByUrl('/tab1', { replaceUrl: true });
+      const userUID = await this.authService.getCurrentUserUID();
+  
+      if (userUID) {
+        const userDoc = await getDoc(doc(this.firestore, "users", userUID));
+  
+        if (userDoc.exists()) {
+          console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
+          this.usuarios = [{ nome: userDoc.data()['nome'], email: userDoc.data()['email'], cpf: userDoc.data()['cpf'] }];
+          console.log(this.usuarios[0]?.nome);
+          console.log(this.usuarios[0]?.email);
+          this.router.navigateByUrl('/tab1', { replaceUrl: true });
+        } else {
+          const userDoc2 = await getDoc(doc(this.firestore, "barbers", userUID));
+          if (userDoc2.exists()) {
+            this.router.navigateByUrl('/tab3', { replaceUrl: true });
+          } else {
+            this.router.navigateByUrl('/menu-barbearia', { replaceUrl: true });
+          }
+        }
+      } else {
+        console.error('User UID not available');
+      }
     } else {
       this.showAlert('Login failed', 'Please try again!');
     }
