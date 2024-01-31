@@ -57,9 +57,7 @@ export class CadastroBarbeiroPage implements OnInit {
     return this.credentials.get('data_nascimento');
   }
 
-  get especialidades() {
-    return this.credentials.get('especialidades');
-  }
+
 
   get foto() {
     return this.credentials.get('foto');

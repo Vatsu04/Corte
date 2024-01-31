@@ -14,7 +14,7 @@
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Senha" formControlName="Password"></ion-input>
+      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
       <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Senha invalido!</ion-note>
     </ion-item>
 
@@ -38,7 +38,19 @@
       <ion-note slot="error" *ngIf="(local_trabalho?.dirty || local_trabalho?.touched) && local_trabalho?.errors">Local de Trabalho invalido!</ion-note>
 
     </ion-item>
-    
+
+    <h2>Data:</h2>
+    <ion-label position="floating"></ion-label>
+    <input
+      type="date"
+      formControlName="data_nascimento"
+      placeholder="Selecione a data"
+      style="background-color: black; color: white;"
+    />
+    <ion-note slot="error" *ngIf="(data_nascimento?.dirty || data_nascimento?.touched) && data_nascimento?.errors">
+      Data inválida!
+    </ion-note>
+
     <h2>Especialidade para Tipo de Cabelo</h2>
     <ion-radio-group formControlName="especialidade_tipo_cabelo" class="radio-group-horizontal">
       <ion-row>
