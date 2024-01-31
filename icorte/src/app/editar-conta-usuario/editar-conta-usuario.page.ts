@@ -68,6 +68,7 @@ export class EditarContaUsuarioPage implements OnInit {
 
     if (success) {
       this.presentToast('User profile updated successfully');
+      this.router.navigateByUrl('/tab1', { replaceUrl: true });
 
     } else {
       this.presentToast('Failed to update user profile');

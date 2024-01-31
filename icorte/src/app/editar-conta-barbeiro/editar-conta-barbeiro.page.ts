@@ -79,6 +79,7 @@ export class EditarContaBarbeiroPage implements OnInit {
     } else {
       this.presentToast('Failed to update user profile');
     } */
+    this.router.navigateByUrl('/tab3', { replaceUrl: true });
   }
 
 
