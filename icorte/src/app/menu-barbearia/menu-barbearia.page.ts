@@ -85,7 +85,7 @@ export class MenuBarbeariaPage implements OnInit {
         }];
       } else {
         console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
-        this.router.navigateByUrl('/tab1', { replaceUrl: true });
+        this.router.navigateByUrl('/', { replaceUrl: true });
       }
     } else {
       console.error('User UID not available');
@@ -118,7 +118,7 @@ export class MenuBarbeariaPage implements OnInit {
 if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste.cep);
         console.log(this.barbearias[0].cep);
-        this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        this.pedidos_feitos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
 

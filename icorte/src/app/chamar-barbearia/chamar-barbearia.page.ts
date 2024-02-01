@@ -253,7 +253,7 @@ export class ChamarBarbeariaPage implements OnInit {
 
       for(i;i< this.teste.length;i++){
         if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
-          this.pedidos_aceitos[i] = this.teste[i]
+          this.pedidos_aceitos.push(this.teste[i]);
         }
       }
 
