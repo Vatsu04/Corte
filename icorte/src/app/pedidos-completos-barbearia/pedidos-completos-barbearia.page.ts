@@ -110,7 +110,9 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
         descricao: doc.data()['descricao'],
         nomeBarbearia: doc.data()['nomeBarbearia'],
         emailBarbearia: doc.data()['emailBarbearia'],
-        cep: doc.data()['cep']
+        avaliacaoCliente: doc.data()['avaliacaoCliente'],
+        cep: doc.data()['cep'],
+       
       });
     });
   
@@ -122,9 +124,9 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
       
 
 
-if (this.teste[i].cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+if (this.teste[i].cep === this.barbearias[0].cep  && this.teste[i].avaliacaoCliente == null) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
        
-  this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+           this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
     console.log(this.pedidos); // Log the result for verification
