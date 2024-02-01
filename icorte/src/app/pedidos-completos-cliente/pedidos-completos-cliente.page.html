@@ -19,7 +19,7 @@
         <ion-card>
           <ion-card-content>
             <p>Descrição: {{ pedido.descricao }}</p>
-            <p>Email do Cliente: {{ pedido.emailBarbeiro}}</p>
+            <p>Email do barbeiro: {{ pedido.emailBarbeiro}}</p>
             <p>Local de Atendimento requisitado: {{ pedido.local}}</p>
      <br><br>
             <form [formGroup]="credentials">
@@ -55,14 +55,14 @@
           <ion-img [src]="pedidoBarbearia.imageUrl" class="image-limit"></ion-img>
 
           <ion-card-header>
-            <ion-card-title class="nome">Barbearia: {{ pedidoBarbearia.nomeBarbeiro}}</ion-card-title>
+            <ion-card-title class="nome">Barbearia: {{ pedidoBarbearia.nomeBarbearia}}</ion-card-title>
           </ion-card-header>
         </ion-card>
 
         <ion-card>
           <ion-card-content>
             <p>Descrição: {{ pedidoBarbearia.descricao }}</p>
-            <p>Email do Cliente: {{ pedidoBarbearia.emailBarbearia}}</p>
+            <p>Email da barbearia: {{ pedidoBarbearia.emailBarbearia}}</p>
             <p>Local de Atendimento requisitado: {{ pedidoBarbearia.local}}</p>
      <br><br>
             <form [formGroup]="credentials">

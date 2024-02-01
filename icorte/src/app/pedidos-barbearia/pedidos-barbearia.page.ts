@@ -71,7 +71,7 @@ export class PedidosBarbeariaPage implements OnInit {
       data: doc.data()['data'],
       local: doc.data()['local'], 
       nomeBarbearia: doc.data()['nomeBarbearia'],
-      emailBarbearia: doc.data()['nomeBarbearia'],
+      emailBarbearia: doc.data()['emailBarbearia'],
       imageUrl: doc.data()['imageUrl'] }]
     });
   
@@ -171,6 +171,7 @@ export class PedidosBarbeariaPage implements OnInit {
      corteAtual: foto2,
      imageUrl: foto,
      cep: cep,
+     descricao: _descricao,
      nomeBarbearia: _nomeBarbearia,
      emailBarbearia: _emailBarbearia,
      nomeCliente: _nomeCliente,

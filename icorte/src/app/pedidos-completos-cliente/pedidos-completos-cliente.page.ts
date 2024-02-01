@@ -119,7 +119,7 @@ export class PedidosCompletosClientePage implements OnInit {
    
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.teste[i].cpfCliente);
-      console.log(this.teste[i]);
+  
     if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
       if(this.teste[i].nomeBarbeiro != null && this.teste[i].avaliacaoBarbeiro == null){
         console.log(this.teste[i].avaliacaoBarbeiro)
@@ -157,7 +157,9 @@ export class PedidosCompletosClientePage implements OnInit {
       console.log(this.testeBarbearia[i])
     if(this.testeBarbearia[i].cpfCliente === this.usuarios[0].cpf){
       if(this.testeBarbearia[i].nomeBarbearia != null && this.testeBarbearia[i].avaliacaoBarbearia == null){
-      this.pedidosBarbearia.push(this.teste[i]);
+      this.pedidosBarbearia.push(this.testeBarbearia[i]);
+      
+      console.log(this.pedidosBarbearia)
     }
   }
   }

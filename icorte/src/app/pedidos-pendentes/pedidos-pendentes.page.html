@@ -56,7 +56,7 @@
           <ion-img [src]="pedidoBarbearia.imageUrl" class="image-limit"></ion-img>
 
           <ion-card-header>
-            <ion-card-title class="nome">Barbeiro: {{ pedidoBarbearia.nomeBarbeiro }}</ion-card-title>
+            <ion-card-title class="nome">Barbearia: {{ pedidoBarbearia.nomeBarbearia }}</ion-card-title>
           </ion-card-header>
         </ion-card>
 
@@ -67,6 +67,11 @@
             <p>Local de Atendimento requisitado: {{ pedidoBarbearia.local}}</p>
 
          
+
+        <!--     async aceitarPedidoBarbearia(foto: string, _nomeCliente: string, _emailCliente: string, cpfCliente:string, 
+            nomeBarbearia:string, emailBarbearia:string,
+            hora:string, data:string,
+            _descricao: string, _local:string, preco:string, cep: string, isOpen:boolean, id:string){ -->
 
             <ion-button color="red" id="negar" (click)="pagarPedidoBarbearia()" >Pagar </ion-button>
 
