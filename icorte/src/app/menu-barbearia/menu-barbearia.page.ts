@@ -13,6 +13,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 })
 export class MenuBarbeariaPage implements OnInit {
   profile: null | DocumentData | undefined = null;
+  
   barbearias:any[] = [{nome:'', endereco:'', especialidade_tamanho_cabelo:'', especialidade_tipo_cabelo:'', email:'',   cep:'', foto:'', uid:''}];
   pedidos_feitos:any = []; // Usado apenas para calcular nota
   pedidos:any = []; // usado para listar os pedidos que foram aceitos  
@@ -25,7 +26,11 @@ export class MenuBarbeariaPage implements OnInit {
     private loadingController: LoadingController,
     private firestore: Firestore,
     private el: ElementRef
-  ) { }
+  ) {
+    this.avatarService.getBarbeariaProfile().subscribe((data) => {
+      this.profile = data;
+    });
+   }
 
   async ngOnInit() {
     await this.listarBanco();
@@ -202,6 +207,8 @@ if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do
       await alert.present();
     }
   }
+
+
   calculateAverageAvaliacao() {
     let sum = 0;
     let count = 0;
