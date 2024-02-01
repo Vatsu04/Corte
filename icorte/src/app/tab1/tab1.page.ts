@@ -178,7 +178,7 @@ if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os va
    
     for (let i = 0; i < this.teste.length; i++) {
 
-      if(this.teste[i].cpfBarbeiro === this.usuarios[0].cpf){
+      if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
         this.chamados.push(this.teste[i]);
       }
     }
