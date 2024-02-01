@@ -70,6 +70,7 @@ export class Tab1Page {
     await this.listarBanco();
     console.log(this.usuarios[0].nome)
     this.listarPedidosFeitos();
+    this.listarChamados();
   }
 
 
@@ -164,6 +165,8 @@ if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os va
       emailCliente: doc.data()['emailCliente'],
       cpfCliente: doc.data()['cpfCliente'],
       nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+      nomeBarbearia: doc.data()['nomeBarbearia'],
+      emailBarbearia: doc.data()['emailBarbearia'],
       emailBarbeiro: doc.data()['emailBarbeiro'],
       cpfBarbeiro: doc.data()['cpfBarbeiro'],
       descricao: doc.data()['descricao'],
@@ -177,9 +180,11 @@ if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os va
     
    
     for (let i = 0; i < this.teste.length; i++) {
-
-      if(this.teste[i].cpfBarbeiro === this.usuarios[0].cpf){
+      console.log(this.teste[i].cpfCliente)
+      console.log(this.usuarios[0].cpf)
+      if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
         this.chamados.push(this.teste[i]);
+        console.log(this.chamados[0]);
       }
     }
     }
