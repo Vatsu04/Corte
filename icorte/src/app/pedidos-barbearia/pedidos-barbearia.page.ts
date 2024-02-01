@@ -126,7 +126,7 @@ export class PedidosBarbeariaPage implements OnInit {
     await this.listarBanco();
   
     // Reload the current route to refresh the page
-    this.router.navigateByUrl('/menu-barbearia', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/pedidos-barbearia', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/pedidos-barbearia']);
     });
   }

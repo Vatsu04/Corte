@@ -253,6 +253,13 @@ export class PedidosPendentesPage implements OnInit {
  }
 
 
+ /*
+pedidoBarbearia.imageUrl, pedidoBarbearia.nomeCliente,
+             pedidoBarbearia.emailCliente, pedidoBarbearia.cpfCliente,
+            pedidoBarbearia.nomeBarbearia, pedidoBarbearia.emailBarbearia, pedidoBarbearia.hora, pedidoBarbearia.data, pedidoBarbearia.descricao, pedidoBarbearia.local,
+             pedidoBarbearia.preco, pedidoBarbearia.cep,
+            true, pedidoBarbearia.id
+ */
 
 
 
@@ -280,10 +287,17 @@ export class PedidosPendentesPage implements OnInit {
       });
       toast.present();
       this.pedidoConfirmado = isOpen;
-      this.aceitarPedido(foto, _nomeCliente, _emailCliente, cpfCliente,
+      this.aceitarPedidoBarbearia(foto, _nomeCliente, _emailCliente, cpfCliente,
         nomeBarbearia, emailBarbearia, hora, data,
         _descricao, _local, preco, cep, isOpen, id );
 
+        /*
+pedidoBarbearia.imageUrl, pedidoBarbearia.nomeCliente,
+             pedidoBarbearia.emailCliente, pedidoBarbearia.cpfCliente,
+            pedidoBarbearia.nomeBarbearia, pedidoBarbearia.emailBarbearia, pedidoBarbearia.hora, pedidoBarbearia.data, pedidoBarbearia.descricao, pedidoBarbearia.local,
+             pedidoBarbearia.preco, pedidoBarbearia.cep,
+            true, pedidoBarbearia.id
+        */
       
       this.cancelarPedido(isOpen, id)
       this.router.navigateByUrl('/tab1', {replaceUrl:true});
