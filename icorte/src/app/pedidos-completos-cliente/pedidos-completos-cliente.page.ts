@@ -18,6 +18,8 @@ enum COLORS {
 })
 export class PedidosCompletosClientePage implements OnInit {
   teste:any = [];
+  testeBarbearia:any = [];
+  pedidosBarbearia: any = [];
   pedidos:any = [];
   usuarios:any = [];
   @Input() rating: number;
@@ -39,7 +41,8 @@ export class PedidosCompletosClientePage implements OnInit {
 
   async ngOnInit() {
     await this.listarBanco();
-    this.listarPedidos();
+    await this.listarPedidos();
+    this.listarPedidosBarbearia();
   }
 
   async rate(index: number, id:string) {
@@ -102,8 +105,42 @@ export class PedidosCompletosClientePage implements OnInit {
       console.log(this.teste[i].cpfCliente);
       console.log(this.usuarios[0].cpf);
     if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
+      if(this.teste[i].nomeBarbeiro != null){
       this.pedidos.push(this.teste[i]);
     }
+  }
+  }
+  }
+
+  async listarPedidosBarbearia() {
+    
+    const querySnapshot = await getDocs(collection(this.firestore, "pedidos_feitos"));
+    this.testeBarbearia = [];
+    querySnapshot.forEach((doc) => {
+      
+      this.testeBarbearia.push({ 
+      id: doc.id,
+      nomeCliente: doc.data()['nomeCliente'], 
+      emailCliente: doc.data()['emailCliente'],
+      cpfCliente: doc.data()['cpfCliente'],
+      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
+      emailBarbeiro: doc.data()['emailBarbeiro'],
+      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      descricao: doc.data()['descricao'],
+      local: doc.data()['local'], 
+      preco: doc.data()['preco'],
+      imageUrl: doc.data()['imageUrl'] 
+    });
+  });
+    this.pedidosBarbearia = []
+    for (let i = 0; i < this.teste.length; i++) {
+      console.log(this.teste[i].cpfCliente);
+      console.log(this.usuarios[0].cpf);
+    if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
+      if(this.teste[i].nomeBarbearia != null){
+      this.pedidos.push(this.teste[i]);
+    }
+  }
   }
   }
 
