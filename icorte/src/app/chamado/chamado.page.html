@@ -103,10 +103,14 @@ Foto do corte de cabelo
           fill="solid" placeholder="Selecione a imagem do corte de Cabelo" />
 
         <div class="images">
-          <ion-card *ngFor="let img of images" (click)="selectImage(img, modal)">
+          <ion-card *ngFor="let img of images">
             <img [src]="img" />
           </ion-card>
         </div>
+        <ion-button color="red" class="button1" *ngFor="let img of images " (click)="selectImage(img, modal)" >Pronto</ion-button>
+        <ion-button color="red" class="back" (click)="modal.dismiss()" >Voltar</ion-button>
+        
+        
       </div>
       
     </ion-content>
@@ -123,10 +127,12 @@ Foto do corte de cabelo
           fill="solid" placeholder="Selecione a imagem do corte de Cabelo" />
 
         <div class="images">
-          <ion-card *ngFor="let img_ of images_" (click)="selectImage_(img_, modal_)">
+          <ion-card *ngFor="let img_ of images_" >
             <img [src]="img_" />
           </ion-card>
         </div>
+        <ion-button color="red" class="button1" *ngFor="let img_ of images_" (click)="selectImage_(img_, modal_)" >Pronto</ion-button>
+        <ion-button color="red" class="back" (click)="modal_.dismiss()" >Voltar</ion-button>
       </div>
       
     </ion-content>

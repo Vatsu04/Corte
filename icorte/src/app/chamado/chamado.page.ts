@@ -332,5 +332,8 @@ export class ChamadoPage implements OnInit {
   hide_show(){
     document.getElementById('cadImg_')?.click()
   }
+
+ 
+
 }
 
