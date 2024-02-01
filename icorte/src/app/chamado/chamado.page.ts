@@ -90,7 +90,7 @@ export class ChamadoPage implements OnInit {
       toast.present();
       return;
     }
-  }for(let i=0;i<this.pedidos_aceitos.length;i++){
+  }for(let i=0;i<this.chamados_feitos.length;i++){
    if( this.chamados_feitos[i].cpfCliente === this.usuarios[0].cpf){
     const toast = await this.toastController.create({
       message: 'Não é permitido o mesmo usuário fazer mais de um pedido de uma vez só',
