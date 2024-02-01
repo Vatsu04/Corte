@@ -50,12 +50,14 @@ export class ChamadoPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.barber = history.state.barber || { nome: '', email: '', cpf:'' , endereco:''};
     console.log(this.barber.nome);
     console.log(this.barber.email);
     console.log(this.barber.cpf);
     this.listarBanco();
+    await this.listarChamados();
+    await this.listarPedidos();
   }
 
   

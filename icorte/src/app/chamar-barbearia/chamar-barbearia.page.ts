@@ -53,13 +53,15 @@ export class ChamarBarbeariaPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.barbearia = history.state.barbearia || {nome:'', email:'', cep:'', endereco: ''};
     console.log(this.barbearia.nome);
     console.log(this.barbearia.email);
     console.log(this.barbearia.cep);
     console.log(this.barbearia.endereco);
     this.listarBanco();
+    await this.listarChamados();
+    await this.listarPedidos();
   }
 
   

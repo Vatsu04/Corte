@@ -36,7 +36,7 @@ export class PedidosPendentesPage implements OnInit {
     await this.listarBanco();
     await this.listarPedidos();
     console.log(this.pedidos);
-    this.listarPedidosBarbearia();
+   await  this.listarPedidosBarbearia();
     console.log(this.pedidos.id);
     console.log(this.pedidoPago)
   }
@@ -75,6 +75,7 @@ export class PedidosPendentesPage implements OnInit {
       if(this.teste[i].nomeBarbeiro != null){
       this.pedidos.push(this.teste[i]);
       }
+      console.log(this.pedidos)
     }
   }
   }
@@ -102,12 +103,13 @@ export class PedidosPendentesPage implements OnInit {
     });
   });
    
-    
+    this.pedidosBarbearia = [];
     for (let i = 0; i < this.testeBarbearia.length; i++) {
     if(this.testeBarbearia[i].cpfCliente === this.usuarios[0].cpf){
       if(this.testeBarbearia[i].nomeBarbearia != null){
       this.pedidosBarbearia.push(this.testeBarbearia[i]);
     }
+    console.log(this.pedidosBarbearia)
   }
   }
   }
@@ -261,7 +263,7 @@ export class PedidosPendentesPage implements OnInit {
   hora:string, data:string,
   _descricao: string, _local:string, preco:string, cep: string, isOpen:boolean, id:string){
   
-    if(this.pedidoPago != true){
+    if(!this.pedidoPagoBarbearia){
       const toast = await this.toastController.create({
         message: 'Pague o pedido antes de confirma-lo!',
         duration: 2000,

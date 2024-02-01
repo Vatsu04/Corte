@@ -123,8 +123,8 @@ export class PedidosCompletosClientePage implements OnInit {
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
       cpfCliente: doc.data()['cpfCliente'],
-      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
-      emailBarbeiro: doc.data()['emailBarbeiro'],
+      nomeBarbearia: doc.data()['nomeBarbearia'], 
+      emailBarbearia: doc.data()['emailBarbearia'],
       cpfBarbeiro: doc.data()['cpfBarbeiro'],
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
@@ -136,8 +136,8 @@ export class PedidosCompletosClientePage implements OnInit {
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.teste[i].cpfCliente);
       console.log(this.usuarios[0].cpf);
-    if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
-      if(this.teste[i].nomeBarbearia != null){
+    if(this.testeBarbearia[i].cpfCliente === this.usuarios[0].cpf){
+      if(this.testeBarbearia[i].nomeBarbearia != null){
       this.pedidosBarbearia.push(this.teste[i]);
     }
   }

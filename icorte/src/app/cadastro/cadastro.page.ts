@@ -82,7 +82,7 @@ export class CadastroPage implements OnInit {
     if (user) {
       this.router.navigateByUrl('/tab1', { replaceUrl: true });
     } else {
-      this.showAlert('Registration failed', 'Please try again!');
+      this.showAlert('Registration failed', 'Please try again, try a different email!');
     }
   }
  
