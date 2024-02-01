@@ -69,7 +69,20 @@ Foto do corte de cabelo
       Foto do corte de cabelo atual
           </ion-button>
     
-    <img *ngIf="isImg"  alt="avatar" [src]="imgSrc" class="imgSrc">
+          <ion-grid>
+            <ion-row>
+              
+              <ion-col>
+                <img *ngIf="isImg"  alt="avatar" [src]="imgSrc" class="imgSrc">
+              </ion-col>
+              
+              
+              <ion-col>
+                <img *ngIf="isImg_"  alt="avatar" [src]="imgSrc_" class="imgSrc">
+              </ion-col>
+        
+            </ion-row> 
+          </ion-grid>
 
     <ion-button color="red" class="button1"  [disabled]="!credentials.valid" type="submit">Fazer pedido</ion-button>
     
