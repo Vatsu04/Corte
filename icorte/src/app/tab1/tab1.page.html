@@ -46,15 +46,16 @@
   
 
             <ion-card-header>
-              <ion-card-title class="nome">Cliente: {{ chamado.nomeCliente }}</ion-card-title>
+              <ion-card-title class="nome" *ngIf="chamado.nomeBarbeiro">Barbeiro: {{ chamado.nomeBarbeiro}}</ion-card-title>
+              <ion-card-title class="nome" *ngIf="chamado.nomeBarbearia">Barbearia: {{ chamado.nomeBarbearia}}</ion-card-title>
             </ion-card-header>
           </ion-card>
   
           <ion-card>
             <ion-card-content>
               <p>Descrição: {{ chamado.descricao }}</p>
-              <p>Email do Cliente: {{ chamado.emailCliente }}</p>
-
+              <p *ngIf="chamado.nomeBarbeiro">Email do Barbeiro: {{ chamado.emailBarbeiro }}</p>
+              <p *ngIf="chamado.nomeBarbearia">Email da Barbearia: {{ chamado.emailBarbearia }}</p>
               <p>Local: {{ chamado.local}}</p>
               
 
@@ -62,8 +63,7 @@
               <p>Data: {{chamado.data}}</p>
               <p>Horario: {{chamado.hora}}</p>
 
-              <p>Preço: R$ {{ chamado.preco }}</p>
-  
+            
             
           
               
