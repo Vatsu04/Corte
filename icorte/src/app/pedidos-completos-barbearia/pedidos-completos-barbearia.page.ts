@@ -78,9 +78,9 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
         this.barbearias = [{ nome: userDoc.data()['nome'],
-         email: userDoc.data()['emaiL'], 
+         email: userDoc.data()['email'], 
          
-         cep: userDoc.data()['cpf']  }];
+         cep: userDoc.data()['cep']  }];
        
       } else {
         console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');

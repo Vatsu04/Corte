@@ -42,7 +42,7 @@ export class PedidosCompletosClientePage implements OnInit {
   async ngOnInit() {
     await this.listarBanco();
     await this.listarPedidos();
-    this.listarPedidosBarbearia();
+    await this.listarPedidosBarbearia();
   }
 
   async rate(index: number, id:string) {
