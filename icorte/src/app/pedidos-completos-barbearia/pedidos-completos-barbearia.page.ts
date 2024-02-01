@@ -44,6 +44,7 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
     try {
       await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacaoCliente: this.rating });
       console.log('Avaliacao updated successfully!');
+      this.router.navigateByUrl('/menu-barbearia', { replaceUrl: true });
     } catch (error) {
       console.error('Error updating avaliacao:', error);
     }

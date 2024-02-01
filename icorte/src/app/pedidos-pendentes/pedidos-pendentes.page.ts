@@ -210,7 +210,7 @@ export class PedidosPendentesPage implements OnInit {
 
       
       this.cancelarPedido(isOpen, id)
-      this.router.navigateByUrl('/', {replaceUrl:true});
+      this.router.navigateByUrl('/tab1', {replaceUrl:true});
     }
     
   } 
@@ -286,7 +286,7 @@ export class PedidosPendentesPage implements OnInit {
 
       
       this.cancelarPedido(isOpen, id)
-      this.router.navigateByUrl('/', {replaceUrl:true});
+      this.router.navigateByUrl('/tab1', {replaceUrl:true});
     }
   }
 
@@ -337,7 +337,7 @@ export class PedidosPendentesPage implements OnInit {
       this.listarBanco()
      }, 2000);
 
-       this.router.navigateByUrl('/tab1', { skipLocationChange: true }).then(() => {
+       this.router.navigateByUrl('/pedidos-pendentes', { skipLocationChange: true }).then(() => {
     this.router.navigate(['/pedidos-pendentes']);
   });
   }

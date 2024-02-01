@@ -8,7 +8,7 @@ import {Photo} from '@capacitor/camera';
   providedIn: 'root'
 })
 export class AvatarService {
-
+ 
   constructor(
     private auth: Auth,
     private firestore: Firestore,
@@ -113,7 +113,7 @@ export class AvatarService {
 
   getBarbeariaProfile(){
     const barber = this.auth.currentUser;
-    const barberDocRef = doc(this.firestore, `barberShop/${barber?.uid}`);
+    const barberDocRef = doc(this.firestore, `barberShops/${barber?.uid}`);
     return docData(barberDocRef);
   }
 
@@ -136,7 +136,7 @@ export class AvatarService {
       const imageUrl = await getDownloadURL(storageRef);
   
       // Retrieve the existing user data
-      const barberDocRef = doc(this.firestore, 'barberShop', barber.uid);
+      const barberDocRef = doc(this.firestore, 'barberShops', barber.uid);
       const barberDoc = await getDoc(barberDocRef);
   
       if (barberDoc.exists()) {
