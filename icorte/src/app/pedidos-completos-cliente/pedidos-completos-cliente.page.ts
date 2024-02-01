@@ -101,6 +101,7 @@ export class PedidosCompletosClientePage implements OnInit {
     });
   });
     this.pedidos = []
+    console.log(this.teste[0]);
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.teste[i].cpfCliente);
       console.log(this.usuarios[0].cpf);
@@ -133,8 +134,9 @@ export class PedidosCompletosClientePage implements OnInit {
     });
   });
     this.pedidosBarbearia = []
+    console.log(this.testeBarbearia[0])
     for (let i = 0; i < this.teste.length; i++) {
-      console.log(this.teste[i].cpfCliente);
+      console.log(this.testeBarbearia[i].cpfCliente);
       console.log(this.usuarios[0].cpf);
     if(this.testeBarbearia[i].cpfCliente === this.usuarios[0].cpf){
       if(this.testeBarbearia[i].nomeBarbearia != null){

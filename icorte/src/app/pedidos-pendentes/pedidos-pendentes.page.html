@@ -38,6 +38,10 @@
              pedido.emailCliente, pedido.cpfCliente,
             pedido.nomeBarbeiro, pedido.emailBarbeiro, pedido.hora, pedido.data, pedido.descricao, pedido.local, pedido.preco, pedido.cpfBarbeiro,
             true, pedido.id)" >Confirmar Serviço Completo </ion-button>
+<!-- 
+            foto: string, _nomeCliente: string, _emailCliente: string, cpfCliente: string, 
+    _nomeBarbeiro: string, _emailBarbeiro: string, hora:string, data:string,
+    _descricao: string, _local:string, _preco: string, _cpfBarbeiro:any, isOpen:boolean, id:string){ -->
             <ion-button color="red" class="back" id="negar" *ngIf="pedido.id" (click)="cancelarPedido(true, pedido.id)">Cancelar Pedido </ion-button>
           </ion-card-content>
         </ion-card>
@@ -71,6 +75,12 @@
             pedidoBarbearia.nomeBarbearia, pedidoBarbearia.emailBarbearia, pedidoBarbearia.hora, pedidoBarbearia.data, pedidoBarbearia.descricao, pedidoBarbearia.local,
              pedidoBarbearia.preco, pedidoBarbearia.cep,
             true, pedidoBarbearia.id)" >Confirmar Serviço Completo </ion-button>
+
+            <!-- (foto: string, _nomeCliente: string, _emailCliente: string, cpfCliente:string, 
+            nomeBarbearia:string, emailBarbearia:string,
+            hora:string, data:string,
+            _descricao: string, _local:string, preco:string, cep: string, isOpen:boolean, id:string){ -->
+
             <ion-button color="red" class="back" id="negar" *ngIf="pedidoBarbearia.id" (click)="cancelarPedido(true, pedidoBarbearia.id)">Cancelar pedidoBarbearia </ion-button>
           </ion-card-content>
         </ion-card>

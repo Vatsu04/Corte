@@ -70,6 +70,7 @@ export class Tab1Page {
     await this.listarBanco();
     console.log(this.usuarios[0].nome)
     this.listarPedidosFeitos();
+    await this.listarChamados();
   }
 
 
@@ -175,9 +176,11 @@ if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os va
     });
   
     
-   
+    this.chamados = [];
+    
     for (let i = 0; i < this.teste.length; i++) {
-
+      console.log(this.teste[i].cpfCliente)
+      console.log(this.usuarios[0].cpf)
       if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
         this.chamados.push(this.teste[i]);
       }
@@ -195,8 +198,8 @@ if (this.teste[i].cpfCliente === this.usuarios[0].cpf) { // pedidos recebe os va
        }, 2000);
     
       // Reload the current route to refresh the page
-      this.router.navigateByUrl('/tab3', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/tab3']);
+      this.router.navigateByUrl('/tab1', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/tab1']);
       });
     }
     
