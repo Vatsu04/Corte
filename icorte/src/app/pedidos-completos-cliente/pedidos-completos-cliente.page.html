@@ -12,7 +12,7 @@
           <ion-img [src]="pedido.imageUrl" class="image-limit"></ion-img>
 
           <ion-card-header>
-            <ion-card-title class="nome">Pedido de {{ pedido.nomeBarbeiro}}</ion-card-title>
+            <ion-card-title class="nome">Barbeiro: {{ pedido.nomeBarbeiro}}</ion-card-title>
           </ion-card-header>
         </ion-card>
 
@@ -30,6 +30,49 @@
               
               <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
                 (click)="rate(num, pedido.id)" [ngStyle]="{'color': getColor(num)}">
+              </ion-icon>
+            </div>
+             
+        
+              
+
+            </form>
+
+          
+        
+         
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let pedidoBarbearia of pedidosBarbearia">
+        <ion-card>
+          <ion-img [src]="pedidoBarbearia.imageUrl" class="image-limit"></ion-img>
+
+          <ion-card-header>
+            <ion-card-title class="nome">Barbearia: {{ pedidoBarbearia.nomeBarbeiro}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <p>Descrição: {{ pedidoBarbearia.descricao }}</p>
+            <p>Email do Cliente: {{ pedidoBarbearia.emailBarbearia}}</p>
+            <p>Local de Atendimento requisitado: {{ pedidoBarbearia.local}}</p>
+     <br><br>
+            <form [formGroup]="credentials">
+
+  <h1>Avalie sua experiencia!</h1><br>
+            
+            <div>
+              
+              <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
+                (click)="rateBarbearia(num, pedidoBarbearia.id)" [ngStyle]="{'color': getColor(num)}">
               </ion-icon>
             </div>
              
