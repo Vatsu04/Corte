@@ -13,6 +13,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 })
 export class MenuBarbeariaPage implements OnInit {
   profile: null | DocumentData | undefined = null;
+  
   barbearias:any[] = [{nome:'', endereco:'', especialidade_tamanho_cabelo:'', especialidade_tipo_cabelo:'', email:'',   cep:'', foto:'', uid:''}];
   pedidos_feitos:any = []; // Usado apenas para calcular nota
   pedidos:any = []; // usado para listar os pedidos que foram aceitos  
@@ -25,7 +26,11 @@ export class MenuBarbeariaPage implements OnInit {
     private loadingController: LoadingController,
     private firestore: Firestore,
     private el: ElementRef
-  ) { }
+  ) {
+    this.avatarService.getBarbeariaProfile().subscribe((data) => {
+      this.profile = data;
+    });
+   }
 
   async ngOnInit() {
     await this.listarBanco();
@@ -85,7 +90,7 @@ export class MenuBarbeariaPage implements OnInit {
         }];
       } else {
         console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
-        this.router.navigateByUrl('/tab1', { replaceUrl: true });
+        this.router.navigateByUrl('/', { replaceUrl: true });
       }
     } else {
       console.error('User UID not available');
@@ -118,7 +123,7 @@ export class MenuBarbeariaPage implements OnInit {
 if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste.cep);
         console.log(this.barbearias[0].cep);
-        this.pedidos_feitos[i] = this.teste[i]; // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        this.pedidos_feitos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
 
@@ -202,6 +207,8 @@ if (this.teste.cep === this.barbearias[0].cep) { // pedidos recebe os valores do
       await alert.present();
     }
   }
+
+
   calculateAverageAvaliacao() {
     let sum = 0;
     let count = 0;

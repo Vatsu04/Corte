@@ -22,6 +22,7 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
   teste:any = [];
   barbeiros:any = [];
   selectedRating: number = 0;
+  
   @Input() rating: number;
   @Output() ratingChange: EventEmitter<number> = new EventEmitter();
 
@@ -51,6 +52,7 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
     try {
       await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacaoCliente: this.rating });
       console.log('Avaliacao updated successfully!');
+      this.router.navigateByUrl('/tab3', { replaceUrl: true });
     } catch (error) {
       console.error('Error updating avaliacao:', error);
     }
@@ -98,7 +100,8 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
         descricao: doc.data()['descricao'],
         nomeBarbeiro: doc.data()['nomeBarbeiro'],
         emailBarbeiro: doc.data()['emailBarbeiro'],
-        cpfBarbeiro: doc.data()['cpfBarbeiro']
+        cpfBarbeiro: doc.data()['cpfBarbeiro'],
+        avaliacaoCliente: doc.data()['avaliacaoCliente']
       });
     });
   
@@ -113,7 +116,9 @@ export class PedidosCompletosBarbeiroPage implements OnInit {
 if (this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
         console.log(this.teste[i].nomeBarbeiro)
         console.log( this.barbeiros[0]?.nome)
+        if(this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf  && this.teste[i].avaliacaoCliente == null){
         this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+        }
       }
     }
     console.log(this.pedidos); // Log the result for verification

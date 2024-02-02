@@ -53,13 +53,15 @@ export class ChamarBarbeariaPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.barbearia = history.state.barbearia || {nome:'', email:'', cep:'', endereco: ''};
     console.log(this.barbearia.nome);
     console.log(this.barbearia.email);
     console.log(this.barbearia.cep);
     console.log(this.barbearia.endereco);
     this.listarBanco();
+    await this.listarChamados();
+    await this.listarPedidos();
   }
 
   
@@ -92,7 +94,7 @@ export class ChamarBarbeariaPage implements OnInit {
       return;
     }
   }
-  for(let i=0;i<this.pedidos_aceitos.length;i++){
+  for(let i=0;i<this.chamados_feitos.length;i++){
    if( this.chamados_feitos[i].cpfCliente === this.usuarios[0].cpf){
     const toast = await this.toastController.create({
       message: 'Não é permitido o mesmo usuário fazer mais de um pedido de uma vez só',
@@ -253,7 +255,7 @@ export class ChamarBarbeariaPage implements OnInit {
 
       for(i;i< this.teste.length;i++){
         if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
-          this.pedidos_aceitos[i] = this.teste[i]
+          this.pedidos_aceitos.push(this.teste[i]);
         }
       }
 

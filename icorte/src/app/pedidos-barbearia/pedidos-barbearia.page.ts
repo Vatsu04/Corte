@@ -71,7 +71,7 @@ export class PedidosBarbeariaPage implements OnInit {
       data: doc.data()['data'],
       local: doc.data()['local'], 
       nomeBarbearia: doc.data()['nomeBarbearia'],
-      emailBarbearia: doc.data()['nomeBarbearia'],
+      emailBarbearia: doc.data()['emailBarbearia'],
       imageUrl: doc.data()['imageUrl'] }]
     });
   
@@ -126,7 +126,7 @@ export class PedidosBarbeariaPage implements OnInit {
     await this.listarBanco();
   
     // Reload the current route to refresh the page
-    this.router.navigateByUrl('/menu-barbearia', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/pedidos-barbearia', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/pedidos-barbearia']);
     });
   }
@@ -171,6 +171,7 @@ export class PedidosBarbeariaPage implements OnInit {
      corteAtual: foto2,
      imageUrl: foto,
      cep: cep,
+     descricao: _descricao,
      nomeBarbearia: _nomeBarbearia,
      emailBarbearia: _emailBarbearia,
      nomeCliente: _nomeCliente,

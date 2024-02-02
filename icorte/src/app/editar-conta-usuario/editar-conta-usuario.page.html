@@ -16,6 +16,15 @@
 
     </ion-item>
 
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
+      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Endereco inválido!</ion-note>
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
+      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome inválido!</ion-note>
+    </ion-item>
   
     <h2>Tipo de Cabelo</h2>
     <ion-radio-group formControlName="tipo_cabelo" class="radio-group-horizontal">
@@ -68,15 +77,7 @@
       </ion-row>
     </ion-radio-group>
     <br>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="endereco" placeholder="Endereco" formControlName="endereco"></ion-input>
-      <ion-note slot="error" *ngIf="(endereco?.dirty || endereco?.touched) && endereco?.errors">Endereco inválido!</ion-note>
-    </ion-item>
-
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="nome" placeholder="Nome" formControlName="nome"></ion-input>
-      <ion-note slot="error" *ngIf="(nome?.dirty || nome?.touched) && nome?.errors">Nome inválido!</ion-note>
-    </ion-item>
+   
  
     <ion-button color="red" class="button1" expand="full" type="button" (click)="editarPerfil(credentials.value)" [disabled]="!credentials.valid">Editar Perfil</ion-button>   
     <br>

@@ -22,6 +22,7 @@ export class PedidosCompletosClientePage implements OnInit {
   pedidosBarbearia: any = [];
   pedidos:any = [];
   usuarios:any = [];
+  nums:any = [1,2,3,4,5];
   @Input() rating: number;
   @Output() ratingChange: EventEmitter<number> = new EventEmitter();
   credentials: FormGroup = this.fb.group({
@@ -42,7 +43,7 @@ export class PedidosCompletosClientePage implements OnInit {
   async ngOnInit() {
     await this.listarBanco();
     await this.listarPedidos();
-    this.listarPedidosBarbearia();
+    await this.listarPedidosBarbearia();
   }
 
   async rate(index: number, id:string) {
@@ -55,6 +56,19 @@ export class PedidosCompletosClientePage implements OnInit {
       console.error('Error updating avaliacao:', error);
     }
   }
+
+  async rateBarbearia(index: number, id:string) {
+    this.rating = index;
+    this.ratingChange.emit(this.rating);
+    try {
+      await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacaoBarbearia: this.rating });
+      console.log('Avaliacao updated successfully!');
+      this.router.navigateByUrl('/tab1', { replaceUrl: true });
+    } catch (error) {
+      console.error('Error updating avaliacao:', error);
+    }
+  }
+
 
   getColor(index: number) {
     if (this.isAboveRating(index)) {
@@ -97,15 +111,18 @@ export class PedidosCompletosClientePage implements OnInit {
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
-      imageUrl: doc.data()['imageUrl'] 
+      imageUrl: doc.data()['imageUrl'],
+      avaliacaoBarbeiro: doc.data()['avaliacaoBarbeiro']
     });
   });
     this.pedidos = []
+   
     for (let i = 0; i < this.teste.length; i++) {
       console.log(this.teste[i].cpfCliente);
-      console.log(this.usuarios[0].cpf);
+  
     if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
-      if(this.teste[i].nomeBarbeiro != null){
+      if(this.teste[i].nomeBarbeiro != null && this.teste[i].avaliacaoBarbeiro == null){
+        console.log(this.teste[i].avaliacaoBarbeiro)
       this.pedidos.push(this.teste[i]);
     }
   }
@@ -123,22 +140,26 @@ export class PedidosCompletosClientePage implements OnInit {
       nomeCliente: doc.data()['nomeCliente'], 
       emailCliente: doc.data()['emailCliente'],
       cpfCliente: doc.data()['cpfCliente'],
-      nomeBarbeiro: doc.data()['nomeBarbeiro'], 
-      emailBarbeiro: doc.data()['emailBarbeiro'],
-      cpfBarbeiro: doc.data()['cpfBarbeiro'],
+      nomeBarbearia: doc.data()['nomeBarbearia'], 
+      emailBarbearia: doc.data()['emailBarbearia'],
+      cep: doc.data()['cep'],
       descricao: doc.data()['descricao'],
       local: doc.data()['local'], 
       preco: doc.data()['preco'],
-      imageUrl: doc.data()['imageUrl'] 
+      imageUrl: doc.data()['imageUrl'],
+      avaliacaoBarbearia: doc.data()['avaliacaoBarbearia']
     });
   });
     this.pedidosBarbearia = []
+    
     for (let i = 0; i < this.teste.length; i++) {
-      console.log(this.teste[i].cpfCliente);
-      console.log(this.usuarios[0].cpf);
-    if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
-      if(this.teste[i].nomeBarbearia != null){
-      this.pedidos.push(this.teste[i]);
+      console.log(this.testeBarbearia[i].cpfCliente);
+      console.log(this.testeBarbearia[i])
+    if(this.testeBarbearia[i].cpfCliente === this.usuarios[0].cpf){
+      if(this.testeBarbearia[i].nomeBarbearia != null && this.testeBarbearia[i].avaliacaoBarbearia == null){
+      this.pedidosBarbearia.push(this.testeBarbearia[i]);
+      
+      console.log(this.pedidosBarbearia)
     }
   }
   }

@@ -44,6 +44,7 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
     try {
       await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacaoCliente: this.rating });
       console.log('Avaliacao updated successfully!');
+      this.router.navigateByUrl('/menu-barbearia', { replaceUrl: true });
     } catch (error) {
       console.error('Error updating avaliacao:', error);
     }
@@ -78,9 +79,9 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
       if (userDoc.exists()) {
         console.log(`${userDoc.id} => ${userDoc.data()['nome']}`);
         this.barbearias = [{ nome: userDoc.data()['nome'],
-         email: userDoc.data()['emaiL'], 
+         email: userDoc.data()['email'], 
          
-         cep: userDoc.data()['cpf']  }];
+         cep: userDoc.data()['cep']  }];
        
       } else {
         console.error('Campos do usuário não encontrados, o usuário logado é provavelmente um cliente');
@@ -110,7 +111,9 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
         descricao: doc.data()['descricao'],
         nomeBarbearia: doc.data()['nomeBarbearia'],
         emailBarbearia: doc.data()['emailBarbearia'],
-        cep: doc.data()['cep']
+        avaliacaoCliente: doc.data()['avaliacaoCliente'],
+        cep: doc.data()['cep'],
+       
       });
     });
   
@@ -122,9 +125,9 @@ export class PedidosCompletosBarbeariaPage implements OnInit {
       
 
 
-if (this.teste[i].cep === this.barbearias[0].cep) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+if (this.teste[i].cep === this.barbearias[0].cep  && this.teste[i].avaliacaoCliente == null) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
        
-  this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+           this.pedidos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
     console.log(this.pedidos); // Log the result for verification

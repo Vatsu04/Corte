@@ -24,6 +24,7 @@ export class ChamadoPage implements OnInit {
     hora: ['', Validators.required]
   });
   teste:any = [];
+  testePedidos:any = [];
   chamado:any =[];
   pedidos_aceitos: any=[];
   chamados_feitos: any =[];
@@ -50,12 +51,14 @@ export class ChamadoPage implements OnInit {
     private toastController: ToastController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.barber = history.state.barber || { nome: '', email: '', cpf:'' , endereco:''};
     console.log(this.barber.nome);
     console.log(this.barber.email);
     console.log(this.barber.cpf);
     this.listarBanco();
+    await this.listarChamados();
+    await this.listarPedidos();
   }
 
   
@@ -87,7 +90,7 @@ export class ChamadoPage implements OnInit {
       toast.present();
       return;
     }
-  }for(let i=0;i<this.pedidos_aceitos.length;i++){
+  }for(let i=0;i<this.chamados_feitos.length;i++){
    if( this.chamados_feitos[i].cpfCliente === this.usuarios[0].cpf){
     const toast = await this.toastController.create({
       message: 'Não é permitido o mesmo usuário fazer mais de um pedido de uma vez só',
@@ -212,9 +215,10 @@ export class ChamadoPage implements OnInit {
       preco: doc.data()['preco'],
       imageUrl: doc.data()['imageUrl'] }]
     });
+    this.chamados_feitos = [];
     for(i;i< this.teste.length;i++){
-      if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
-        this.chamados_feitos[i] = this.teste[i]
+      if(this.teste[i].cpfCliente === this.usuarios[0].cpf){
+        this.chamados_feitos.push(this.teste[i]);
       }
     }
     
@@ -225,12 +229,12 @@ export class ChamadoPage implements OnInit {
     async listarPedidos() {
       let i = 0;
       const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
-      this.teste = []; // Clear the array before populating it
+      this.testePedidos = []; // Clear the array before populating it
   
     
       querySnapshot.forEach((doc) => {
         
-        this.teste = [...this.teste, { 
+        this.testePedidos = [...this.testePedidos, { 
         id: doc.id,
         corteAtual: doc.data()['corteAtual'],
         nomeCliente: doc.data()['nomeCliente'], 
@@ -247,7 +251,7 @@ export class ChamadoPage implements OnInit {
         imageUrl: doc.data()['imageUrl'] }]
       });
   
-
+      this.pedidos_aceitos = [];
       for(i;i< this.teste.length;i++){
         if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
           this.pedidos_aceitos.push(this.teste[i]);
@@ -328,5 +332,8 @@ export class ChamadoPage implements OnInit {
   hide_show(){
     document.getElementById('cadImg_')?.click()
   }
+
+ 
+
 }
 

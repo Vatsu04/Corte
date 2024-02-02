@@ -26,8 +26,8 @@
 
   <ion-button color="red"   routerLink="/editar-conta-usuario">Editar Conta</ion-button><br>
       <ion-button color="red"   routerLink="/catalogo">Catálogo de Barbeiros</ion-button><br>
-      <ion-button color="red"    routerLink="/pedidos-pendentes">Pedidos Pendentes</ion-button><br>
-      <ion-button color="red" (click)="avaliarBarbeiros()">Avaliar Barbeiro</ion-button>
+      <ion-button color="red"    routerLink="/pedidos-pendentes">Pedidos Aceitos</ion-button><br>
+      <ion-button color="red" (click)="avaliarBarbeiros()">Avaliar Barbeiro/Barbearia</ion-button>
       <br>  
       <ion-button class="back" color="red" (click)="logout()">
         Log Out
@@ -54,12 +54,11 @@
           <ion-card>
             <ion-card-content>
               <p>Descrição: {{ chamado.descricao }}</p>
-              <p>Email do Cliente: {{ chamado.emailCliente }}</p>
-
+              <p *ngIf="chamado.nomeBarbeiro">Email do Barbeiro: {{ chamado.emailBarbeiro }}</p>
+              <p *ngIf="chamado.nomeBarbearia">Email da Barbearia: {{ chamado.emailBarbearia }}</p>
               <p>Local: {{ chamado.local}}</p>
 
-
-              <p>Local de Atendimento requisitado: {{ chamado.local}}</p>
+           
               <p>Data: {{chamado.data}}</p>
               <p>Horario: {{chamado.hora}}</p>
 
