@@ -210,7 +210,7 @@ export class PedidosPendentesPage implements OnInit {
 
       
       this.cancelarPedido(isOpen, id)
-      this.router.navigateByUrl('/tab1', {replaceUrl:true});
+      
     }
     
   } 
@@ -300,7 +300,7 @@ pedidoBarbearia.imageUrl, pedidoBarbearia.nomeCliente,
         */
       
       this.cancelarPedido(isOpen, id)
-      this.router.navigateByUrl('/tab1', {replaceUrl:true});
+ 
     }
   }
 

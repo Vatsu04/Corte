@@ -52,6 +52,7 @@ export class PedidosCompletosClientePage implements OnInit {
     try {
       await updateDoc(doc(this.firestore, 'pedidos_feitos', id), { avaliacaoBarbeiro: this.rating });
       console.log('Avaliacao updated successfully!');
+      this.router.navigateByUrl('/tab1', { replaceUrl: true });
     } catch (error) {
       console.error('Error updating avaliacao:', error);
     }

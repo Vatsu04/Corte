@@ -24,6 +24,7 @@ export class ChamarBarbeariaPage implements OnInit {
     hora: ['', Validators.required]
   });
   teste:any = [];
+  testePedidos:any = [];
   chamado:any =[];
   pedidos_aceitos: any=[];
   chamados_feitos: any =[];
@@ -59,9 +60,9 @@ export class ChamarBarbeariaPage implements OnInit {
     console.log(this.barbearia.email);
     console.log(this.barbearia.cep);
     console.log(this.barbearia.endereco);
-    this.listarBanco();
-    await this.listarChamados();
-    await this.listarPedidos();
+    await this.listarBanco();
+    this.listarChamados();
+    this.listarPedidos();
   }
 
   
@@ -230,12 +231,12 @@ export class ChamarBarbeariaPage implements OnInit {
     async listarPedidos() {
       let i = 0;
       const querySnapshot = await getDocs(collection(this.firestore, "pedidos"));
-      this.teste = []; // Clear the array before populating it
+      this.testePedidos = []; // Clear the array before populating it
   
     
       querySnapshot.forEach((doc) => {
         
-        this.teste = [...this.teste, { 
+        this.testePedidos = [...this.teste, { 
         id: doc.id,
         corteAtual: doc.data()['corteAtual'],
         nomeCliente: doc.data()['nomeCliente'], 
@@ -253,9 +254,9 @@ export class ChamarBarbeariaPage implements OnInit {
       });
   
 
-      for(i;i< this.teste.length;i++){
-        if(this.teste[i].cpfCliente == this.usuarios[0].cpf){
-          this.pedidos_aceitos.push(this.teste[i]);
+      for(i;i< this.testePedidos.length;i++){
+        if(this.testePedidos[i].cpfCliente == this.usuarios[0].cpf){
+          this.pedidos_aceitos.push(this.testePedidos[i]);
         }
       }
 

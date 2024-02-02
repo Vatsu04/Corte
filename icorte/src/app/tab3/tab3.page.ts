@@ -200,9 +200,8 @@ if (this.teste[i].cpfBarbeiro ===  this.barbeiros[0].cpf) { // pedidos recebe os
       
 
 
-if (testeCpfBarbeiro === barbeiroCpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
-        console.log(testeCpfBarbeiro);
-        console.log(barbeiroCpf);
+if (this.teste[i].cpfBarbeiro === this.barbeiros[0].cpf) { // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
+      
         this.pedidos_feitos.push(this.teste[i]); // pedidos recebe os valores do teste caso esse pedido corresponder a esse barbeiro
       }
     }
