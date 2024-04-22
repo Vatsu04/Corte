@@ -46,5 +46,9 @@ Protótipo UX/UI (Figma): <a href="https://www.figma.com/file/jEHOwqNvHi7HUm7TvR
 
 ### Contribuidores (em todas as dependências do projeto): 
 
-<a href="https://github.com/Vatsu04/Corte/graphs/contributors">Contribuidores</a> 
 
+
+<a href="https://github.com/Vatsu04"><img src="https://avatars.githubusercontent.com/u/98766671?v=4" title="gustavo" width="80" height="80"></a>
+<a href="https://github.com/LSDavi"><img src="https://avatars.githubusercontent.com/u/127431430?v=4" title="davi" width="80" height="80"></a>
+<a href="https://github.com/DanielJT20"><img src="https://avatars.githubusercontent.com/u/127428783?v=4" title="daniel" width="80" height="80"></a>
+<a href="https://github.com/PHMS-98"><img src="https://github.com/PHMS-98" title="daniel" width="80" height="80"></a>
