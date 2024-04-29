@@ -92,7 +92,11 @@ const routes: Routes = [
   {
     path: 'pedidos-completos-barbearia',
     loadChildren: () => import('./pedidos-completos-barbearia/pedidos-completos-barbearia.module').then( m => m.PedidosCompletosBarbeariaPageModule)
+  },  {
+    path: 'produtos',
+    loadChildren: () => import('./produtos/produtos.module').then( m => m.ProdutosPageModule)
   }
+
 
 
 
