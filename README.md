@@ -46,7 +46,7 @@ Protótipo UX/UI (Figma): <a href="https://www.figma.com/file/jEHOwqNvHi7HUm7TvR
 <div align="center">
 <h1>Baixe o aplicativo no seu celular:</h1>
 
-<img src="https://media.discordapp.net/attachments/1115345169135439883/1232115664882241546/4fdc894a-b0bf-4f03-8842-2b456b2b46bf.png?ex=662848a2&is=6626f722&hm=327c667226446d52ad327a71e93ce8b69ef8cdd5d8da9852bd77b319104a2153&=&format=webp&quality=lossless" title="qrcode" width="150" height="150">
+<img src="https://firebasestorage.googleapis.com/v0/b/bamboolites-d3d02.appspot.com/o/dddecde0-56db-423e-abc7-1f0974f2fb0a.jpg?alt=media&token=d096be46-666f-4cba-b66b-260793c2fcb5" title="qrcode" width="150" height="150">
 
 
 </div>
